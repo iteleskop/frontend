@@ -1,0 +1,151 @@
+# Copyright (C) 2015 iTeleskop.org development team
+#
+
+# To jest skrypt inicjalizujacy schemat bazy danych MySQL do projektu
+# iTeleskop.org
+#
+
+# Do stworzenia bazy danych mozna uzyc nastepujacej komendy:
+#
+# mysql -u <user> -p <password> <database> < mysql.schema
+#
+# ... z linii polecen, lub zalogowac sie klientem MySQL i wydac nastepujace
+# polecenie:
+#
+# source mysql.schema
+#
+# W zwiazku z tym, ze baza danych bedzie ewoluowala, konieczne jest wersjonowanie
+# bazy danych.
+
+# Start inicjalizacji do wersji 1 bazy.
+
+DROP TABLE tasks;
+DROP TABLE task_states;
+DROP TABLE users;
+DROP TABLE telescopes;
+DROP TABLE filters;
+
+# Tabela zawierajaca zadania
+CREATE TABLE tasks (
+    # Identyfikator zadania (za pomoca tego zadania bedziemy identyfikowac zadanie)
+    task_id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+
+    PRIMARY KEY (task_id),
+
+    # Identyfikator uzytkownika, ktory dodal to zadanie
+    user_id INT NOT NULL,
+
+    # Identyfikator teleskopu
+    telescope_id INT NOT NULL,
+
+    # Nazwa obiektu, ktory bedzie fotografowany
+    object VARCHAR(64),
+
+    # Rektascencja (w postaci ulamkowej, od 0h do 24h)
+    ra FLOAT,
+
+    # Deklinacja (w stopniach, dla teleskopu Nerpio -20 do 90)
+    decl FLOAT,
+
+    # Opis zadania (zwykle puste)
+    descr VARCHAR(1024),
+
+    # Lista filtrow (todo)
+    filter INT UNSIGNED,
+
+    # binning 1x1, 2x2, 3x3
+    binning TINYINT,
+
+    # czy rozogniskowac 0 = nie, 1 = tak
+    defocus TINYINT,
+
+    # czy dokonac kalibracji za pomoca darkow, flatow, biasow (0 = nie, 1 = tak)
+    calibrate TINYINT,
+
+    # czy rozwiazac zdjecie przez pinpoint?
+    solve TINYINT,
+
+    # czy wyslac zdjecie do ASVSO VPhot?
+    vphot TINYINT,
+
+    # dodatkowe komendy do ACP/Lapacza Fotonow
+    other_cmd VARCHAR(512),
+
+    # Nie obserwuj, jezeli wysokosc obiektu mniejsza niz X stopni
+    min_alt float,
+
+    # Nie obserwuj, jezeli odlegosc od ksiezyca jest mniejsza niz X stopni
+    moon_distance float,
+
+    # Nie obserwuj, przed tym momentem (czas w UT)
+    skip_before TIMESTAMP,
+
+    # Nie obserwuj, po tym momencie (czas w UT)
+    skip_after  TIMESTAMP,
+
+    # Nie obserwuj, jezeli od poprzednije obserwacji obiektu minelo mniej niz X sekund
+    skip_interval INT,
+
+    # Nie obserwuj, jezeli w ciagu ostatnich X sekund zostalo wykonanych Y zdjec
+    skip_period_seconds INT,
+    skip_period_count INT,
+
+    # Komentarz
+    comment TEXT,
+
+    # Stan zadania (wartosci z tabeli task_states)
+    state INT,
+
+    # Nazwa pliku ze zdjeciem wynikowym
+    imagename VARCHAR(64)
+);
+
+CREATE TABLE task_states (
+    state INT PRIMARY KEY NOT NULL,
+    name VARCHAR(20)
+);
+
+INSERT INTO task_states VALUES (0, "NEW");   # Non-temporary v6 addresses
+INSERT INTO task_states VALUES (1, "ACTIVATED");   # Temporary v6 addresses
+INSERT INTO task_states VALUES (2, "RUNNING");   # Temporary v6 addresses
+INSERT INTO task_states VALUES (3, "COMPLETE");   # Temporary v6 addresses
+INSERT INTO task_states VALUES (4, "USER_CANCELLED");   # Prefix delegations
+
+CREATE TABLE users (
+    user_id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    login VARCHAR(32),
+    pass VARCHAR(32),
+    firstname VARCHAR(32),
+    lastname VARCHAR(32),
+    share FLOAT,
+    phone VARCHAR(11)
+);
+
+# Przykladowe dane uzytkownikow
+INSERT INTO users(login,pass,firstname, lastname, share, phone)
+    values("tomek", "", "Tomek", "M.", 0.07, "698-000-000");
+INSERT INTO users(login,pass,firstname, lastname, share, phone)
+    values("andrzej1", "", "Andrzej", "A.", 0.3, "698-000-000");
+INSERT INTO users(login,pass,firstname, lastname, share, phone)
+    values("andrzej2", "", "Andrzej", "S.", 0.1, "698-000-000");
+INSERT INTO users(login,pass,firstname, lastname, share, phone)
+    values("kuba", "", "Jakub", "R.", 0.1, "698-000-000");
+INSERT INTO users(login,pass,firstname, lastname, share, phone)
+    values("tadek", "", "Tadeusz", "S.", 0.05, "698-000-000");
+
+CREATE TABLE telescopes (
+    scope_id INT PRIMARY KEY NOT NULL,
+    name VARCHAR(64),
+    descr VARCHAR(1024),
+    min_dec float,
+    max_dec float
+);
+
+INSERT INTO telescopes VALUES(1, "nerpio-1", "CDK 12.5\"", -20.0, 90.0);
+INSERT INTO telescopes VALUES(2, "test", "Teleskop testowy", -30, 90);
+
+CREATE TABLE filters (
+    scope_id INT,
+    filter_id VARCHAR(16),
+    descr VARCHAR(128)
+);
