@@ -100,6 +100,16 @@ CREATE TABLE tasks (
     imagename VARCHAR(64)
 );
 
+# A teraz dodajmy dwa zadania przykladowe
+INSERT INTO tasks(user_id, telescope_id, object, ra, decl, descr, filter, binning, defocus, calibrate, solve, vphot, other_cmd, 
+                  min_alt, moon_distance, skip_before, skip_after, skip_interval, skip_period_seconds, skip_period_count, comment, state)
+    VALUES(1, 1, "Moon", 0, 0, "Luna, nasz jedyny naturalny satelita", 0, 1, 0, 1, 1, 1, "echo test", 0, 0, 2000-01-01, 2015-12-24, 0, 0, 0, "komentarz testowy", 0);
+    
+INSERT INTO tasks(user_id, telescope_id, object, ra, decl, descr, filter, binning, defocus, calibrate, solve, vphot, other_cmd, 
+                  min_alt, moon_distance, skip_before, skip_after, skip_interval, skip_period_seconds, skip_period_count, comment, state)
+    VALUES(2, 1, "M31", 0.4244, 41.1609, "Messier 31", 0, 1, 0, 1, 1, 1, ";brak ", 0, 0, 2015-12-31, 2016-01-01, 0, 0, 0, "Obiekt ze stalymi wspolrzednymi", 0);
+
+
 CREATE TABLE task_states (
     state INT PRIMARY KEY NOT NULL,
     name VARCHAR(20)
