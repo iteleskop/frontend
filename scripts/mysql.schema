@@ -105,19 +105,33 @@ CREATE TABLE task_states (
     name VARCHAR(20)
 );
 
-INSERT INTO task_states VALUES (0, "NEW");   # Non-temporary v6 addresses
-INSERT INTO task_states VALUES (1, "ACTIVATED");   # Temporary v6 addresses
-INSERT INTO task_states VALUES (2, "RUNNING");   # Temporary v6 addresses
-INSERT INTO task_states VALUES (3, "COMPLETE");   # Temporary v6 addresses
-INSERT INTO task_states VALUES (4, "USER_CANCELLED");   # Prefix delegations
+INSERT INTO task_states VALUES (0, "NEW");            # Nowe, dodane zadanie
+INSERT INTO task_states VALUES (1, "ACTIVATED");      # Backend wybral to zadanie i wrzucil je do kolejki teleskopu
+INSERT INTO task_states VALUES (2, "RUNNING");        # Zadanie obecnie jest wykonywane
+INSERT INTO task_states VALUES (3, "COMPLETE");       # Zadanie jest zakonczone
+INSERT INTO task_states VALUES (4, "USER_CANCELLED"); # Uzytkownik anulowal zadanie
 
+# Lista uzytkownikow
 CREATE TABLE users (
+    # identyfikator uzytkownika
     user_id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+
+    # login
     login VARCHAR(32),
+
+    # haslo
     pass VARCHAR(32),
+
+    # Imie
     firstname VARCHAR(32),
+
+    # Nazwisko
     lastname VARCHAR(32),
+
+    # Procentowy udzial w czasie teleskopu
     share FLOAT,
+
+    # Telefon
     phone VARCHAR(11)
 );
 
@@ -133,6 +147,9 @@ INSERT INTO users(login,pass,firstname, lastname, share, phone)
 INSERT INTO users(login,pass,firstname, lastname, share, phone)
     values("tadek", "", "Tadeusz", "S.", 0.05, "698-000-000");
 
+# Spis obslugiwanych teleskopow. Na razie beda dwa:
+# 1. teleskop fizyczny w Nerpio
+# 2. teleskop test (symulator teleskopu)
 CREATE TABLE telescopes (
     scope_id INT PRIMARY KEY NOT NULL,
     name VARCHAR(64),
