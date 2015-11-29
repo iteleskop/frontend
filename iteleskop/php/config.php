@@ -16,7 +16,7 @@ $photon_catcher_db   = 'iteleskop';
                 )
             )
         ),
-        'QueryDatabase' => array(
+        'QueryTasks' => array(
             'methods' => array(
                 'getResults' => array(
                     'len' => 1

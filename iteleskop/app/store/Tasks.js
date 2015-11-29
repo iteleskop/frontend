@@ -18,7 +18,7 @@ Ext.define('iTeleskop.store.Tasks', {
 
     proxy: {
         type: 'direct',
-        directFn: 'QueryDatabase.getResults'
+        directFn: 'QueryTasks.getResults'
     },
 
     autoLoad: true
