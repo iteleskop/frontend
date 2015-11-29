@@ -3,22 +3,23 @@
  */
 Ext.define('iTeleskop.view.main.List', {
     extend: 'Ext.grid.Panel',
-    xtype: 'mainlist',
+    xtype: 'tasks',
 
     requires: [
         'iTeleskop.store.Personnel'
     ],
 
-    title: 'Personnel',
+    title: 'Zadania',
 
     store: {
         type: 'personnel'
     },
 
     columns: [
-        { text: 'Name',  dataIndex: 'name' },
-        { text: 'Email', dataIndex: 'email', flex: 1 },
-        { text: 'Phone', dataIndex: 'phone', flex: 1 }
+        { text: 'Task ID',  dataIndex: 'task_id' },
+        { text: 'Obiekt', dataIndex: 'object', flex: 1 },
+        { text: 'RA', dataIndex: 'ra', flex: 1 },
+        { text: 'Dec', dataIndex: 'decl', flex: 1 }
     ],
 
     listeners: {

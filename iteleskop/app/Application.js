@@ -13,7 +13,7 @@ Ext.define('iTeleskop.Application', {
     ],
     
     launch: function () {
-        // TODO - Launch the application
+        Ext.direct.Manager.addProvider(Ext.REMOTING_API);
     },
 
     onAppUpdate: function () {

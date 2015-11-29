@@ -33,7 +33,8 @@ Ext.define('iTeleskop.view.main.Main', {
         },
         title: {
             bind: {
-                text: '{name}'
+                text: '{name}',
+                html: "<img src='logo.png' title='iteleskop'/>"
             },
             flex: 0
         },
@@ -76,27 +77,39 @@ Ext.define('iTeleskop.view.main.Main', {
     },
 
     items: [{
-        title: 'Home',
-        iconCls: 'fa-home',
+        title: 'Moje zadania',
+        iconCls: 'fa-user',
         // The following grid shares a store with the classic version's grid as well!
+        bind: {
+            html: 'Work in progress'
+        }
+    }, {
+        title: 'Dodaj zadanie',
+        iconCls: 'fa-plus-circle',
+        bind: {
+            html: '{loremIpsum}'
+        }
+    }, {
+        title: 'Podgląd kolejki',
+        iconCls: 'fa-users',
         items: [{
-            xtype: 'mainlist'
+            xtype: 'tasks'
         }]
     }, {
-        title: 'Users',
-        iconCls: 'fa-user',
-        bind: {
-            html: '{loremIpsum}'
-        }
-    }, {
-        title: 'Groups',
-        iconCls: 'fa-users',
-        bind: {
-            html: '{loremIpsum}'
-        }
-    }, {
-        title: 'Settings',
+        title: 'Status teleskopu',
         iconCls: 'fa-cog',
+        bind: {
+            html: 'Status teleskopu: Nie kupiony ;)'
+        }
+    }, {
+        title: 'Użytkownicy',
+        iconCls: 'fa-users',
+        items: [{
+            xtype: 'tasks'
+        }]        
+    }, {
+        title: 'Zdjęcia',
+        iconCls: 'fa-camera',
         bind: {
             html: '{loremIpsum}'
         }

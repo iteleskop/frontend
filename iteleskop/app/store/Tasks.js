@@ -1,7 +1,7 @@
 Ext.define('iTeleskop.store.Personnel', {
     extend: 'Ext.data.Store',
 
-    alias: 'store.personnel',
+    alias: 'store.tasks',
 
     fields: [
         'task_id', 'object', 'ra', 'decl', 'login', 'firstname'

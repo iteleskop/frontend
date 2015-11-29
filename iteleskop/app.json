@@ -213,6 +213,10 @@
      */
     "js": [
         {
+            "path": "php/api.php",
+            "remote": true
+        },
+        {
             "path": "app.js",
             "bundle": true
         }
@@ -581,5 +585,5 @@
      * Uniquely generated id for this application, used as prefix for localStorage keys.
      * Normally you should never change this value.
      */
-    "id": "06cdf5d8-6940-46ed-85b6-eb63f9e42013"
+    "id": "bb1a9a9b-2dfe-4c3d-a455-4733cf38aaae"
 }
