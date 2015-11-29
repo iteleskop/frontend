@@ -6,15 +6,30 @@ Ext.define('iTeleskop.store.Tasks', {
     alias: 'store.tasks',
 
     fields: [
-        'task_id', 'object', 'ra', 'decl', 'login', 'firstname'
+        'task_id',
+        'state',
+        'object',
+        'ra',
+        'decl',
+        'login',
+        'descr',
+        'comment',
+        'filter',
+        'binning',
+        'defocus',
+        'calibrate',
+        'solve',
+        'vphot',
+        'other_cmd',
+        'min_alt',
+        'moon_distance',
+        'skip_before',
+        'skip_after',
+        'skip_interval',
+        'skip_period_seconds',
+        'skip_period_count',
+        'imagename'
     ],
-
-    data: { items: [
-        { name: 'Jean Luc', email: "jeanluc.picard@enterprise.com", phone: "555-111-1111" },
-        { name: 'Worf',     email: "worf.moghsson@enterprise.com",  phone: "555-222-2222" },
-        { name: 'Deanna',   email: "deanna.troi@enterprise.com",    phone: "555-333-3333" },
-        { name: 'Data',     email: "mr.data@enterprise.com",        phone: "555-444-4444" }
-    ]},
 
     proxy: {
         type: 'direct',
