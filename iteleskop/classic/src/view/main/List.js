@@ -6,13 +6,13 @@ Ext.define('iTeleskop.view.main.List', {
     xtype: 'tasks',
 
     requires: [
-        'iTeleskop.store.Personnel'
+        'iTeleskop.store.Tasks'
     ],
 
     title: 'Zadania',
 
     store: {
-        type: 'personnel'
+        type: 'tasks'
     },
 
     columns: [

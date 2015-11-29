@@ -106,7 +106,7 @@ Ext.define('iTeleskop.view.main.Main', {
         iconCls: 'fa-users',
         items: [{
             xtype: 'tasks'
-        }]        
+        }]
     }, {
         title: 'Zdjęcia',
         iconCls: 'fa-camera',

@@ -1,4 +1,4 @@
-Ext.define('iTeleskop.store.Personnel', {
+Ext.define('iTeleskop.store.Tasks', {
     extend: 'Ext.data.Store',
 
     alias: 'store.tasks',
