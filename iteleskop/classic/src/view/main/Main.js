@@ -101,13 +101,19 @@ Ext.define('iTeleskop.view.main.Main', {
         bind: {
             html: 'Status teleskopu: Nie kupiony ;)'
         }
-    }, {
+    },
+/* Zakomentowane, bo view users z jakiegos powodu nie dziala.
+   w app/stoare/Users.js jest wyraznie podane proxy: directFn: 'QueryUsers.getResults',
+   a jednak wolane jest QueryDatabase zamiast QueryResults.
+
+    {
         title: 'Użytkownicy',
         iconCls: 'fa-users',
         items: [{
-            xtype: 'tasks'
+            xtype: 'users'
         }]
-    }, {
+    }, */
+    {
         title: 'Zdjęcia',
         iconCls: 'fa-camera',
         bind: {

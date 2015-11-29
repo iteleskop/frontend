@@ -1,6 +1,8 @@
 Ext.define('iTeleskop.store.Tasks', {
     extend: 'Ext.data.Store',
 
+    /* storeId: 'tasksStore', */
+
     alias: 'store.tasks',
 
     fields: [
@@ -16,7 +18,7 @@ Ext.define('iTeleskop.store.Tasks', {
 
     proxy: {
         type: 'direct',
-        directFn: "QueryDatabase.getResults"
+        directFn: 'QueryDatabase.getResults'
     },
 
     autoLoad: true

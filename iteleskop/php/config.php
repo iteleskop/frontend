@@ -9,6 +9,13 @@ $photon_catcher_db   = 'iteleskop';
  function get_extdirect_api() {
 
     $API = array(
+        'QueryUsers' => array(
+            'methods' => array(
+                'getResults' => array(
+                    'len' => 1
+                )
+            )
+        ),
         'QueryDatabase' => array(
             'methods' => array(
                 'getResults' => array(
