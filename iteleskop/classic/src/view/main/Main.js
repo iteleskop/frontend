@@ -76,26 +76,28 @@ Ext.define('iTeleskop.view.main.Main', {
         }
     },
 
-    items: [{
-        title: 'Moje zadania',
-        iconCls: 'fa-user',
-        // The following grid shares a store with the classic version's grid as well!
-        bind: {
-            html: 'Work in progress'
-        }
-    }, {
-        title: 'Dodaj zadanie',
-        iconCls: 'fa-plus-circle',
-        bind: {
-            html: '{loremIpsum}'
-        }
-    },
+    items: [
     {
         title: 'Podgląd kolejki',
         iconCls: 'fa-users',
         items: [{
             xtype: 'tasks'
         }]
+    },
+    {
+        title: 'Moje zadania',
+        iconCls: 'fa-user',
+        // The following grid shares a store with the classic version's grid as well!
+        bind: {
+            html: '{loremIpsum}'
+        }
+    },
+    {
+        title: 'Dodaj zadanie',
+        iconCls: 'fa-plus-circle',
+        bind: {
+            html: '{loremIpsum}'
+        }
     },
     {
         title: 'Status teleskopu',

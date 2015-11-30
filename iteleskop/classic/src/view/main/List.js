@@ -16,8 +16,9 @@ Ext.define('iTeleskop.view.main.Tasks', {
     },
 
     columns: [
-        { text: 'Task ID',  dataIndex: 'task_id' },
+        { text: 'Task ID',  dataIndex: 'task_id', width: 70 },
         { text: 'Stan', dataIndex: 'state' },
+        { text: 'Login', dataIndex: 'login' },
         { text: 'Obiekt', dataIndex: 'object', flex: 1 },
         { text: 'RA', dataIndex: 'ra', flex: 1,
           renderer: function(value) {
