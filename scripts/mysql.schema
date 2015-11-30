@@ -97,7 +97,10 @@ CREATE TABLE tasks (
     state INT,
 
     # Nazwa pliku ze zdjeciem wynikowym
-    imagename VARCHAR(64)
+    imagename VARCHAR(64),
+
+    # Czas utworzenia zadania
+    created timestamp
 );
 
 # A teraz dodajmy dwa zadania przykladowe
@@ -142,7 +145,10 @@ CREATE TABLE users (
     share FLOAT,
 
     # Telefon
-    phone VARCHAR(11)
+    phone VARCHAR(11),
+
+    # E-mail
+    email VARCHAR(64)
 );
 
 # Przykladowe dane uzytkownikow
