@@ -17,7 +17,10 @@ Ext.define('iTeleskop.view.main.Main', {
         'iTeleskop.view.main.MainController',
         'iTeleskop.view.main.MainModel',
         'iTeleskop.view.main.List',
-        'iTeleskop.view.main.AddTask'
+        'iTeleskop.view.main.AddTask',
+
+        'Ext.ux.DateTimePicker',
+        'Ext.ux.DateTimeField'
     ],
 
     controller: 'main',
