@@ -9,13 +9,15 @@ Ext.define('iTeleskop.view.main.Main', {
     extend: 'Ext.tab.Panel',
     xtype: 'app-main',
 
+    /* tu jest lista klas, ktore trzeba zaladowac przed startem aplikacji */
     requires: [
         'Ext.plugin.Viewport',
         'Ext.window.MessageBox',
 
         'iTeleskop.view.main.MainController',
         'iTeleskop.view.main.MainModel',
-        'iTeleskop.view.main.List'
+        'iTeleskop.view.main.List',
+        'iTeleskop.view.main.AddTask'
     ],
 
     controller: 'main',
@@ -87,17 +89,18 @@ Ext.define('iTeleskop.view.main.Main', {
     {
         title: 'Moje zadania',
         iconCls: 'fa-user',
-        // The following grid shares a store with the classic version's grid as well!
         bind: {
             html: '{loremIpsum}'
         }
     },
     {
+        // to jest panel z dodawaniem nowych zadan. Definicja samego panelu znajduje
+        // sie w app/view/main/AddTask.js
         title: 'Dodaj zadanie',
         iconCls: 'fa-plus-circle',
-        bind: {
-            html: '{loremIpsum}'
-        }
+        items: [{
+            xtype: 'addtask'
+        }]
     },
     {
         title: 'Status teleskopu',
