@@ -1,12 +1,35 @@
 // Ta klasa definuje nowy panel odpowiedzialny za dodawanie nowych zadan.
 
+/// @todo: Wyciagac to z serwera, z tabeli telescopes
+var AddTaskScopes = Ext.create('Ext.data.Store', {
+    fields: [ 'telescope_id', 'text'],
+    data: [
+        { 'telescope_id': 1, 'text': '1: CDK 12.5" (Nerpio)' },
+        { 'telescope_id': 2, 'text': '2: symulator teleskopu' }
+    ]
+});
+
 var AddTaskBinning = Ext.create('Ext.data.Store', {
     fields: [ 'binning', 'text'],
     data: [
         { 'binning': 1, 'text': '1x1' },
         { 'binning': 2, 'text': '2x2' },
         { 'binning': 3, 'text': '3x3' }
-        ]
+    ]
+});
+
+var AddTaskFilters = Ext.create('Ext.data.Store', {
+    fields: ['filter' , 'text'],
+    data: [
+        { 'filter': 'L',     'text': 'L (luminancja)' },
+        { 'filter': 'Red',   'text': 'R (red)' },
+        { 'filter': 'Green', 'text': 'G (green)' },
+        { 'filter': 'Blue',  'text': 'B (blue)' },
+        { 'filter': 'Ha',    'text': 'H-alpha' },
+        { 'filter': 'V',     'text': 'V (fotometryczny)' },
+        { 'filter': 'B',     'text': 'B (fotometryczny)' },
+        { 'filter': 'none',  'text': 'bez filtra' }
+    ]
 });
 
 Ext.define('iTeleskop.view.main.AddTask', {
@@ -22,7 +45,7 @@ Ext.define('iTeleskop.view.main.AddTask', {
     layout: {
         type: 'vbox',
         align: 'left',
-        padding: 0,
+        padding: 10,
         autoScroll: true,
         overflowX: 'scroll',
         overflowY: 'scroll'
@@ -34,7 +57,13 @@ Ext.define('iTeleskop.view.main.AddTask', {
             // Wybor teleskopu: @todo: wyciagac te dane z tabeli telescopes
             fieldLabel: 'Teleskop',
             name: 'telescope_id',
-            value: "1 (Nerpio CDK12.5\")"
+            value: "1",
+            xtype: 'combobox',
+            valueField: 'telescope_id',
+            displayField: 'text',
+            queryMode: 'local',
+            store: AddTaskScopes,
+            width: 400
         },
         {
             // Wybor obiektu, jedno wielkie @todo trzeba te dane wyciagac z jakiejs bazy
@@ -60,7 +89,15 @@ Ext.define('iTeleskop.view.main.AddTask', {
         },
         {
             fieldLabel: 'Filtr',
-            name: 'filter'
+            name: 'filter',
+            editable: false,
+            value: 'none',
+            xtype: 'combobox',
+            valueField: 'filter',
+            displayField: 'text',
+            queryMode: 'local',
+            store: AddTaskFilters,
+            width: 400
         },
         {
             fieldLabel: 'Binning',
