@@ -1,5 +1,14 @@
 // Ta klasa definuje nowy panel odpowiedzialny za dodawanie nowych zadan.
 
+var AddTaskBinning = Ext.create('Ext.data.Store', {
+    fields: [ 'binning', 'text'],
+    data: [
+        { 'binning': 1, 'text': '1x1' },
+        { 'binning': 2, 'text': '2x2' },
+        { 'binning': 3, 'text': '3x3' }
+        ]
+});
+
 Ext.define('iTeleskop.view.main.AddTask', {
     extend: 'Ext.form.Panel',
     title: 'Nowe zadanie',
@@ -42,6 +51,7 @@ Ext.define('iTeleskop.view.main.AddTask', {
             // Wybor deklinacji, @todo wyciagac max. limity z tabeli telescopes,
             // na razie na sztywno od -20 do +90 dla CDK12.5" w Nerpio.
             fieldLabel: 'Deklinacja (-20 do +90)',
+            labelWidth: 200,
             name: 'decl'
         },
         {
@@ -54,7 +64,13 @@ Ext.define('iTeleskop.view.main.AddTask', {
         },
         {
             fieldLabel: 'Binning',
-            name: 'binning'
+            xtype: 'combobox',
+            name: 'binning',
+            store: AddTaskBinning,
+            queryMode: 'local',
+            valueField: 'binning',
+            displayField: 'text',
+            value: '2'
         },
         {
             fieldLabel: 'Defocus',
@@ -70,6 +86,7 @@ Ext.define('iTeleskop.view.main.AddTask', {
         },
         {
             fieldLabel: 'Rozwiąż (pinpoint)',
+            labelWidth: 150,
             xtype: 'checkbox',
             checked: true,
             name: 'solve'
@@ -91,6 +108,7 @@ Ext.define('iTeleskop.view.main.AddTask', {
         },
         {
             fieldLabel: 'Min. odległość od księżyca (w stopniach)',
+            labelWidth: 300,
             name: 'moon_distance',
             value: '0'
         },
