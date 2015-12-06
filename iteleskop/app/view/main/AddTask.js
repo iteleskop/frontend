@@ -1,6 +1,6 @@
 // Ta klasa definuje nowy panel odpowiedzialny za dodawanie nowych zadan.
 
-/// @todo: Wyciagac to z serwera, z tabeli telescopes
+/// @todo: Wyciagac te dane po stronie serwera z MySQL, z tabeli telescopes
 var AddTaskScopes = Ext.create('Ext.data.Store', {
     fields: [ 'telescope_id', 'text'],
     data: [
@@ -18,6 +18,7 @@ var AddTaskBinning = Ext.create('Ext.data.Store', {
     ]
 });
 
+/// @todo: Wyciagac te dane po stronie serwera z MySQL, z tabeli filters
 var AddTaskFilters = Ext.create('Ext.data.Store', {
     fields: ['filter' , 'text'],
     data: [
@@ -41,6 +42,8 @@ Ext.define('iTeleskop.view.main.AddTask', {
     // pionowy)
     autoScroll: true,
     height: 900,
+
+    url: 'php/classes/AddTask.php',
 
     layout: {
         type: 'vbox',
@@ -69,24 +72,55 @@ Ext.define('iTeleskop.view.main.AddTask', {
             // Wybor obiektu, jedno wielkie @todo trzeba te dane wyciagac z jakiejs bazy
             // danych, moze z simbada? Na razie wpisywane z reki
             fieldLabel: 'Obiekt',
-            name: 'object'
+            name: 'object',
+            allowBlank: false
         },
         {
             // Rektascencja: od 0h0m0s do 23h59m59s
             fieldLabel: 'Rektascencja',
-            name: 'ra'
+            name: 'ra',
+            allowBlank: false
         },
         {
             // Wybor deklinacji, @todo wyciagac max. limity z tabeli telescopes,
             // na razie na sztywno od -20 do +90 dla CDK12.5" w Nerpio.
             fieldLabel: 'Deklinacja (-20 do +90)',
             labelWidth: 200,
-            name: 'decl'
+            name: 'decl',
+            allowBlank: false
+        },
+        {
+            fieldLabel: 'Espozycja [s]',
+            name: 'exposure',
+            value: '10',
+            allowNegative: false,
+            allowBlank: false,
+
+            // Ta walidacja jakos nie chce dzialac
+            validator: function(val) {
+                if (val === "") {
+                    return "Nie moze byc pusta";
+                }
+                if (isNaN(val)) {
+                    return "Wartość nie jest liczbą";
+                }
+
+                if (val < 0) {
+                    return "Wartość nie może być ujemna";
+                }
+
+                return true;
+            }
         },
         {
             fieldLabel: 'Opis zadania',
             name: 'descr'
         },
+        {
+            fieldLabel: 'Komentarz',
+            name: 'comment',
+            value: 'na'
+        }
         {
             fieldLabel: 'Filtr',
             name: 'filter',
@@ -170,19 +204,37 @@ Ext.define('iTeleskop.view.main.AddTask', {
         {
             fieldLabel: 'Skip if (X) photos were done in the last Y seconds',
             name: 'skip_period_count'
+        }
+    ], // koniec items, czyli obiektow znadujacych sie w tej formie
+    buttons: [
+        {
+            text: 'Wyślij',
+            handler: function() {
+                var form = this.up('form'); // get the form panel
+                if (form.isValid()) { // make sure the form contains valid data before submitting
+                    form.submit({
+                        success: function(form, action) {
+                           Ext.Msg.alert('Success', action.result.msg);
+                        },
+                        failure: function(form, action) {
+                            Ext.Msg.alert('Failed', action.result.msg);
+                        }
+                    });
+                } else { // display error alert if the data is invalid
+                    Ext.Msg.alert('Niepoprawne', 'Proszę sprawdzić poprawność.')
+                }
+            }
         },
         {
-            fieldLabel: 'Komentarz',
-            name: 'comment'
-        },
-        {
-            xtype: 'button',
-            text: 'Sprawdź dane'
-        },
-        {
-            xtype: 'displayfield',
-            value: '',
-            fieldLabel: 'Wygenerowane zadanie'
+            text: "Sprawdź dane",
+            handler: function() {
+                var form = this.up('form'); // get the form panel
+                if (form.isValid()) { // make sure the form contains valid data before submitting
+                    Ext.Msg.alert('Sukces', "Dane wygladają na poprawne.");
+                } else { // display error alert if the data is invalid
+                    Ext.Msg.alert('Niestety', 'Popraw pola oznaczone czerwonym kolorem.');
+                }
+            }
         }
     ]
 });
