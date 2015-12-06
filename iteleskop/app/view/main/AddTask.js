@@ -69,6 +69,13 @@ Ext.define('iTeleskop.view.main.AddTask', {
             width: 400
         },
         {
+            // @todo: Trzeba dopisac obsluge uzytkownikow, na razie na pale
+            // jest wbity user 42.
+            name: 'user_id',
+            xtype: 'hidden',
+            value: 42
+        },
+        {
             // Wybor obiektu, jedno wielkie @todo trzeba te dane wyciagac z jakiejs bazy
             // danych, moze z simbada? Na razie wpisywane z reki
             fieldLabel: 'Obiekt',
@@ -120,7 +127,7 @@ Ext.define('iTeleskop.view.main.AddTask', {
             fieldLabel: 'Komentarz',
             name: 'comment',
             value: 'na'
-        }
+        },
         {
             fieldLabel: 'Filtr',
             name: 'filter',
@@ -214,10 +221,10 @@ Ext.define('iTeleskop.view.main.AddTask', {
                 if (form.isValid()) { // make sure the form contains valid data before submitting
                     form.submit({
                         success: function(form, action) {
-                           Ext.Msg.alert('Success', action.result.msg);
+                            Ext.Msg.alert('Sukces', action.result.msg);
                         },
                         failure: function(form, action) {
-                            Ext.Msg.alert('Failed', action.result.msg);
+                            Ext.Msg.alert('Porażka', action.result.msg);
                         }
                     });
                 } else { // display error alert if the data is invalid
