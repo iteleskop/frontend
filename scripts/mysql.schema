@@ -25,6 +25,45 @@ DROP TABLE users;
 DROP TABLE telescopes;
 DROP TABLE filters;
 
+# Lista uzytkownikow
+CREATE TABLE users (
+    # identyfikator uzytkownika
+    user_id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+
+    # login
+    login VARCHAR(32),
+
+    # haslo
+    pass VARCHAR(32),
+
+    # Imie
+    firstname VARCHAR(32),
+
+    # Nazwisko
+    lastname VARCHAR(32),
+
+    # Procentowy udzial w czasie teleskopu
+    share FLOAT,
+
+    # Telefon
+    phone VARCHAR(11),
+
+    # E-mail
+    email VARCHAR(64)
+);
+
+# Przykladowe dane uzytkownikow
+INSERT INTO users(login,pass,firstname, lastname, share, phone)
+    values("tomek", "", "Tomek", "M.", 0.07, "698-000-000");
+INSERT INTO users(login,pass,firstname, lastname, share, phone)
+    values("andrzej1", "", "Andrzej", "A.", 0.3, "698-000-000");
+INSERT INTO users(login,pass,firstname, lastname, share, phone)
+    values("andrzej2", "", "Andrzej", "S.", 0.1, "698-000-000");
+INSERT INTO users(login,pass,firstname, lastname, share, phone)
+    values("kuba", "", "Jakub", "R.", 0.1, "698-000-000");
+INSERT INTO users(login,pass,firstname, lastname, share, phone)
+    values("tadek", "", "Tadeusz", "S.", 0.05, "698-000-000");
+
 # Tabela zawierajaca zadania
 CREATE TABLE tasks (
     # Identyfikator zadania (za pomoca tego zadania bedziemy identyfikowac zadanie)
@@ -131,44 +170,6 @@ INSERT INTO task_states VALUES (2, "RUNNING");        # Zadanie obecnie jest wyk
 INSERT INTO task_states VALUES (3, "COMPLETE");       # Zadanie jest zakonczone
 INSERT INTO task_states VALUES (4, "USER_CANCELLED"); # Uzytkownik anulowal zadanie
 
-# Lista uzytkownikow
-CREATE TABLE users (
-    # identyfikator uzytkownika
-    user_id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-
-    # login
-    login VARCHAR(32),
-
-    # haslo
-    pass VARCHAR(32),
-
-    # Imie
-    firstname VARCHAR(32),
-
-    # Nazwisko
-    lastname VARCHAR(32),
-
-    # Procentowy udzial w czasie teleskopu
-    share FLOAT,
-
-    # Telefon
-    phone VARCHAR(11),
-
-    # E-mail
-    email VARCHAR(64)
-);
-
-# Przykladowe dane uzytkownikow
-INSERT INTO users(login,pass,firstname, lastname, share, phone)
-    values("tomek", "", "Tomek", "M.", 0.07, "698-000-000");
-INSERT INTO users(login,pass,firstname, lastname, share, phone)
-    values("andrzej1", "", "Andrzej", "A.", 0.3, "698-000-000");
-INSERT INTO users(login,pass,firstname, lastname, share, phone)
-    values("andrzej2", "", "Andrzej", "S.", 0.1, "698-000-000");
-INSERT INTO users(login,pass,firstname, lastname, share, phone)
-    values("kuba", "", "Jakub", "R.", 0.1, "698-000-000");
-INSERT INTO users(login,pass,firstname, lastname, share, phone)
-    values("tadek", "", "Tadeusz", "S.", 0.05, "698-000-000");
 
 # Spis obslugiwanych teleskopow. Na razie beda dwa:
 # 1. teleskop fizyczny w Nerpio
