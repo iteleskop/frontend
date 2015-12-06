@@ -2,10 +2,10 @@
 
 /// @todo: Wyciagac te dane po stronie serwera z MySQL, z tabeli telescopes
 var AddTaskScopes = Ext.create('Ext.data.Store', {
-    fields: [ 'telescope_id', 'text'],
+    fields: [ 'scope_id', 'text'],
     data: [
-        { 'telescope_id': 1, 'text': '1: CDK 12.5" (Nerpio)' },
-        { 'telescope_id': 2, 'text': '2: symulator teleskopu' }
+        { 'scope_id': 1, 'text': '1: CDK 12.5" (Nerpio)' },
+        { 'scope_id': 2, 'text': '2: symulator teleskopu' }
     ]
 });
 
@@ -59,10 +59,10 @@ Ext.define('iTeleskop.view.main.AddTask', {
         {
             // Wybor teleskopu: @todo: wyciagac te dane z tabeli telescopes
             fieldLabel: 'Teleskop',
-            name: 'telescope_id',
+            name: 'scope_id',
             value: "1",
             xtype: 'combobox',
-            valueField: 'telescope_id',
+            valueField: 'scope_id',
             displayField: 'text',
             queryMode: 'local',
             store: AddTaskScopes,

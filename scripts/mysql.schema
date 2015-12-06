@@ -35,8 +35,12 @@ CREATE TABLE tasks (
     # Identyfikator uzytkownika, ktory dodal to zadanie
     user_id INT NOT NULL,
 
+    FOREIGN KEY (user_id)
+        REFERENCES users(user_id)
+        ON DELETE CASCADE,
+
     # Identyfikator teleskopu
-    telescope_id INT NOT NULL,
+    scope_id INT NOT NULL,
 
     # Nazwa obiektu, ktory bedzie fotografowany
     object VARCHAR(64),
