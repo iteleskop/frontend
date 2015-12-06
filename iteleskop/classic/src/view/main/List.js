@@ -30,6 +30,7 @@ Ext.define('iTeleskop.view.main.Tasks', {
               return DeclinationFloatToDMS(value);
           }
         },
+        { text: 'Ekspozycja [s]', dataIndex: 'exposure', flex: 1 },
         { text: 'Opis', dataIndex: 'descr', flex: 1 },
         { text: 'Komentarz', dataIndex: 'comment', flex: 1 },
         { text: 'Filtr', dataIndex: 'filter', flex: 1 },

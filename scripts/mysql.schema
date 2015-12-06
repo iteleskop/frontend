@@ -47,6 +47,9 @@ CREATE TABLE tasks (
     # Deklinacja (w stopniach, dla teleskopu Nerpio -20 do 90)
     decl FLOAT,
 
+    # Czas ekspozycji
+    exposure FLOAT,
+
     # Opis zadania (zwykle puste)
     descr VARCHAR(1024),
 
