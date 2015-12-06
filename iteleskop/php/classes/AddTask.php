@@ -104,7 +104,7 @@ class AddTask {
             return;
         }
         if (!isset($_GET[$name])) {
-            $this->failure("Brak okreslonego parametru ".$name);
+            $this->failure("Brak obowiazkowego parametru ".$name);
         }
         $this->data[$name] = $_GET[$name];
         return;
@@ -112,14 +112,22 @@ class AddTask {
 
     function getBoolParam($name) {
         if (isset($_POST[$name])) {
-            $this->data[$name] = 1;
+            if ($_POST[$name] == "on") {
+                $this->data[$name] = 1;
+            } else {
+                $this->data[$name] = 0;
+            }
             return;
         }
-        if (!isset($_GET[$name])) {
-            $this->data[$name] = 0; 
+        if (isset($_GET[$name])) {
+            if ($_GET[$name] == "on") {
+                $this->data[$name] = 1;
+            } else {
+                $this->data[$name] = 0;
+            }
+            return;
         }
-        $this->data[$name] = 1;
-        return;
+        $this->data[$name] = 0;
     }
     
     // Czas odebrac wszystkie dane
