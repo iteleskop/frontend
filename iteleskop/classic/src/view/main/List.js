@@ -15,6 +15,9 @@ Ext.define('iTeleskop.view.main.Tasks', {
         type: 'tasks'
     },
 
+    autoScroll: true,
+    height: 900,
+
     columns: [
         { text: 'Task ID',  dataIndex: 'task_id', width: 70 },
         { text: 'Stan', dataIndex: 'state' },
