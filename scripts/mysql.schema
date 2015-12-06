@@ -57,8 +57,8 @@ CREATE TABLE tasks (
     # Opis zadania (zwykle puste)
     descr VARCHAR(1024),
 
-    # Lista filtrow (todo)
-    filter INT UNSIGNED,
+    # Lista filtrow
+    filter VARCHAR(16),
 
     # binning 1x1, 2x2, 3x3
     binning TINYINT,
