@@ -83,7 +83,7 @@ Ext.define('iTeleskop.view.main.List', {
     title: 'Zadania',
 
     store: {
-        type: 'tasks'
+        type: 'users'
     },
 
     columns: [
