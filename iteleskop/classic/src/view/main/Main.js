@@ -107,7 +107,9 @@ Ext.define('iTeleskop.view.main.Main', {
         iconCls: 'fa-plus-circle',
         items: [{
             xtype: 'addtask'
-        }]
+        }],
+        layout: 'fit',
+        autoScroll: true
     },
     {
         title: 'Status teleskopu',
