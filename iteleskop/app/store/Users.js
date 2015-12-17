@@ -1,7 +1,7 @@
 Ext.define('iTeleskop.store.Users', {
     extend: 'Ext.data.Store',
 
-    /* storeId: 'usersStore', */
+    storeId: 'users',
 
     alias: 'store.users',
 
@@ -11,7 +11,7 @@ Ext.define('iTeleskop.store.Users', {
 
     proxy: {
         type: 'direct',
-         directFn: 'QueryUsers.getResults'
+        directFn: 'QueryUsers.getResults'
     },
 
     autoLoad: true

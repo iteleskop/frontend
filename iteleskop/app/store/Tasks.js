@@ -1,7 +1,7 @@
 Ext.define('iTeleskop.store.Tasks', {
     extend: 'Ext.data.Store',
 
-    /* storeId: 'tasksStore', */
+    storeId: 'tasks',
 
     alias: 'store.tasks',
 
