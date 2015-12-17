@@ -8,8 +8,21 @@ Ext.define('iTeleskop.Application', {
     
     name: 'iTeleskop',
 
+    models: [
+    ],
+
+    requires: [
+        'iTeleskop.view.main.Main'
+    ],
+
+    views: [
+        'iTeleskop.view.main.Main'
+    ],
+
+    // Lista uzywanych store'ow
     stores: [
-        // TODO: add global / shared stores here
+        'Tasks',
+        'Users'
     ],
     
     launch: function () {
