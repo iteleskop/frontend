@@ -18,8 +18,22 @@ Fajne extension do wskazywania naraz daty i godziny DateTimePicker:
 https://www.sencha.com/forum/showthread.php?288858-DateTime-Field-Extension/
 
 Problemy do rozwiazania:
-- czemu Users i Tasks uzywa tego samego calla do pobrania danych z serwera?
 
-- Jak sensownie ustawic wysokosc panelu form (app/view/main/AddTask.js: autoScroll i height
-  wbite na sztywno na 900)
+1. Jak wstawic panel z logowaniem?
+Znalazłem tutorial pokazujący, jak zrobić proste logowanie:
+https://docs.sencha.com/extjs/5.1/getting_started/login_app.html
+
+
+  Po zmianie w app.js z:
+
+    mainView: 'iTeleskop.view.main.Main'
+
+  na:
+
+  launch: function() {
+      Ext.widget('app-main'); // app-main to alias do iTeleskop.view.main.Main
+  },
+
+Zaczyna wywalać taki oto błąd:
+[E] Ext.data.proxy.Direct.resolveMethods(): Cannot resolve directFn QueryTasks.getResults
 
