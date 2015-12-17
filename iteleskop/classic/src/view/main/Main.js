@@ -89,7 +89,9 @@ Ext.define('iTeleskop.view.main.Main', {
         iconCls: 'fa-users',
         items: [{
             xtype: 'tasks'
-        }]
+        }],
+        layout: 'fit',
+        autoScroll: true
     },
     {
         title: 'Moje zadania',
