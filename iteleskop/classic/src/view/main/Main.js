@@ -38,8 +38,10 @@ Ext.define('iTeleskop.view.main.Main', {
         },
         title: {
             bind: {
-                text: '{name}',
-                html: "<img src='logo.png' title='iteleskop'/>"
+                // @todo: Jak wyciagnac wersje tej aplikacji?
+                html: "<div align='center' style='font-size: 50%'><img src='logo-small.png' title='iTeleskop logo'/><br/>"
+                    + "0.1.0, <a href='https://www.sencha.com/products/extjs/'>Ext JS (" + Ext.getVersion().version + ')</a>'
+                + '</div>'
             },
             flex: 0
         },
