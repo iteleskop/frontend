@@ -66,7 +66,7 @@ Ext.define('iTeleskop.view.main.Main', {
     },
 
     defaults: {
-        bodyPadding: 20,
+        bodyPadding: 10,
         tabConfig: {
             plugins: 'responsive',
             responsiveConfig: {
@@ -118,9 +118,6 @@ Ext.define('iTeleskop.view.main.Main', {
             html: 'Status teleskopu: Nie kupiony ;)'
         }
     },
-/* Zakomentowane, bo view users z jakiegos powodu nie dziala.
-   w app/stoare/Users.js jest wyraznie podane proxy: directFn: 'QueryUsers.getResults',
-   a jednak wolane jest QueryTasks zamiast QueryUsers. */
     {
         title: 'Użytkownicy',
         iconCls: 'fa-users',
