@@ -16,16 +16,22 @@ Ext.define('iTeleskop.Application', {
     ],
 
     views: [
+        // 'iTeleskop.view.login.Login',
         'iTeleskop.view.main.Main'
     ],
 
-    // Lista uzywanych store'ow
+    mainView: 'iTeleskop.view.main.Main',
+    // mainView: 'iTeleskop.view.login.Login',
+
+    // Lista uzywanych magazynow informacji
     stores: [
         'Tasks',
         'Users'
     ],
     
-    launch: function () {
+    launch: function() {
+
+        // Interfejs do pobierania danych server-side
         Ext.direct.Manager.addProvider(Ext.REMOTING_API);
     },
 
