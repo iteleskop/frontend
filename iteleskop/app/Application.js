@@ -16,12 +16,9 @@ Ext.define('iTeleskop.Application', {
     ],
 
     views: [
-        // 'iTeleskop.view.login.Login',
+        'iTeleskop.view.login.Login',
         'iTeleskop.view.main.Main'
     ],
-
-    mainView: 'iTeleskop.view.main.Main',
-    // mainView: 'iTeleskop.view.login.Login',
 
     // Lista uzywanych magazynow informacji
     stores: [
@@ -30,9 +27,12 @@ Ext.define('iTeleskop.Application', {
     ],
     
     launch: function() {
-
         // Interfejs do pobierania danych server-side
         Ext.direct.Manager.addProvider(Ext.REMOTING_API);
+
+        // Mozna to odkomentowac w celu otrzymania potwierdzenia, ze launch() zostal
+        // wywolany.
+        // alert('Application.js/launch');
     },
 
     onAppUpdate: function () {
@@ -43,5 +43,10 @@ Ext.define('iTeleskop.Application', {
                 }
             }
         );
-    }
+    },
+
+    // To okresla, ktory widok jest wyswietlany na poczatku
+    mainView: 'iTeleskop.view.main.Main'
+    //mainView: 'iTeleskop.view.login.Login'
+
 });
