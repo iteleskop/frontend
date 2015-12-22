@@ -5,8 +5,18 @@
  */
 Ext.define('iTeleskop.Application', {
     extend: 'Ext.app.Application',
-    
+
     name: 'iTeleskop',
+
+    controllers: [
+	'Ctrl'
+    ],
+
+    // To okresla, ktory widok jest wyswietlany na poczatku. Mozna albo uzyc
+    // bezposrednio konretnego widoku albo kontrolera Ctrl, ale nie obu
+    // rzeczy naraz
+    //mainView: 'iTeleskop.view.main.Main',
+    //mainView: 'iTeleskop.view.login.Login'
 
     models: [
     ],
@@ -25,7 +35,7 @@ Ext.define('iTeleskop.Application', {
         'Tasks',
         'Users'
     ],
-    
+
     launch: function() {
         // Interfejs do pobierania danych server-side
         Ext.direct.Manager.addProvider(Ext.REMOTING_API);
@@ -43,10 +53,6 @@ Ext.define('iTeleskop.Application', {
                 }
             }
         );
-    },
-
-    // To okresla, ktory widok jest wyswietlany na poczatku
-    mainView: 'iTeleskop.view.main.Main'
-    //mainView: 'iTeleskop.view.login.Login'
+    }
 
 });

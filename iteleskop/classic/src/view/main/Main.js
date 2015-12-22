@@ -6,7 +6,13 @@
  * TODO - Replace this content of this view to suite the needs of your application.
  */
 Ext.define('iTeleskop.view.main.Main', {
+
+    // Ext.tab.Panel dobrze wyglada w widoku ustawianym przez mainView w Application.js
     extend: 'Ext.tab.Panel',
+
+    // Ext.window.Window wyswietla sie przy wlaczaniu przez app.controller.Ctrl
+    // is zawolanie this.viewport.show();
+    //extend: 'Ext.window.Window',
     xtype: 'app-main',
 
     /* tu jest lista klas, ktore trzeba zaladowac przed startem aplikacji */
@@ -24,13 +30,17 @@ Ext.define('iTeleskop.view.main.Main', {
     ],
 
     controller: 'main',
-    viewModel: 'main',
+    viewModel: {
+        type: 'main'
+    },
 
     ui: 'navigation',
 
     tabBarHeaderPosition: 1,
     titleRotation: 0,
     tabRotation: 0,
+
+    autoShow: true,
 
     header: {
         layout: {

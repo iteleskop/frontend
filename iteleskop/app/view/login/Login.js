@@ -1,11 +1,10 @@
 Ext.define('iTeleskop.view.login.Login', {
-    extend: 'Ext.tab.Panel',
+    extend: 'Ext.window.Window',
     xtype: 'login',
 
     requires: [
         'Ext.plugin.Viewport',
         'iTeleskop.view.login.LoginController',
-        'iTeleskop.view.login.LoginModel',
         'Ext.form.Panel'
     ],
 
@@ -15,8 +14,9 @@ Ext.define('iTeleskop.view.login.Login', {
     bodyPadding: 10,
     title: 'Zaloguj się do iTeleskop',
     closable: false,
-    autoShow: true,
 
+    // autoShow jest wylaczone, bo wyswietlaniem steruje app/controller/Ctrl.js
+    //autoShow: true,
 
     cls: 'login',
 
