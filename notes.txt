@@ -37,3 +37,18 @@ https://docs.sencha.com/extjs/5.1/getting_started/login_app.html
 Zaczyna wywalać taki oto błąd:
 [E] Ext.data.proxy.Direct.resolveMethods(): Cannot resolve directFn QueryTasks.getResults
 
+
+Kolejnosc uruchamiania metod:
+Application.js/launch
+onLaunch w iTeleskop.controller.Ctrl
+[pojawia sie okienko z logowaniem]
+
+po kliknieciu login
+doLogin w app/view/login/LoginController.js
+onLoginSuccess w app/view/login/LoginController.js, ktory uruchamia
+event: login
+
+Ctrl.onLoginSuccess w iTeleskop.controller.Ctrl
+Ctrl.showUI
+
+
