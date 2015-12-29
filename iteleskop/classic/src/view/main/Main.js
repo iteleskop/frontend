@@ -7,12 +7,11 @@
  */
 Ext.define('iTeleskop.view.main.Main', {
 
-    // Ext.tab.Panel dobrze wyglada w widoku ustawianym przez mainView w Application.js
+    // Ten widok to zestaw paneli (czyli takich przelaczanych zakladek)
     extend: 'Ext.tab.Panel',
 
-    // Ext.window.Window wyswietla sie przy wlaczaniu przez app.controller.Ctrl
-    // is zawolanie this.viewport.show();
-    //extend: 'Ext.window.Window',
+    // Ten widok definituje typ app-main. Zamiast iTeleskop.view.main.Main
+    // mozna poslugiwac sie nazwa app-main.
     xtype: 'app-main',
 
     /* tu jest lista klas, ktore trzeba zaladowac przed startem aplikacji */
@@ -28,6 +27,10 @@ Ext.define('iTeleskop.view.main.Main', {
         'Ext.ux.DateTimePicker',
         'Ext.ux.DateTimeField'
     ],
+
+    // Dodany plugin viewport, ktory odpowiada za samodzielne wyswietlanie
+    // tego widoku. Bez tego metoda show() by nie zadzialala.
+    plugins: 'viewport',
 
     controller: 'main',
     viewModel: {
