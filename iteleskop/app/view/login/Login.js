@@ -26,11 +26,13 @@ Ext.define('iTeleskop.view.login.Login', {
         items: [{
             xtype: 'textfield',
             name: 'username',
+            reference: 'login_user',
             fieldLabel: 'Użytkownik',
             allowBlank: false
         }, {
             xtype: 'textfield',
             name: 'password',
+            reference: 'login_pass',
             inputType: 'password',
             fieldLabel: 'Hasło',
             allowBlank: false

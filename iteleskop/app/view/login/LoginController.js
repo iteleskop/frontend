@@ -2,6 +2,11 @@ Ext.define('iTeleskop.view.login.LoginController', {
     extend: 'Ext.app.ViewController',
     alias: 'controller.login',
 
+    // Toast to male wyskakujace powiadomienie, defaultowo w prawym dolnym rogu
+    requires: [
+        'Ext.window.Toast'
+    ],
+
     onSpecialKey: function(field, e) {
         if (e.getKey() === e.ENTER) {
             this.doLogin();
@@ -17,14 +22,45 @@ Ext.define('iTeleskop.view.login.LoginController', {
         // This would be the ideal location to verify the user's credentials via
         // a server-side lookup. We'll just move forward for the sake of this example.
 
-        this.onLoginSuccess();
+        var user = this.lookupReference('login_user').getValue();
+        var pwd = this.lookupReference('login_pass').getValue();
+
+        var data = {
+            "user": user,
+            "md5pass": pwd
+        };
+
+        // Zawolaj zdalna metode (server-side) przez Ext.Direct. To wywolanie
+        // zostanie przetworzone na zawołanie metode verify w klasie Login
+        // w php/classes/Login.php. Po zakonczeniu, zostanie zawolany callback
+        // verifyResult.
+        Login.verify(data, this.verifyResult, this);
     },
 
-    onLoginFailure: function() {
+    // Ta metoda jest wolana o otrzymaniu wynikow proby logowania po stronie
+    // serwera. Mozliwe odpowiedzi:
+    // { 'success': true, 'login': ..., 'user_id': 123 }
+    // { 'failure': true, msg: '...' }
+    verifyResult: function(result, event, success) {
+
+        // resuuult
+
+        // Jezeli w odpowiedzi jest pole failure, to logowanie sie
+        // nie udalo. Wyswietl zalaczony komunikat i na tym koniec
+        // przetwarzania.
+        if (result.hasOwnProperty('failure')) {
+            Ext.toast("Błąd logowania: " + result.msg);
+            return;
+        }
+
+        if (result.hasOwnProperty('success')) {
+            Ext.toast("Logowanie udane, Twój id to " + result.user_id);
+        }
+
+        // this.onLoginSuccess();
     },
 
     onLoginSuccess: function(user) {
-
         this.fireViewEvent('login', this.getView(), this.loginManager);
     }
 });
