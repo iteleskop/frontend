@@ -41,7 +41,7 @@ class AddTask {
             return $txt;
         }
     }
-    
+
     function insert($data) {
         $q = 'INSERT INTO tasks(user_id, scope_id, object, ra, decl, exposure, descr, '.
              'filter, binning, defocus, calibrate, solve, vphot, other_cmd, min_alt, '.
@@ -80,7 +80,7 @@ class AddTask {
             $this->failure("<b>Błąd podłączenia do bazy</b><br/>".
                            "Informacje debugowe: DB error=". $_db->error."<br/>".
                 "DB connection error=". $_db->connect_error);
-        
+
         $last_id = $_db->insert_id;
 
         $txt = "Dodano zadanie obserwacji <b>".$data['object'].
@@ -129,7 +129,7 @@ class AddTask {
         }
         $this->data[$name] = 0;
     }
-    
+
     // Czas odebrac wszystkie dane
     function getData() {
         $this->data = array();

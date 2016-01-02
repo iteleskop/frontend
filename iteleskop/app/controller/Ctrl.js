@@ -19,7 +19,7 @@ Ext.define('iTeleskop.controller.Ctrl', {
             listeners: {
                 scope: this,
                 login: 'onLoginSuccess'
-            },
+            }
         });
 
         // iTeleskop.view.login.Login doesn't have autoShow, so
