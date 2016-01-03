@@ -4,7 +4,8 @@ Ext.define('iTeleskop.view.login.LoginController', {
 
     // Toast to male wyskakujace powiadomienie, defaultowo w prawym dolnym rogu
     requires: [
-        'Ext.window.Toast'
+        'Ext.window.Toast',
+        'iTeleskop.store.User'
     ],
 
     onSpecialKey: function(field, e) {
@@ -55,9 +56,21 @@ Ext.define('iTeleskop.view.login.LoginController', {
 
         if (result.hasOwnProperty('success')) {
             Ext.toast("Logowanie udane, Twój id to " + result.user_id);
+
+            this.saveUserData(result.user_id,
+                         this.lookupReference('login_user').getValue());
+
+            // Zakoncz logowanie z sukcesem.
+            this.onLoginSuccess();
         }
 
-        // this.onLoginSuccess();
+    },
+
+    // Zapisuje dane uzytkownika w magazynie 'user'
+    saveUserData: function(user_id, login) {
+        var x = Ext.getStore('user');
+        x.add({ login: login, user_id: user_id });
+        // alert("added to store:" + login + user_id);
     },
 
     onLoginSuccess: function(user) {

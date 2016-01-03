@@ -33,7 +33,8 @@ Ext.define('iTeleskop.Application', {
     // Lista uzywanych magazynow informacji
     stores: [
         'Tasks',
-        'Users'
+        'Users',
+        'User'
     ],
 
     launch: function() {
