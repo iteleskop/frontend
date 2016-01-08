@@ -66,40 +66,44 @@ Ext.define('iTeleskop.view.main.AddTask', {
             displayField: 'text',
             queryMode: 'local',
             store: AddTaskScopes,
-            width: 400
+            labelWidth: 300
         },
         {
-            // @todo: Trzeba dopisac obsluge uzytkownikow, na razie na pale
-            // jest wbity user 42.
+            // To pole jest ustawianie w metodzie beforerender
             name: 'user_id',
-            xtype: 'hidden',
-            value: 42
+            xtype: 'textfield',
+            fieldLabel:'ID użytkownika',
+            readOnly: true,
+            labelWidth: 300
         },
         {
             // Wybor obiektu, jedno wielkie @todo trzeba te dane wyciagac z jakiejs bazy
             // danych, moze z simbada? Na razie wpisywane z reki
             fieldLabel: 'Obiekt',
             name: 'object',
+            labelWidth: 300,
             allowBlank: false
         },
         {
             // Rektascencja: od 0h0m0s do 23h59m59s
             fieldLabel: 'Rektascencja',
             name: 'ra',
+            labelWidth: 300,
             allowBlank: false
         },
         {
             // Wybor deklinacji, @todo wyciagac max. limity z tabeli telescopes,
             // na razie na sztywno od -20 do +90 dla CDK12.5" w Nerpio.
             fieldLabel: 'Deklinacja (-20 do +90)',
-            labelWidth: 200,
             name: 'decl',
+            labelWidth: 300,
             allowBlank: false
         },
         {
             fieldLabel: 'Espozycja [s]',
             name: 'exposure',
             value: '10',
+            labelWidth: 300,
             allowNegative: false,
             allowBlank: false,
 
@@ -121,11 +125,13 @@ Ext.define('iTeleskop.view.main.AddTask', {
         },
         {
             fieldLabel: 'Opis zadania',
+            labelWidth: 300,
             name: 'descr'
         },
         {
             fieldLabel: 'Komentarz',
             name: 'comment',
+            labelWidth: 300,
             value: 'na'
         },
         {
@@ -138,7 +144,7 @@ Ext.define('iTeleskop.view.main.AddTask', {
             displayField: 'text',
             queryMode: 'local',
             store: AddTaskFilters,
-            width: 400
+            labelWidth: 300
         },
         {
             fieldLabel: 'Binning',
@@ -148,18 +154,21 @@ Ext.define('iTeleskop.view.main.AddTask', {
             queryMode: 'local',
             valueField: 'binning',
             displayField: 'text',
+            labelWidth: 300,
             value: '2'
         },
         {
             fieldLabel: 'Defocus',
             xtype: 'checkbox',
             name: 'defocus',
+            labelWidth: 300,
             checked: false
         },
         {
             fieldLabel: 'Kalibracja zdjęć',
             xtype: 'checkbox',
             checked: true,
+            labelWidth: 300,
             name: 'calibrate'
         },
         {
@@ -167,22 +176,26 @@ Ext.define('iTeleskop.view.main.AddTask', {
             labelWidth: 150,
             xtype: 'checkbox',
             checked: true,
+            labelWidth: 300,
             name: 'solve'
         },
         {
             fieldLabel: 'Vphot',
             xtype: 'checkbox',
             checked: false,
+            labelWidth: 300,
             name: 'vphot'
         },
         {
             fieldLabel: 'Dodatkowe komendy',
+            labelWidth: 300,
             name: 'other_cmd'
         },
         {
             fieldLabel: 'Minimalna wysokość (w stopniach)',
             name: 'min_alt',
-            value: '0'
+            value: '0',
+            labelWidth: 300
         },
         {
             fieldLabel: 'Min. odległość od księżyca (w stopniach)',
@@ -191,25 +204,30 @@ Ext.define('iTeleskop.view.main.AddTask', {
             value: '0'
         },
         {
-            fieldLabel: 'Nie rozpoczynaj przed...',
+            fieldLabel: 'Nie rozpoczynaj przed datą:',
+            labelWidth: 300,
             //xtype: 'datetimefield',
             //format: 'Y-m-d H:i',
             name: 'skip_before'
         },
         {
-            fieldLabel: 'Nie rozpoczynaj po...',
+            fieldLabel: 'Nie rozpoczynaj po dacie:',
+            labelWidth: 300,
             name: 'skip_after'
         },
         {
-            fieldLabel: 'Nie wykonuj, jeżeli ostatnie zdjęcie było mniej X sekund temu',
+            fieldLabel: 'Nie wykonuj, jeżeli ostatnie zdjęcie było mniej niż X sekund temu',
+            labelWidth: 300,
             name: 'skip_interval'
         },
         {
-            fieldLabel: 'Skip if X photos were done in last (Y) seconds',
+            fieldLabel: 'Pomiń, jeżeli co najmniej x zdjęć zostało zrobionych w ostatnich ... sekundach',
+            labelWidth: 300,
             name: 'skip_period_seconds'
         },
         {
-            fieldLabel: 'Skip if (X) photos were done in the last Y seconds',
+            fieldLabel: 'Pomiń, jeżeli co najmniej ... zdjęć zostało zrobionych w ostatnich x sekundach',
+            labelWidth: 300,
             name: 'skip_period_count'
         }
     ], // koniec items, czyli obiektow znadujacych sie w tej formie
@@ -243,5 +261,16 @@ Ext.define('iTeleskop.view.main.AddTask', {
                 }
             }
         }
-    ]
+    ],
+
+    listeners: {
+
+        // Ta funkcja jest zawolana zaraz przed wyrenderowaniem formularza.
+        // Wyciagamy dane z magazynu 'user' i ustawiamy pole formularza
+        // user_id.
+        beforerender: function(component, eOpts) {
+            var user_id = Ext.getStore('user').getAt(0).data.user_id;
+            component.getForm().findField('user_id').setValue(user_id);
+        }
+    }
 });
