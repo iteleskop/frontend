@@ -28,6 +28,7 @@ Ext.define('iTeleskop.view.login.Login', {
             name: 'username',
             reference: 'login_user',
             fieldLabel: 'Użytkownik',
+            // value: 'tomek',
             allowBlank: false
         }, {
             xtype: 'textfield',
@@ -39,7 +40,8 @@ Ext.define('iTeleskop.view.login.Login', {
         }, {
             xtype: 'displayfield',
             hideEmptyLabel: false,
-            value: 'Proszę podać swoje dane. Jeżeli zapomniałeś hasła, skontaktuj się z abc@example.org'
+            value: 'Proszę podać swoje dane. Jeżeli zapomniałeś<br/>' +
+                'hasła, skontaktuj się z abc@example.org'
         }],
         buttons: [{
             text: 'Login',

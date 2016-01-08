@@ -6,7 +6,9 @@
 Ext.application({
     name: 'iTeleskop',
 
-    extend: 'iTeleskop.Application'
+    extend: 'iTeleskop.Application',
+
+    version: '0.2.0'
 
     //-------------------------------------------------------------------------
     // Most customizations should be made to iTeleskop.Application. If you need to
