@@ -240,6 +240,7 @@ Ext.define('iTeleskop.view.main.AddTask', {
                     form.submit({
                         success: function(form, action) {
                             Ext.Msg.alert('Sukces', action.result.msg);
+                            Ext.getStore('tasks').load();
                         },
                         failure: function(form, action) {
                             Ext.Msg.alert('Porażka', action.result.msg);
