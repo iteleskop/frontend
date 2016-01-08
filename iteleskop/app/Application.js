@@ -34,6 +34,7 @@ Ext.define('iTeleskop.Application', {
     stores: [
         'Tasks',
         'Users',
+        'Objects',
         'User'
     ],
 

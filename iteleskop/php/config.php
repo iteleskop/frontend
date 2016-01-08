@@ -23,6 +23,13 @@ $photon_catcher_db   = 'iteleskop';
                     )
                 )
             ),
+        'QueryObjects' => array(
+            'methods' => array(
+                'getResults' => array(
+                    'len' => 1
+                    )
+                )
+            ),
         'Login' => array(
             'methods' => array(
                 'verify' => array(

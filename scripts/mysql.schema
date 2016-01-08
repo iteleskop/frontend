@@ -192,3 +192,23 @@ CREATE TABLE filters (
     filter_id VARCHAR(16),
     descr VARCHAR(128)
 );
+
+CREATE TABLE objects (
+    # Identyfikator uzytkownika, ktory dodal to zadanie
+    object_id INT PRIMARY KEY NOT NULL,
+
+    # Nazwa obiektu, ktory bedzie fotografowany
+    name VARCHAR(64),
+
+    # Rektascencja (w postaci ulamkowej, od 0h do 24h)
+    ra FLOAT,
+
+    # Deklinacja (w stopniach, dla teleskopu Nerpio -20 do 90)
+    decl FLOAT,
+
+    # Opis zadania (zwykle puste)
+    descr VARCHAR(1024),
+
+    # Komentarz
+    comment TEXT
+);
