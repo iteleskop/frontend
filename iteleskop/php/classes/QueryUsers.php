@@ -27,8 +27,9 @@
     public function getResults($params) {
         $_db = $this->_db;
 
-        $_result = $_db->query("SELECT user_id, login, firstname, lastname, share, phone, email FROM users") or
-            die('Connection Error: ' . $_db->connect_error);
+        $_result = $_db->query("SELECT user_id, login, firstname, lastname, share," .
+                               "phone, email, permissions, aavso_id FROM users ORDER BY firstname")
+            or die('Connection Error: ' . $_db->connect_error);
 
         $results = array();
 
@@ -43,9 +44,4 @@
 
  }
 
-/* COMMENTED OUT: Prints the data returned by MySQL
- $x = new QueryUsers();
- $y = $x->getResults("");
- print_r($y);
- echo 'Hello world'; */
 ?>
