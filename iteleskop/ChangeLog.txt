@@ -1,14 +1,13 @@
  iTeleskop ChangeLog
 ---------------------
 
-
-0.2.1
+0.2.1 (2016-01-17)
 - Added aavso_id column in the Users view
 - Added permissions column in the Users view
 - Added tooltip on permissions column
 - Added tooltip for task_id (in the task forum)
 - Fixed names encoding (polish diacritic letters are now displayed
-  correcty) in users list.
+  correcty) in the users and object list.
 
 0.2.0 (2016-01-09)
 - Initial (limited) public version
