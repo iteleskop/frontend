@@ -8,6 +8,9 @@
 - Added tooltip for task_id (in the task forum)
 - Fixed names encoding (polish diacritic letters are now displayed
   correcty) in the users, tasks and objects list.
+- Added ability to switch your own tasks to waiting mode
+- Added ability to delete your own task (work in progress:
+  delete working, but the task is displayed until the page is reloaded)
 
 0.2.0 (2016-01-09)
 - Initial (limited) public version

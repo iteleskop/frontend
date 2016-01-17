@@ -20,6 +20,19 @@ $photon_catcher_db   = 'iteleskop';
             'methods' => array(
                 'getResults' => array(
                     'len' => 1
+                    ),
+                'update' => array(
+                    'params' => array(
+                        'user_id',
+                        'task_id',
+                        'new_state'
+                        )
+                    ),
+                'delete' => array(
+                    'params' => array(
+                        'user_id',
+                        'task_id'
+                        )
                     )
                 )
             ),

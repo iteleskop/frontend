@@ -31,8 +31,10 @@
     public function getResults($params) {
         $_db = $this->_db;
 
-        $_result = $_db->query("SELECT task_id, scope_id, object, ra, decl, tasks.user_id, users.login, exposure, filter,binning, defocus, calibrate, solve, vphot, other_cmd, min_alt, moon_distance, skip_before, skip_after, skip_interval, skip_period_seconds, skip_period_count, comment, state, imagename from tasks, users WHERE tasks.user_id = users.user_id ORDER BY task_id DESC") or
-            die('Connection Error: ' . $_db->connect_error);
+        $_result = $_db->query("SELECT task_id, scope_id, object, ra, decl, tasks.user_id, users.login, exposure, filter,binning, defocus, calibrate, solve, vphot, other_cmd, min_alt, moon_distance, skip_before, skip_after, skip_interval, skip_period_seconds, skip_period_count, comment, state, imagename from tasks, users WHERE tasks.user_id = users.user_id ORDER BY task_id DESC");
+        if (!$_result) {
+            return $this->failure("MySQL error:". $_db->error);
+        }
 
         $results = array();
 
@@ -43,6 +45,53 @@
         $this->_db->close();
 
         return $results;
+    }
+
+    function success($txt) {
+        $answer = array();
+        $answer['success'] = true;
+        $answer['msg'] = $txt;
+        return $answer;
+    }
+
+    function failure($txt) {
+        $answer = array();
+        $answer['failure'] = true;
+        $answer['msg'] = $txt;
+        return $answer;
+    }
+
+    public function update($params) {
+        $user_id = $params->user_id;
+        $task_id = $params->task_id;
+        $new_state = $params->new_state;
+
+        $_db = $this->_db;
+        $_result = $_db->query("UPDATE tasks SET state=".$new_state.
+                               " WHERE task_id=".$task_id);
+        if (!$_result) {
+            return $this->failure("MySQL error:". $_db->error);
+        }
+
+        $this->_db->close();
+
+        return $this->success("Task ".$task_id." updated.");
+    }
+
+    public function delete($params) {
+        $user_id = $params->user_id;
+        $task_id = $params->task_id;
+
+        $_db = $this->_db;
+        $_result = $_db->query("DELETE FROM tasks WHERE task_id=".$task_id);
+
+        if (!$_result) {
+            return $this->failure("MySQL error:". $_db->error);
+        }
+
+        $this->_db->close();
+
+        $this->success("Task ".$task_id." deleted.");
     }
 
  }

@@ -44,8 +44,6 @@ Ext.define('iTeleskop.view.login.LoginController', {
     // { 'failure': true, msg: '...' }
     verifyResult: function(result, event, success) {
 
-        // resuuult
-
         // Jezeli w odpowiedzi jest pole failure, to logowanie sie
         // nie udalo. Wyswietl zalaczony komunikat i na tym koniec
         // przetwarzania.
@@ -70,7 +68,6 @@ Ext.define('iTeleskop.view.login.LoginController', {
     saveUserData: function(user_id, login) {
         var x = Ext.getStore('user');
         x.add({ login: login, user_id: user_id });
-        // alert("added to store:" + login + user_id);
     },
 
     onLoginSuccess: function(user) {

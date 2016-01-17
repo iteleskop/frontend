@@ -24,6 +24,10 @@ class AddTask {
             die('Connection Error: ' . $_db->connect_error);
         }
 
+        if (!$_db->set_charset("utf8")) {
+            die('Setting charset to utf8 failed: '. $_db->error);
+        }
+
         return $_db;
     }
 
@@ -31,6 +35,8 @@ class AddTask {
         if (!isset($data) || !is_array($data)) {
             $this->failure("Validation failed: passed data is not an array");
         }
+
+        // @todo: implement real validation here
     }
 
     function quoted($data, $name, $comma) {
@@ -79,7 +85,7 @@ class AddTask {
         $_result = $_db->query($q) or
             $this->failure("<b>Błąd podłączenia do bazy</b><br/>".
                            "Informacje debugowe: DB error=". $_db->error."<br/>".
-                "DB connection error=". $_db->connect_error);
+                           "DB connection error=". $_db->connect_error);
 
         $last_id = $_db->insert_id;
 
