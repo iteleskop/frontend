@@ -54,7 +54,7 @@ Ext.define('iTeleskop.view.main.Tasks', {
         { text: 'Task ID',  dataIndex: 'task_id', width: 70,
           renderer: function(value, metaData, record) { return this.tooltip(value, metaData, record); }
         },
-        { text: 'Stan', dataIndex: 'state',
+        { text: 'State', dataIndex: 'state',
           renderer: function(value, metaData) {
               var tip = "Available states:<br/>" +
                   "<b>0 (waiting)</b> - the user marked this task as not to be conducted yet. " +
@@ -124,6 +124,6 @@ Ext.define('iTeleskop.view.main.Tasks', {
     ],
 
     listeners: {
-        select: 'onItemSelected'
+        select: 'onTaskClick'
     }
 });
