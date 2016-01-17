@@ -14,10 +14,57 @@ Ext.define('iTeleskop.view.main.Tasks', {
     store: {
         type: 'tasks'
     },
-    
+
+    // Method prepares tooltip with all the task details.
+    tooltip: function(value, metaData, record) {
+        var tip = 'Task ID: <b>' + record.get('task_id') + '</b>, submitted by '
+            + record.get('login') + '<br/>';
+        tip += 'Object: <b>' + record.get('object') + '</b><br/>'
+            + 'Coords: RA: <b>' + RAfloatToHMS(record.get('ra')) + '</b>, Dec <b>'
+            + DeclinationFloatToDMS(record.get('decl'), false) + '</b><br/>'
+            + 'Exposure: <b>' + record.get('exposure') + '</b>, filter: <b>' + record.get('filter') + '</b><br/>';
+
+        metaData.tdAttr = 'data-qtip="' + tip + '"';
+        return value;
+    },
+
+    // Converts numeric value to more descriptive representation of the status
+    stateToText: function(value) {
+        switch (value) {
+        case "0":
+            return "new(0)";
+        case "1":
+            return "passive(1)";
+        case 2:
+            return "in queue(2)";
+        case 3:
+            return "3";
+        case 4:
+            return "4";
+        case 5:
+            return "5";
+        default:
+            return "unknown(" + value + ")";
+        };
+    },
+
     columns: [
-        { text: 'Task ID',  dataIndex: 'task_id', width: 70 },
-        { text: 'Stan', dataIndex: 'state' },
+        { text: 'Task ID',  dataIndex: 'task_id', width: 70,
+          renderer: function(value, metaData, record) { return this.tooltip(value, metaData, record); }
+        },
+        { text: 'Stan', dataIndex: 'state',
+          renderer: function(value, metaData) {
+              var tip = "Available states:<br/>" +
+              "0 - new (task has been just added and is not picked into the queue yet.<br/>" +
+                  "1 - disabled (task has been added, but the user doesn't want it to be picked up yet)<br/>" +
+                  "2 - ...<br/>" +
+                  "3 - ...<br/>" +
+                  "4 - ...<br/>" +
+                  "5 - ...";
+              metaData.tdAttr = 'data-qtip="' + tip + '"';
+              return this.stateToText(value);
+          }
+        },
         { text: 'Login', dataIndex: 'login' },
         { text: 'Obiekt', dataIndex: 'object', flex: 1 },
         { text: 'RA', dataIndex: 'ra', flex: 1,
