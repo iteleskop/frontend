@@ -1,0 +1,13 @@
+ iTeleskop ChangeLog
+---------------------
+
+
+0.2.1
+- Added aavso_id column in the Users view
+- Added permissions column in the Users view
+- Added tooltip on permissions column
+- Added tooltip for task_id (in the task forum)
+
+0.2.0 (2016-01-09)
+- Initial (limited) public version
+- Task view, Task add, Users view, Objects view working
