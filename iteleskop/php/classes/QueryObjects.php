@@ -21,6 +21,10 @@
             die('Connection Error: ' . $_db->connect_error);
         }
 
+        if (!$_db->set_charset("utf8")) {
+            die('Setting charset to utf8 failed: '. $_db->error);
+        }
+
         return $_db;
     }
 
