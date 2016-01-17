@@ -1,6 +1,6 @@
 <?php
 
- class QueryTasks {
+ class Tasks {
 
     private $_db;
     protected $_result;
@@ -48,7 +48,7 @@
  }
 
 /* COMMENTED OUT: Prints the data returned by MySQL
- $x = new QueryTasks();
+ $x = new Tasks();
  $y = $x->getResults("");
  print_r($y);
  echo 'Hello world'; */
