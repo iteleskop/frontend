@@ -22,10 +22,12 @@ function RAfloatToHMS(ra) {
 
 // Fukcja konwertuje deklinacje z formatu zmiennoprzecinkowego na
 // stopnie, minuty, sekundy
-function DeclinationFloatToDMS(dec) {
+function DeclinationFloatToDMS(dec, superscript) {
     if (dec == 0) {
         return ("-");
     }
+
+    var superscript = typeof superscript !== 'undefined' ? superscript : true;
 
     var deg = Math.floor(dec);
     var tmp = (dec - deg)*60;
@@ -33,7 +35,11 @@ function DeclinationFloatToDMS(dec) {
     tmp = (tmp - m)*60;
     var s = Math.floor(tmp);
 
-    return (deg + "<sup>o</sup> " + m + "\'" + s + "\"");
+    if (superscript) {
+        return (deg + "<sup>o</sup> " + m + "\'" + s + "\"");
+    } else {
+        return (deg + "deg. " + m + "m " + s + "s ");
+    }
 }
 
 

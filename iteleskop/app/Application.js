@@ -9,7 +9,7 @@ Ext.define('iTeleskop.Application', {
     name: 'iTeleskop',
 
     controllers: [
-	'Ctrl'
+        'Ctrl'
     ],
 
     // To okresla, ktory widok jest wyswietlany na poczatku. Mozna albo uzyc

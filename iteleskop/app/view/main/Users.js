@@ -6,7 +6,7 @@ Ext.define('iTeleskop.view.main.Users', {
         'iTeleskop.store.Users'
     ],
 
-    title: 'Zadania',
+    title: 'Observation Tasks',
 
     store: {
         type: 'users'
