@@ -32,17 +32,19 @@ Ext.define('iTeleskop.view.main.Tasks', {
     stateToText: function(value) {
         switch (value) {
         case "0":
-            return "new(0)";
+            return "0 (waiting)";
         case "1":
-            return "passive(1)";
-        case 2:
-            return "in queue(2)";
-        case 3:
-            return "3";
-        case 4:
-            return "4";
-        case 5:
-            return "5";
+            return "1 (new)";
+        case "2":
+            return "2 (activated)";
+        case "3":
+            return "3 (in Nerpio queue)";
+        case "4":
+            return "4 (executed)";
+        case "5":
+            return "5 (done,for users)";
+        case "6":
+            return "6 (done,public)";
         default:
             return "unknown(" + value + ")";
         };
@@ -55,12 +57,22 @@ Ext.define('iTeleskop.view.main.Tasks', {
         { text: 'Stan', dataIndex: 'state',
           renderer: function(value, metaData) {
               var tip = "Available states:<br/>" +
-              "0 - new (task has been just added and is not picked into the queue yet.<br/>" +
-                  "1 - disabled (task has been added, but the user doesn't want it to be picked up yet)<br/>" +
-                  "2 - ...<br/>" +
-                  "3 - ...<br/>" +
-                  "4 - ...<br/>" +
-                  "5 - ...";
+                  "<b>0 (waiting)</b> - the user marked this task as not to be conducted yet. " +
+                  "It will stay in this state until the user either " +
+                  "moves it to the new (1) state or deletes this task.<br/>" +
+                  "<b>1 (new)</b> - the task has been added, but it was not picked up by the " +
+                  " queueing software yet.<br/>" +
+                  "<b>2 (activated)</b> - the task has been picked by the queing software for " +
+                  "execution.<br/>" +
+                  "<b>3 (in queue)</b> - the task is currently in Nerpio queue and will be " +
+                  "executed soon.<br/>" +
+                  "<b>4 (executed)</b> - the observation is complete! The resulting image " +
+                  "has to be downloaded and processed.<br/>" +
+                  "<b>5 (done,for users)</b> - the processing is done and the resulting data is " +
+                  "available to all shareholders<br/>" +
+                  "<b>6 (done,public)</b> - this processing is done and certain amount of time " +
+                  "has elapsed, so the photo is made available for everyone publicly";
+              
               metaData.tdAttr = 'data-qtip="' + tip + '"';
               return this.stateToText(value);
           }
