@@ -7,6 +7,8 @@
 - Added permissions column in the Users view
 - Added tooltip on permissions column
 - Added tooltip for task_id (in the task forum)
+- Fixed names encoding (polish diacritic letters are now displayed
+  correcty) in users list.
 
 0.2.0 (2016-01-09)
 - Initial (limited) public version
