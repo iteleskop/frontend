@@ -22,13 +22,14 @@ var AddTaskBinning = Ext.create('Ext.data.Store', {
 var AddTaskFilters = Ext.create('Ext.data.Store', {
     fields: ['filter' , 'text'],
     data: [
-        { 'filter': 'L',     'text': 'L (luminancja)' },
-        { 'filter': 'Red',   'text': 'R (red)' },
-        { 'filter': 'Green', 'text': 'G (green)' },
-        { 'filter': 'Blue',  'text': 'B (blue)' },
-        { 'filter': 'Ha',    'text': 'H-alpha' },
-        { 'filter': 'V',     'text': 'V (fotometryczny)' },
-        { 'filter': 'B',     'text': 'B (fotometryczny)' },
+        { 'filter': 'CV',     'text': 'L (luminance)' },
+        { 'filter': 'TR',   'text': 'R (red)' },
+        { 'filter': 'TG', 'text': 'G (green)' },
+        { 'filter': 'TB',  'text': 'B (blue)' },
+        { 'filter': 'HA',    'text': 'H-alpha' },
+        { 'filter': 'V',     'text': 'V (fotometric)' },
+        { 'filter': 'B',     'text': 'B (fotometric)' },
+        { 'filter': 'R',     'text': 'R (fotometric)' },
         { 'filter': 'none',  'text': 'bez filtra' }
     ]
 });
