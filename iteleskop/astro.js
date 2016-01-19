@@ -29,11 +29,21 @@ function DeclinationFloatToDMS(dec, superscript) {
 
     var superscript = typeof superscript !== 'undefined' ? superscript : true;
 
+    var negative = false;
+    if (dec < 0) {
+        negative = true;
+        dec = -dec;
+    }
+
     var deg = Math.floor(dec);
     var tmp = (dec - deg)*60;
     var m = Math.floor(tmp);
-    tmp = (tmp - m)*60;
-    var s = Math.floor(tmp);
+    tmp = (tmp - m)*600;
+    var s = Math.round(tmp)/10;
+
+    if (negative) {
+        deg = -deg;
+    }
 
     if (superscript) {
         return (deg + "<sup>o</sup> " + m + "\'" + s + "\"");
