@@ -83,6 +83,7 @@ Ext.define('iTeleskop.view.main.AddTask', {
             allowBlank: false
         },
 
+        // Right ascension starts here
         {
             xtype: 'container',
             layout: 'hbox',
@@ -172,14 +173,113 @@ Ext.define('iTeleskop.view.main.AddTask', {
                 }
             ]
         },
+        // End of right ascension declaration
+
+        // Declination starts here
         {
-            // Wybor deklinacji, @todo wyciagac max. limity z tabeli telescopes,
-            // na razie na sztywno od -20 do +90 dla CDK12.5" w Nerpio.
-            fieldLabel: 'Deklinacja (-20 do +90)',
-            name: 'decl',
-            labelWidth: 300,
-            allowBlank: false
+            xtype: 'container',
+            layout: 'hbox',
+            layoutConfig: {
+                type: 'hbox',
+                align: 'stretch',
+                pack: 'start'
+            },
+            padding: "0 0 10 0", // top right bottom left
+            items: [
+                {
+                    // Wybor deklinacji, @todo wyciagac max. limity z tabeli telescopes,
+                    // na razie na sztywno od -20 do +90 dla CDK12.5" w Nerpio.
+                    xtype: 'textfield',
+                    fieldLabel: 'Deklinacja (-20 do +90)',
+                    name: 'decl',
+                    value: '0.0',
+                    labelWidth: 300,
+                    allowBlank: false
+                },
+                {
+                    xtype: 'button',
+                    text: 'a.b => deg:m:s',
+                    scope: this,
+                    handler: function(x) {
+                        var dec_field = x.up().up().getForm().findField('decl');
+                        var d_field = x.up().up().getForm().findField('decl_deg');
+                        var m_field = x.up().up().getForm().findField('decl_m');
+                        var s_field = x.up().up().getForm().findField('decl_s');
+
+                        var dec = dec_field.getValue();
+                        var negative = false;
+                        if (dec < 0) {
+                            negative = true;
+                            dec = -dec;
+                        }
+
+                        var deg = Math.floor(dec);
+                        var tmp = (dec - deg)*60;
+                        var m = Math.floor(tmp);
+                        tmp = (tmp - m)*600;
+                        var s = Math.round(tmp)/10;
+
+                        if (negative) {
+                            deg = -deg;
+                        }
+
+                        d_field.setValue(deg);
+                        m_field.setValue(m);
+                        s_field.setValue(s);
+                    }
+                },
+                {
+                    xtype: 'button',
+                    text: 'a.b <= deg:m:s',
+                    handler: function(x) {
+                        var decl_field = x.up().up().getForm().findField('decl');
+                        var d_field = x.up().up().getForm().findField('decl_deg');
+                        var m_field = x.up().up().getForm().findField('decl_m');
+                        var s_field = x.up().up().getForm().findField('decl_s');
+
+                        var decl = DeclinationDMSToFloat(d_field.getValue(),
+                                                         m_field.getValue(),
+                                                         s_field.getValue());
+                        decl_field.setValue(decl);
+                    }
+                },
+                {
+                    // Right ascension (hour value: 0...23)
+                    xtype: 'textfield',
+                    fieldLabel: 'deg',
+                    labelAlign: 'right',
+                    value: '0',
+                    name: 'decl_deg',
+                    labelWidth: 30,
+                    width: 100,
+                    allowBlank: false
+                },
+                {
+                    // Right ascension (minute value: 0...59)
+                    xtype: 'textfield',
+                    fieldLabel: 'm',
+                    labelAlign: 'right',
+                    value: '0',
+                    name: 'decl_m',
+                    labelWidth: 30,
+                    width: 100,
+                    allowBlank: false
+                },
+                {
+                    // Right ascension (seconds value: 0.0...59.99)
+                    xtype: 'textfield',
+                    fieldLabel: 's',
+                    labelAlign: 'right',
+                    value: '0.0',
+                    name: 'decl_s',
+                    labelWidth: 30,
+                    width: 100,
+                    allowBlank: false
+                }
+            ]
         },
+        // Declination ends here
+
         {
             fieldLabel: 'Espozycja [s]',
             name: 'exposure',

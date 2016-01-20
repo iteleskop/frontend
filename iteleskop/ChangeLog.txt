@@ -6,9 +6,12 @@
 - Corrected right ascension calculations. Right now the floating point
   value can change between 0 and 359.99999999
 - Added binning 4x4
-- It's now possible to specify right ascension in h:m:s format and
-  convert it to floating point value
-- It's now possible to specify initial task state: 0(waiting) or 1(new)
+- Adding task improvements:
+  - ability to specify right ascension in h:m:s format and
+    convert it to floating point value
+  - ability to specify declination in deg:m:s format and convert
+    it to floating point value
+  - ability to specify initial task state: 0(waiting) or 1(new)
 
 0.2.2 (2016-01-18)
 - Slightly modified filter designations:

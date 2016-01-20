@@ -54,6 +54,15 @@ function DeclinationFloatToDMS(dec, superscript) {
 
 
 function DeclinationDMSToFloat(d, m, s) {
-    var ra = parseFloat(d) + parseFloat(m)/60 + parseFloat(s)/3600;
-    return (ra.toFixed(8));
+    var negative = false;
+    if (d < 0) {
+        negative = true;
+        d = -d;
+    }
+
+    var decl = parseFloat(d) + parseFloat(m)/60 + parseFloat(s)/3600;
+    if (negative) {
+        decl = -decl;
+    }
+    return (decl.toFixed(8));
 }
