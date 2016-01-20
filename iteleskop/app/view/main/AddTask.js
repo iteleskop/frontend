@@ -86,12 +86,95 @@ Ext.define('iTeleskop.view.main.AddTask', {
             labelWidth: 300,
             allowBlank: false
         },
+
         {
-            // Rektascencja: od 0h0m0s do 23h59m59s
-            fieldLabel: 'Rektascencja',
-            name: 'ra',
-            labelWidth: 300,
-            allowBlank: false
+            xtype: 'container',
+            layout: 'hbox',
+            layoutConfig: {
+                type: 'hbox',
+                align: 'stretch',
+                pack: 'start'
+            },
+            padding: "0 0 10 0", // top right bottom left
+            items: [
+                {
+                    // Right ascension in floating point format.
+                    xtype: 'textfield',
+                    fieldLabel: 'Rektascencja',
+                    name: 'ra',
+                    value: '0.0',
+                    labelWidth: 300,
+                    allowBlank: false
+                },
+                {
+                    xtype: 'button',
+                    text: 'a.b => h:m:s',
+                    scope: this,
+                    handler: function(x) {
+                        var ra_field = x.up().up().getForm().findField('ra');
+                        var h_field = x.up().up().getForm().findField('ra_h');
+                        var m_field = x.up().up().getForm().findField('ra_m');
+                        var s_field = x.up().up().getForm().findField('ra_s');
+
+                        var ra = ra_field.getValue();
+                        var h = Math.floor(ra/15); // hours
+                        var tmp = ra - (15*h);
+                        var m = Math.floor(tmp*4);
+                        tmp = tmp - (m/4);
+                        var s = Math.floor(tmp * 2400)/10;
+                        h_field.setValue(h);
+                        m_field.setValue(m);
+                        s_field.setValue(s);
+                    }
+                },
+                {
+                    xtype: 'button',
+                    text: 'a.b <= h:m:s',
+                    handler: function(x) {
+                        var ra_field = x.up().up().getForm().findField('ra');
+                        var h_field = x.up().up().getForm().findField('ra_h');
+                        var m_field = x.up().up().getForm().findField('ra_m');
+                        var s_field = x.up().up().getForm().findField('ra_s');
+
+                        var ra = RAhmsToFloat(h_field.getValue(), m_field.getValue(),
+                                              s_field.getValue());
+                        ra_field.setValue(ra);
+                    }
+                },
+                {
+                    // Right ascension (hour value: 0...23)
+                    xtype: 'textfield',
+                    fieldLabel: 'h',
+                    labelAlign: 'right',
+                    value: '0',
+                    name: 'ra_h',
+                    labelWidth: 30,
+                    width: 100,
+                    allowBlank: false
+                },
+                {
+                    // Right ascension (minute value: 0...59)
+                    xtype: 'textfield',
+                    fieldLabel: 'm',
+                    labelAlign: 'right',
+                    value: '0',
+                    name: 'ra_m',
+                    labelWidth: 30,
+                    width: 100,
+                    allowBlank: false
+                },
+                {
+                    // Right ascension (seconds value: 0.0...59.99)
+                    xtype: 'textfield',
+                    fieldLabel: 's',
+                    labelAlign: 'right',
+                    value: '0.0',
+                    name: 'ra_s',
+                    labelWidth: 30,
+                    width: 100,
+                    allowBlank: false
+                }
+            ]
         },
         {
             // Wybor deklinacji, @todo wyciagac max. limity z tabeli telescopes,
@@ -175,7 +258,6 @@ Ext.define('iTeleskop.view.main.AddTask', {
         },
         {
             fieldLabel: 'Rozwiąż (pinpoint)',
-            labelWidth: 150,
             xtype: 'checkbox',
             checked: true,
             labelWidth: 300,

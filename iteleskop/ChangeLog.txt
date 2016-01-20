@@ -6,6 +6,8 @@
 - Corrected right ascension calculations. Right now the floating point
   value can change between 0 and 359.99999999
 - Added binning 4x4
+- It's now possible to specify right ascension in h:m:s format and
+  convert it to floating point value
 
 0.2.2 (2016-01-18)
 - Slightly modified filter designations:
