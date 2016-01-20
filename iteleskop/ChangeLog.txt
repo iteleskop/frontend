@@ -12,6 +12,7 @@
   - ability to specify declination in deg:m:s format and convert
     it to floating point value
   - ability to specify initial task state: 0(waiting) or 1(new)
+- telescope state updated
 
 0.2.2 (2016-01-18)
 - Slightly modified filter designations:

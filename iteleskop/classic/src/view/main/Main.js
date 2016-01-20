@@ -134,7 +134,14 @@ Ext.define('iTeleskop.view.main.Main', {
         title: 'Status teleskopu',
         iconCls: 'fa-cog',
         bind: {
-            html: 'Status teleskopu: Nie kupiony ;)'
+            html: 'TODO: This is a static page for now. Make it actually check the state<br/>'
+                .concat('Telescope status: <b>BOUGHT!</b><br/>',
+                'Web interface: <b>prototype</b><br/>',
+                'Desktop interface: <b>prototype</b><br/>',
+                'Szczecin/Nerpio communication: <b>in development</b><br/>',
+                'Queuing management: <b>in development</b><br/>',
+                'Telescope management: <b>in development</b><br/>',
+                'Data server: <b>Offline (not set up yet)</b>')
         }
     },
     {
