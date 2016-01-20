@@ -14,7 +14,8 @@ var AddTaskBinning = Ext.create('Ext.data.Store', {
     data: [
         { 'binning': 1, 'text': '1x1' },
         { 'binning': 2, 'text': '2x2' },
-        { 'binning': 3, 'text': '3x3' }
+        { 'binning': 3, 'text': '3x3' },
+        { 'binning': 4, 'text': '4x4' }
     ]
 });
 

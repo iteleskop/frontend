@@ -11,11 +11,11 @@ function RAfloatToHMS(ra) {
         return ("-");
     }
 
-    var h = Math.floor(ra); // Hours
-    var tmp = (ra - h)*60; //
-    var m = Math.floor(tmp);
-    tmp = (tmp - m)*60;
-    var s = Math.floor(tmp);
+    var h = Math.floor(ra/15); // hours
+    var tmp = ra - (15*h);
+    var m = Math.floor(tmp*4);
+    tmp = tmp - (m/4);
+    var s = Math.floor(tmp * 240);
 
     return (h + "h" + m + "m" + s + "s");
 }
