@@ -49,12 +49,13 @@ class AddTask {
     }
 
     function insert($data) {
-        $q = 'INSERT INTO tasks(user_id, scope_id, object, ra, decl, exposure, descr, '.
+        $q = 'INSERT INTO tasks(user_id, state, scope_id, object, ra, decl, exposure, descr, '.
              'filter, binning, defocus, calibrate, solve, vphot, other_cmd, min_alt, '.
              'moon_distance, skip_before, skip_after, skip_interval, '.
-             'skip_period_seconds, skip_period_count, comment, state, created)'.
-            'SELECT '.
+             'skip_period_seconds, skip_period_count, comment, created) '.
+            'VALUES('.
             $this->quoted($data, 'user_id', true).
+            $this->quoted($data, 'state', true).
             $this->quoted($data, 'scope_id', true).
             $this->quoted($data, 'object', true).
             $this->quoted($data, 'ra', true).
@@ -76,9 +77,7 @@ class AddTask {
             $this->quoted($data, 'skip_period_seconds', true).
             $this->quoted($data, 'skip_period_count', true).
             $this->quoted($data, 'comment', true).
-            "ts.state, ". // new task state = 0 (NEW)
-            "now() ".     // created
-            " FROM task_states ts WHERE ts.name='NEW'";
+            "now())";  // created
 
         $_db = $this->_db;
 
@@ -141,6 +140,7 @@ class AddTask {
         $this->data = array();
 
         $this->getParam("user_id");
+        $this->getParam("state");
         $this->getParam("scope_id");
         $this->getParam("object");
         $this->getParam("ra");

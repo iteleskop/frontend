@@ -35,6 +35,14 @@ var AddTaskFilters = Ext.create('Ext.data.Store', {
     ]
 });
 
+var InitialState = Ext.create('Ext.data.Store', {
+    fields: ['state', 'text'],
+    data: [
+        { 'state': 0, 'text': 'Waiting (0)' },
+        { 'state': 1, 'text': 'New (1)' }
+    ]
+});
+
 Ext.define('iTeleskop.view.main.AddTask', {
     extend: 'Ext.form.Panel',
     title: 'Nowe zadanie',
@@ -58,18 +66,6 @@ Ext.define('iTeleskop.view.main.AddTask', {
 
     defaultType: 'textfield',
     items: [
-        {
-            // Wybor teleskopu: @todo: wyciagac te dane z tabeli telescopes
-            fieldLabel: 'Teleskop',
-            name: 'scope_id',
-            value: "1",
-            xtype: 'combobox',
-            valueField: 'scope_id',
-            displayField: 'text',
-            queryMode: 'local',
-            store: AddTaskScopes,
-            labelWidth: 300
-        },
         {
             // To pole jest ustawianie w metodzie beforerender
             name: 'user_id',
@@ -207,6 +203,30 @@ Ext.define('iTeleskop.view.main.AddTask', {
 
                 return true;
             }
+        },
+
+        {
+            fieldLabel: 'Initial state',
+            name: 'state',
+            value: '1',
+            xtype: 'combobox',
+            valueField: 'state',
+            displayField: 'text',
+            queryMode: 'local',
+            store: InitialState,
+            labelWidth: 300
+        },
+        {
+            // Wybor teleskopu: @todo: wyciagac te dane z tabeli telescopes
+            fieldLabel: 'Teleskop',
+            name: 'scope_id',
+            value: "1",
+            xtype: 'combobox',
+            valueField: 'scope_id',
+            displayField: 'text',
+            queryMode: 'local',
+            store: AddTaskScopes,
+            labelWidth: 300
         },
         {
             fieldLabel: 'Opis zadania',
