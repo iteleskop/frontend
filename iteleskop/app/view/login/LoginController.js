@@ -48,12 +48,12 @@ Ext.define('iTeleskop.view.login.LoginController', {
         // nie udalo. Wyswietl zalaczony komunikat i na tym koniec
         // przetwarzania.
         if (result.hasOwnProperty('failure')) {
-            Ext.toast("Błąd logowania: " + result.msg);
+            Ext.toast("Login error: " + result.msg);
             return;
         }
 
         if (result.hasOwnProperty('success')) {
-            Ext.toast("Logowanie udane, Twój id to " + result.user_id);
+            Ext.toast("Logged in, your id is " + result.user_id + ", welcome!");
 
             this.saveUserData(result.user_id,
                          this.lookupReference('login_user').getValue());

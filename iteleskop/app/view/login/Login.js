@@ -12,7 +12,7 @@ Ext.define('iTeleskop.view.login.Login', {
     controller: 'login',
 
     bodyPadding: 10,
-    title: 'Zaloguj się do iTeleskop',
+    title: 'Welcome to iTeleskop',
     closable: false,
 
     // autoShow jest wylaczone, bo wyswietlaniem steruje app/controller/Ctrl.js
@@ -27,21 +27,23 @@ Ext.define('iTeleskop.view.login.Login', {
             xtype: 'textfield',
             name: 'username',
             reference: 'login_user',
-            fieldLabel: 'Użytkownik',
-            // value: 'tomek',
+            fieldLabel: 'Username:',
+            value: 'tomek',
             allowBlank: false
         }, {
             xtype: 'textfield',
             name: 'password',
             reference: 'login_pass',
             inputType: 'password',
-            fieldLabel: 'Hasło',
+            fieldLabel: 'Password:',
             allowBlank: false
         }, {
             xtype: 'displayfield',
             hideEmptyLabel: false,
-            value: 'Proszę podać swoje dane. Jeżeli zapomniałeś<br/>' +
-                'hasła, skontaktuj się z abc@example.org'
+            value: 'This system is for shareholders only.<br/>' +
+                'If you\'re one of them and forgotten <br/>' +
+                'your password, please contact admins <br/>' +
+                'at <a href="http://iteleskop.org/">iteleskop.org</a>'
         }],
         buttons: [{
             text: 'Login',

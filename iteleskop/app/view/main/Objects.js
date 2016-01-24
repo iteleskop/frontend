@@ -13,15 +13,11 @@ Ext.define('iTeleskop.view.main.Objects', {
     },
 
     columns: [
-        { text: 'ID objektu',  dataIndex: 'object_id' },
-        { text: 'Nazwa', dataIndex: 'name', flex: 1 },
-        { text: 'Rektascencja', dataIndex: 'ra' },
-        { text: 'Deklinacja', dataIndex: 'decl' },
-        { text: 'Opis', dataIndex: 'descr', flex: 1 },
-        { text: 'Komentarz', dataIndex: 'comment', flex: 1 }
-    ],
-
-    listeners: {
-        select: 'onItemSelected'
-    }
+        { text: 'Object ID',  dataIndex: 'object_id' },
+        { text: 'Target name', dataIndex: 'name', flex: 1 },
+        { text: 'RA', dataIndex: 'ra' },
+        { text: 'Dec', dataIndex: 'decl' },
+        { text: 'Description', dataIndex: 'descr', flex: 1 },
+        { text: 'Comment', dataIndex: 'comment', flex: 1 }
+    ]
 });
