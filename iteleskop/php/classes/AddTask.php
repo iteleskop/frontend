@@ -50,9 +50,9 @@ class AddTask {
 
     function insert($data) {
         $q = 'INSERT INTO tasks(user_id, state, scope_id, object, ra, decl, exposure, descr, '.
-             'filter, binning, defocus, calibrate, solve, vphot, other_cmd, min_alt, '.
-             'moon_distance, skip_before, skip_after, skip_interval, '.
-             'skip_period_seconds, skip_period_count, comment, created) '.
+             'filter, binning, guiding, dither, defocus, calibrate, solve, vphot, other_cmd, '.
+             'min_alt, min_sun_alt, moon_distance, max_moon_phase, min_interval, '.
+             'skip_before, skip_after, comment, created) '.
             'VALUES('.
             $this->quoted($data, 'user_id', true).
             $this->quoted($data, 'state', true).
@@ -64,18 +64,20 @@ class AddTask {
             $this->quoted($data, 'descr', true).
             $this->quoted($data, 'filter', true).
             $this->quoted($data, 'binning', true).
+            $this->quoted($data, 'guiding', true).
+            $this->quoted($data, 'dither', true).
             $this->quoted($data, 'defocus', true).
             $this->quoted($data, 'calibrate', true).
             $this->quoted($data, 'solve', true).
             $this->quoted($data, 'vphot', true).
             $this->quoted($data, 'other_cmd', true).
             $this->quoted($data, 'min_alt', true).
+            $this->quoted($data, 'min_sun_alt', true).
             $this->quoted($data, 'moon_distance', true).
+            $this->quoted($data, 'max_moon_phase', true).
+            $this->quoted($data, 'min_interval', true).
             $this->quoted($data, 'skip_before', true).
             $this->quoted($data, 'skip_after', true).
-            $this->quoted($data, 'skip_interval', true).
-            $this->quoted($data, 'skip_period_seconds', true).
-            $this->quoted($data, 'skip_period_count', true).
             $this->quoted($data, 'comment', true).
             "now())";  // created
 
@@ -149,18 +151,20 @@ class AddTask {
         $this->getParam("descr");
         $this->getParam("filter");
         $this->getParam("binning");
+        $this->getBoolParam("guiding");
+        $this->getBoolParam("dither");
         $this->getBoolParam("defocus");
         $this->getBoolParam("calibrate");
         $this->getBoolParam("solve");
         $this->getBoolParam("vphot");
         $this->getParam("other_cmd");
         $this->getParam("min_alt");
+        $this->getParam("min_sun_alt");
         $this->getParam("moon_distance");
+        $this->getParam("max_moon_phase");
+        $this->getParam("min_interval");
         $this->getParam("skip_before");
         $this->getParam("skip_after");
-        $this->getParam("skip_interval");
-        $this->getParam("skip_period_seconds");
-        $this->getParam("skip_period_count");
         $this->getParam("comment");
 
         return ($this->data);

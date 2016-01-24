@@ -94,7 +94,7 @@ Ext.define('iTeleskop.view.main.Tasks', {
           }
         },
         { text: 'Login', dataIndex: 'login' },
-        { text: 'Object', dataIndex: 'object', flex: 1 },
+        { text: 'Target', dataIndex: 'object', flex: 1 },
         { text: 'RA', dataIndex: 'ra', flex: 1,
           renderer: function(value) {
               return RAfloatToHMS(value);
@@ -110,6 +110,8 @@ Ext.define('iTeleskop.view.main.Tasks', {
         { text: 'Comment', dataIndex: 'comment', flex: 1 },
         { text: 'Filter', dataIndex: 'filter', flex: 1 },
         { text: 'Binning', dataIndex: 'binning', flex: 1 },
+        { text: 'Guiding', dataIndex: 'guiding', flex: 1 },
+        { text: 'Dither', dataIndex: 'dither', flex: 1 },
         { text: 'Defocus', dataIndex: 'defocus', flex: 1 },
         { text: 'Calibrate', dataIndex: 'calibrate', flex: 1 },
         { text: 'Pinpoint', dataIndex: 'solve', flex: 1 },
@@ -118,18 +120,18 @@ Ext.define('iTeleskop.view.main.Tasks', {
         /* ograniczenia */
         { text: 'Min. wysokosc', dataIndex: 'min_alt', flex: 1,
           hidden: true, hideable: true },
+        { text: 'Min. wysokosc', dataIndex: 'min_sun_alt', flex: 1,
+          hidden: true, hideable: true },
         { text: 'Min. old od Księżyca', dataIndex: 'moon_distance', flex: 1,
           hidden: true, hideable: true },
-        { text: 'Nie wcześniej niż', dataIndex: 'skip_before', flex: 1,
+        { text: 'Max Moon phase', dataIndex: 'max_moon_phase', flex: 1,
           hidden: true, hideable: true },
-        { text: 'Nie później niż', dataIndex: 'skip_after', flex: 1,
+        { text: 'Min interval [s]', dataIndex: 'skip_interval', flex: 1,
           hidden: true, hideable: true },
-        { text: 'Nie częściej niż sekund', dataIndex: 'skip_interval', flex: 1,
+        { text: 'No earlier than', dataIndex: 'skip_before', flex: 1,
           hidden: true, hideable: true },
-        { text: 'Omiń, jeżeli w ciągu X sekund...', dataIndex: 'skip_period_seconds', flex: 1,
+        { text: 'No later than', dataIndex: 'skip_after', flex: 1,
           hidden: true, hideable: true },
-        { text: '... było Y obserawacji', dataIndex: 'skip_period_count', flex: 1,
-          hidden: true, hideable: true},
 
         /* pozostale */
         { text: 'Other commands', dataIndex: 'other_cmd', flex: 1,

@@ -5,7 +5,7 @@ var AddTaskScopes = Ext.create('Ext.data.Store', {
     fields: [ 'scope_id', 'text'],
     data: [
         { 'scope_id': 1, 'text': '1: CDK 12.5" (Nerpio)' },
-        { 'scope_id': 2, 'text': '2: symulator teleskopu' }
+        { 'scope_id': 2, 'text': '2: simulator' }
     ]
 });
 
@@ -31,21 +31,21 @@ var AddTaskFilters = Ext.create('Ext.data.Store', {
         { 'filter': 'V',     'text': 'V (fotometric)' },
         { 'filter': 'B',     'text': 'B (fotometric)' },
         { 'filter': 'R',     'text': 'R (fotometric)' },
-        { 'filter': 'none',  'text': 'bez filtra' }
+        { 'filter': 'none',  'text': 'no filter' }
     ]
 });
 
 var InitialState = Ext.create('Ext.data.Store', {
     fields: ['state', 'text'],
     data: [
-        { 'state': 0, 'text': 'Waiting (0)' },
+        { 'state': 0, 'text': 'Template (0)' },
         { 'state': 1, 'text': 'New (1)' }
     ]
 });
 
 Ext.define('iTeleskop.view.main.AddTask', {
     extend: 'Ext.form.Panel',
-    title: 'Nowe zadanie',
+    title: 'Add new task',
     xtype: 'addtask',
 
     // Eskperyment z przewijaniem (autoScroll + height w pixelach wlacza scroll
@@ -70,14 +70,14 @@ Ext.define('iTeleskop.view.main.AddTask', {
             // To pole jest ustawianie w metodzie beforerender
             name: 'user_id',
             xtype: 'textfield',
-            fieldLabel:'ID użytkownika',
+            fieldLabel:'User ID',
             readOnly: true,
             labelWidth: 300
         },
         {
             // Wybor obiektu, jedno wielkie @todo trzeba te dane wyciagac z jakiejs bazy
             // danych, moze z simbada? Na razie wpisywane z reki
-            fieldLabel: 'Obiekt',
+            fieldLabel: 'Target Name',
             name: 'object',
             labelWidth: 300,
             allowBlank: false
@@ -97,7 +97,7 @@ Ext.define('iTeleskop.view.main.AddTask', {
                 {
                     // Right ascension in floating point format.
                     xtype: 'textfield',
-                    fieldLabel: 'Rektascencja',
+                    fieldLabel: 'Right ascension',
                     name: 'ra',
                     value: '0.0',
                     labelWidth: 300,
@@ -190,7 +190,7 @@ Ext.define('iTeleskop.view.main.AddTask', {
                     // Wybor deklinacji, @todo wyciagac max. limity z tabeli telescopes,
                     // na razie na sztywno od -20 do +90 dla CDK12.5" w Nerpio.
                     xtype: 'textfield',
-                    fieldLabel: 'Deklinacja (-20 do +90)',
+                    fieldLabel: 'Declination (-17.0 to 90.0)',
                     name: 'decl',
                     value: '0.0',
                     labelWidth: 300,
@@ -329,18 +329,18 @@ Ext.define('iTeleskop.view.main.AddTask', {
             labelWidth: 300
         },
         {
-            fieldLabel: 'Opis zadania',
+            fieldLabel: 'Description',
             labelWidth: 300,
             name: 'descr'
         },
         {
-            fieldLabel: 'Komentarz',
+            fieldLabel: 'Comment',
             name: 'comment',
             labelWidth: 300,
-            value: 'na'
+            value: 'n/a'
         },
         {
-            fieldLabel: 'Filtr',
+            fieldLabel: 'Filter',
             name: 'filter',
             editable: false,
             value: 'none',
@@ -363,6 +363,20 @@ Ext.define('iTeleskop.view.main.AddTask', {
             value: '2'
         },
         {
+            fieldLabel: 'Guiding',
+            xtype: 'checkbox',
+            name: 'guiding',
+            labelWidth: 300,
+            checked: true
+        },
+        {
+            fieldLabel: 'Dither',
+            xtype: 'checkbox',
+            name: 'dither',
+            labelWidth: 300,
+            checked: false
+        },
+        {
             fieldLabel: 'Defocus',
             xtype: 'checkbox',
             name: 'defocus',
@@ -370,99 +384,114 @@ Ext.define('iTeleskop.view.main.AddTask', {
             checked: false
         },
         {
-            fieldLabel: 'Kalibracja zdjęć',
+            fieldLabel: 'Automatic image calibration',
             xtype: 'checkbox',
             checked: true,
             labelWidth: 300,
             name: 'calibrate'
         },
         {
-            fieldLabel: 'Rozwiąż (pinpoint)',
+            fieldLabel: 'Plate Solve with PinPoint',
             xtype: 'checkbox',
             checked: true,
             labelWidth: 300,
             name: 'solve'
         },
         {
-            fieldLabel: 'Vphot',
+            fieldLabel: 'Send image to AAVSO',
             xtype: 'checkbox',
             checked: false,
             labelWidth: 300,
             name: 'vphot'
         },
         {
-            fieldLabel: 'Dodatkowe komendy',
+            fieldLabel: 'Extra commands',
             labelWidth: 300,
             name: 'other_cmd'
         },
         {
-            fieldLabel: 'Minimalna wysokość (w stopniach)',
+            xtype: 'displayfield',
+            fieldLabel: "Don't observe if...",
+            labelWidth: 300
+
+        },
+        {
+            fieldLabel: '... target altitude is lesser than [] degrees above horizon',
             name: 'min_alt',
-            value: '0',
+            value: '5',
             labelWidth: 300
         },
         {
-            fieldLabel: 'Min. odległość od księżyca (w stopniach)',
+            fieldLabel: '... Sun altitude is lesser than [] degrees below horizon',
+            labelWidth: 300,
+            name: 'min_sun_alt',
+            value: '-12'
+        },
+        {
+            fieldLabel: '... target to Moon distance is lesser than [] degrees',
             labelWidth: 300,
             name: 'moon_distance',
             value: '0'
         },
         {
-            fieldLabel: 'Nie rozpoczynaj przed datą:',
+            fieldLabel: '... Moon phase is greater than [] per cent',
+            labelWidth: 300,
+            name: 'max_moon_phase',
+            value: '100'
+        },
+        {
+            fieldLabel: '... time passed from previous exposure of this target is less than [] seconds',
+            labelWidth: 300,
+            name: 'min_interval',
+            value: '0'
+        },
+
+        {
+            fieldLabel: 'Do not observe before (y-m-d h:m):',
             labelWidth: 300,
             //xtype: 'datetimefield',
             //format: 'Y-m-d H:i',
+            xtype: 'datefield',
+            format: 'Y-m-d',
             name: 'skip_before'
         },
         {
-            fieldLabel: 'Nie rozpoczynaj po dacie:',
+            fieldLabel: 'Do not observe after (y-m-d h:m)',
             labelWidth: 300,
+            xtype: 'datefield',
+            format: 'Y-m-d',
             name: 'skip_after'
-        },
-        {
-            fieldLabel: 'Nie wykonuj, jeżeli ostatnie zdjęcie było mniej niż X sekund temu',
-            labelWidth: 300,
-            name: 'skip_interval'
-        },
-        {
-            fieldLabel: 'Pomiń, jeżeli co najmniej x zdjęć zostało zrobionych w ostatnich ... sekundach',
-            labelWidth: 300,
-            name: 'skip_period_seconds'
-        },
-        {
-            fieldLabel: 'Pomiń, jeżeli co najmniej ... zdjęć zostało zrobionych w ostatnich x sekundach',
-            labelWidth: 300,
-            name: 'skip_period_count'
         }
     ], // koniec items, czyli obiektow znadujacych sie w tej formie
     buttons: [
         {
-            text: 'Wyślij',
+            text: 'Add task',
             handler: function() {
                 var form = this.up('form'); // get the form panel
                 if (form.isValid()) { // make sure the form contains valid data before submitting
                     form.submit({
                         success: function(form, action) {
-                            Ext.Msg.alert('Sukces', action.result.msg);
+                            Ext.Msg.alert('Success', action.result.msg);
                             Ext.getStore('tasks').load();
                         },
                         failure: function(form, action) {
-                            Ext.Msg.alert('Porażka', action.result.msg);
+                            Ext.Msg.alert('Failure', action.result.msg);
                         }
                     });
                 } else { // display error alert if the data is invalid
-                    Ext.Msg.alert('Niepoprawne', 'Proszę sprawdzić poprawność.')
+                    Ext.Msg.alert('Data incorrect',
+                                  'Please check correctness of the fields marked in red.')
                 }
             }
         },
         {
-            text: "Sprawdź dane",
+            text: "Check correctness",
             handler: function() {
                 var form = this.up('form'); // get the form panel
                 if (form.isValid()) { // make sure the form contains valid data before submitting
-                    Ext.Msg.alert('Sukces', "Dane wygladają na poprawne.");
+                    Ext.Msg.alert('Success', "Data seems valid, but validation is still simple.");
                 } else { // display error alert if the data is invalid
-                    Ext.Msg.alert('Niestety', 'Popraw pola oznaczone czerwonym kolorem.');
+                    Ext.Msg.alert('Failure', 'Fix the fields marked with red rectangles.');
                 }
             }
         }

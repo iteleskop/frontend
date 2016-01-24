@@ -31,7 +31,14 @@
     public function getResults($params) {
         $_db = $this->_db;
 
-        $_result = $_db->query("SELECT task_id, scope_id, object, ra, decl, tasks.user_id, users.login, exposure, filter,binning, defocus, calibrate, solve, vphot, other_cmd, min_alt, moon_distance, skip_before, skip_after, skip_interval, skip_period_seconds, skip_period_count, comment, state, imagename from tasks, users WHERE tasks.user_id = users.user_id ORDER BY task_id DESC");
+        $_result = $_db->query(
+            "SELECT task_id, scope_id, object, ra, decl, tasks.user_id, users.login, ".
+            "exposure, filter, binning, guiding, dither, defocus, calibrate, ".
+            "solve, vphot, other_cmd,".
+            "min_alt, min_sun_alt, moon_distance, max_moon_phase, ".
+            "min_interval, skip_before, skip_after, ".
+            "comment, state, imagename ".
+            "FROM tasks, users WHERE tasks.user_id = users.user_id ORDER BY task_id DESC");
         if (!$_result) {
             return $this->failure("MySQL error:". $_db->error);
         }

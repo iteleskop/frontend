@@ -9,6 +9,15 @@
 - Added filtering to tasks:
   - filter by specific state 0-6/show all states
   - show only my tasks (yes/no)
+- Removed columns:
+  - skip_period_seconds
+  - skip_period_count
+- Renamed columns:
+  - skip_interval to min_interval
+- Added columns in task:
+  - max_moon_phase
+  - min_sun_alt
+- Translation to English almost complete
 
 0.2.3 (2016-01-20)
 - Corrected negative declination calculations
