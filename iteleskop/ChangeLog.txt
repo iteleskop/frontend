@@ -1,6 +1,12 @@
  iTeleskop ChangeLog
 ---------------------
 
+0.2.4 (2016-01-24)
+- Renamed task state 0(waiting) to 0(template)
+- Added ability to switch tasks between 0(template) and 1(waiting)
+- Added ability to delete tasks you own that are in 0 or 1 state
+- Translation to English in progress
+
 0.2.3 (2016-01-20)
 - Corrected negative declination calculations
 - Corrected right ascension calculations. Right now the floating point

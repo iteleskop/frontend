@@ -75,7 +75,7 @@
 
         $this->_db->close();
 
-        return $this->success("Task ".$task_id." updated.");
+        return $this->success("Task ".$task_id." updated to state ".$new_state);
     }
 
     public function delete($params) {
@@ -91,7 +91,7 @@
 
         $this->_db->close();
 
-        $this->success("Task ".$task_id." deleted.");
+        return $this->success("Task ".$task_id." deleted.");
     }
 
  }

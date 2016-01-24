@@ -9,7 +9,7 @@ Ext.define('iTeleskop.view.main.Tasks', {
         'iTeleskop.store.Tasks'
     ],
 
-    title: 'Zadania',
+    title: 'Tasks',
 
     store: {
         type: 'tasks'
@@ -32,7 +32,7 @@ Ext.define('iTeleskop.view.main.Tasks', {
     stateToText: function(value) {
         switch (value) {
         case "0":
-            return "0 (waiting)";
+            return "0 (template)";
         case "1":
             return "1 (new)";
         case "2":
@@ -57,9 +57,10 @@ Ext.define('iTeleskop.view.main.Tasks', {
         { text: 'State', dataIndex: 'state',
           renderer: function(value, metaData) {
               var tip = "Available states:<br/>" +
-                  "<b>0 (waiting)</b> - the user marked this task as not to be conducted yet. " +
+                  "<b>0 (template)</b> - the user marked this task as not to be conducted. " +
                   "It will stay in this state until the user either " +
-                  "moves it to the new (1) state or deletes this task.<br/>" +
+                  "moves it to the new (1) state or deletes this task. In the future it will<br/>" +
+                  "be used to create many similar tasks.<br/>" +
                   "<b>1 (new)</b> - the task has been added, but it was not picked up by the " +
                   " queueing software yet.<br/>" +
                   "<b>2 (activated)</b> - the task has been picked by the queing software for " +
@@ -78,7 +79,7 @@ Ext.define('iTeleskop.view.main.Tasks', {
           }
         },
         { text: 'Login', dataIndex: 'login' },
-        { text: 'Obiekt', dataIndex: 'object', flex: 1 },
+        { text: 'Object', dataIndex: 'object', flex: 1 },
         { text: 'RA', dataIndex: 'ra', flex: 1,
           renderer: function(value) {
               return RAfloatToHMS(value);
@@ -89,14 +90,14 @@ Ext.define('iTeleskop.view.main.Tasks', {
               return DeclinationFloatToDMS(value);
           }
         },
-        { text: 'Ekspozycja [s]', dataIndex: 'exposure', flex: 1 },
-        { text: 'Opis', dataIndex: 'descr', flex: 1 },
-        { text: 'Komentarz', dataIndex: 'comment', flex: 1 },
-        { text: 'Filtr', dataIndex: 'filter', flex: 1 },
+        { text: 'Exposure [s]', dataIndex: 'exposure', flex: 1 },
+        { text: 'Description', dataIndex: 'descr', flex: 1 },
+        { text: 'Comment', dataIndex: 'comment', flex: 1 },
+        { text: 'Filter', dataIndex: 'filter', flex: 1 },
         { text: 'Binning', dataIndex: 'binning', flex: 1 },
         { text: 'Defocus', dataIndex: 'defocus', flex: 1 },
-        { text: 'Kalibracja', dataIndex: 'calibrate', flex: 1 },
-        { text: 'PinPoint', dataIndex: 'solve', flex: 1 },
+        { text: 'Calibrate', dataIndex: 'calibrate', flex: 1 },
+        { text: 'Pinpoint', dataIndex: 'solve', flex: 1 },
         { text: 'VPhot', dataIndex: 'vphot', flex: 1 },
 
         /* ograniczenia */
@@ -116,9 +117,9 @@ Ext.define('iTeleskop.view.main.Tasks', {
           hidden: true, hideable: true},
 
         /* pozostale */
-        { text: 'Dodatkowe komendy', dataIndex: 'other_cmd', flex: 1,
+        { text: 'Other commands', dataIndex: 'other_cmd', flex: 1,
           hidden: true, hideable: true },
-        { text: 'Plik', dataIndex: 'imagename', flex: 1,
+        { text: 'File', dataIndex: 'imagename', flex: 1,
           hidden: true, hideable: true }
 
     ],
