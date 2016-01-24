@@ -104,7 +104,7 @@ Ext.define('iTeleskop.view.main.Main', {
 
     items: [
     {
-        title: 'Podgląd kolejki',
+        title: 'Tasks',
         iconCls: 'fa-users',
         items: [{
             xtype: 'tasks'
@@ -113,16 +113,9 @@ Ext.define('iTeleskop.view.main.Main', {
         autoScroll: true
     },
     {
-        title: 'Moje zadania',
-        iconCls: 'fa-user',
-        bind: {
-            html: '{loremIpsum}'
-        }
-    },
-    {
         // to jest panel z dodawaniem nowych zadan. Definicja samego panelu znajduje
         // sie w app/view/main/AddTask.js
-        title: 'Dodaj zadanie',
+        title: 'New task',
         iconCls: 'fa-plus-circle',
         items: [{
             xtype: 'addtask'
@@ -131,7 +124,21 @@ Ext.define('iTeleskop.view.main.Main', {
         autoScroll: true
     },
     {
-        title: 'Status teleskopu',
+        title: 'Users',
+        iconCls: 'fa-users',
+        items: [{
+            xtype: 'users'
+        }]
+    },
+    {
+        title: 'Objects',
+        iconCls: 'fa-users',
+        items: [{
+            xtype: 'objects'
+        }]
+    },
+    {
+        title: 'Status',
         iconCls: 'fa-cog',
         bind: {
             html: 'TODO: This is a static page for now. Make it actually check the state<br/>'
@@ -145,21 +152,7 @@ Ext.define('iTeleskop.view.main.Main', {
         }
     },
     {
-        title: 'Użytkownicy',
-        iconCls: 'fa-users',
-        items: [{
-            xtype: 'users'
-        }]
-    },
-    {
-        title: 'Obiekty',
-        iconCls: 'fa-users',
-        items: [{
-            xtype: 'objects'
-        }]
-    },
-    {
-        title: 'Zdjęcia',
+        title: 'Results',
         iconCls: 'fa-camera',
         bind: {
             html: '{loremIpsum}'

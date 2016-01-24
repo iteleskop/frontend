@@ -1,6 +1,23 @@
 /**
  * This view is an example list of people.
  */
+
+// This is a list of allowed filters. Those filters are displayed at the top
+// of the grid and allow filtering displayed tasks.
+var FilterStates = Ext.create('Ext.data.Store', {
+    fields: ['states' , 'text'],
+    data: [
+        { 'filter': '0',   'text': '0(templates)' },
+        { 'filter': '1',   'text': '1(new)' },
+        { 'filter': '2',   'text': '2(activated)' },
+        { 'filter': '3',   'text': '3(in queue)' },
+        { 'filter': '4',   'text': '4(executed)' },
+        { 'filter': '5',   'text': '5(done,for users)' },
+        { 'filter': '6',   'text': '5(done,public)' },
+        { 'filter': 'all', 'text': 'show all states' }
+    ]
+});
+
 Ext.define('iTeleskop.view.main.Tasks', {
     extend: 'Ext.grid.Panel',
     xtype: 'tasks',
@@ -11,9 +28,7 @@ Ext.define('iTeleskop.view.main.Tasks', {
 
     title: 'Tasks',
 
-    store: {
-        type: 'tasks'
-    },
+    store: 'tasks',
 
     // Method prepares tooltip with all the task details.
     tooltip: function(value, metaData, record) {
@@ -73,7 +88,7 @@ Ext.define('iTeleskop.view.main.Tasks', {
                   "available to all shareholders<br/>" +
                   "<b>6 (done,public)</b> - this processing is done and certain amount of time " +
                   "has elapsed, so the photo is made available for everyone publicly";
-              
+
               metaData.tdAttr = 'data-qtip="' + tip + '"';
               return this.stateToText(value);
           }
@@ -126,5 +141,115 @@ Ext.define('iTeleskop.view.main.Tasks', {
 
     listeners: {
         select: 'onTaskClick'
+    },
+
+    // That's gonna be cool. This will allow showing records a page at a time.
+    /*
+    dockedItems: [{
+        xtype: 'pagingtoolbar',
+        store: 'tasks',   // same store GridPanel is using
+        dock: 'bottom',
+        displayInfo: true
+        }],  */
+
+    filterChanged: function() {
+        var btn1 = Ext.getCmp('my_tasks_filter');
+        var btn2 = Ext.getCmp('task_state_filter');
+        var user_login = Ext.getStore('user').getAt(0).data.login;
+
+        var filter = [
+        ];
+
+        Ext.getStore('tasks').clearFilter();
+
+        if (btn1.pressed) {
+            filter.push({ property: 'login', value: user_login });
+        }
+
+        if (btn2.getValue() != 'all') {
+            filter.push({ property: 'state', value: btn2.getValue() });
+        }
+
+        Ext.getStore('tasks').filter(filter);
+
+        /*
+                    if (this.pressed) {
+                        Ext.getStore('tasks').filter('login', user_login);
+                        this.setText('Your tasks only (yes)');
+                    } else {
+                        Ext.getStore('tasks').clearFilter();
+                        this.setText('Your tasks only (no)');
+                } */
+    },
+
+    header: {
+        titlePosition: 0,
+        items: [
+            {
+                xtype: 'button',
+                id: 'my_tasks_filter',
+                text: 'Your tasks only (no)',
+                margins: '10 10 10 10',
+                padding: '10 10 10 10',
+                enableToggle: true,
+                stateful: true,
+                handler: function() {
+                    if (this.pressed) {
+                        this.setText('Your tasks only (yes)');
+                    } else {
+                        this.setText('Your tasks only (no)');
+                    }
+                    this.up().up().filterChanged();
+                },
+
+                getState: function() {
+                    if (this.enableToggle == true) {
+                        var config = {};
+                        config.pressed = this.pressed;
+                        return config;
+                }
+                    return null;
+                }
+            },
+            {
+                bind: { html: '<p>Show tasks in state:</p>' }
+            },
+
+            {
+                xtype: 'combobox',
+                valueField: 'filter',
+                id: 'task_state_filter',
+                displayField: 'text',
+                queryMode: 'local',
+                value: 'all',
+                store: FilterStates,
+                forceSelection: true,
+                labelWidth: 250,
+                listeners: {
+                    change: function(element, newValue, oldValue) {
+                        element.up().up().filterChanged();
+                    }
+                    //select: function(ele, rec, index) { alert("select" + ele); }
+                }
+            }
+
+        ]
     }
+
+    /*
+    buttons: [
+        {
+            text: 'Your tasks',
+            handler: function() {
+                var user_login = Ext.getStore('user').getAt(0).data.login;
+                Ext.getStore('tasks').filter('login', user_login);
+            }
+        },
+        {
+            text: 'All tasks',
+            handler: function() {
+                Ext.getStore('tasks').clearFilter();
+            }
+        }
+    ] */
 });
