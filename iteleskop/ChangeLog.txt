@@ -1,6 +1,10 @@
  iTeleskop ChangeLog
 ---------------------
 
+0.2.5 (2016-01-25)
+- Renamed min_sun_alt to max_sun_alt
+- Default max_sun_alt is now -18, not -12
+
 0.2.4 (2016-01-24)
 - Renamed task state 0(waiting) to 0(template)
 - Added ability to switch tasks between 0(template) and 1(waiting)

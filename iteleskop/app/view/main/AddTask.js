@@ -422,10 +422,10 @@ Ext.define('iTeleskop.view.main.AddTask', {
             labelWidth: 300
         },
         {
-            fieldLabel: '... Sun altitude is lesser than [] degrees below horizon',
+            fieldLabel: '... Sun altitude is greater than [] degrees below horizon',
             labelWidth: 300,
-            name: 'min_sun_alt',
-            value: '-12'
+            name: 'max_sun_alt',
+            value: '-18'
         },
         {
             fieldLabel: '... target to Moon distance is lesser than [] degrees',

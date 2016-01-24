@@ -35,7 +35,7 @@
             "SELECT task_id, scope_id, object, ra, decl, tasks.user_id, users.login, ".
             "exposure, filter, binning, guiding, dither, defocus, calibrate, ".
             "solve, vphot, other_cmd,".
-            "min_alt, min_sun_alt, moon_distance, max_moon_phase, ".
+            "min_alt, max_sun_alt, moon_distance, max_moon_phase, ".
             "min_interval, skip_before, skip_after, ".
             "comment, state, imagename ".
             "FROM tasks, users WHERE tasks.user_id = users.user_id ORDER BY task_id DESC");

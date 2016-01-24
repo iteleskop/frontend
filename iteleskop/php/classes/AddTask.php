@@ -51,7 +51,7 @@ class AddTask {
     function insert($data) {
         $q = 'INSERT INTO tasks(user_id, state, scope_id, object, ra, decl, exposure, descr, '.
              'filter, binning, guiding, dither, defocus, calibrate, solve, vphot, other_cmd, '.
-             'min_alt, min_sun_alt, moon_distance, max_moon_phase, min_interval, '.
+             'min_alt, max_sun_alt, moon_distance, max_moon_phase, min_interval, '.
              'skip_before, skip_after, comment, created) '.
             'VALUES('.
             $this->quoted($data, 'user_id', true).
@@ -72,7 +72,7 @@ class AddTask {
             $this->quoted($data, 'vphot', true).
             $this->quoted($data, 'other_cmd', true).
             $this->quoted($data, 'min_alt', true).
-            $this->quoted($data, 'min_sun_alt', true).
+            $this->quoted($data, 'max_sun_alt', true).
             $this->quoted($data, 'moon_distance', true).
             $this->quoted($data, 'max_moon_phase', true).
             $this->quoted($data, 'min_interval', true).
@@ -159,7 +159,7 @@ class AddTask {
         $this->getBoolParam("vphot");
         $this->getParam("other_cmd");
         $this->getParam("min_alt");
-        $this->getParam("min_sun_alt");
+        $this->getParam("max_sun_alt");
         $this->getParam("moon_distance");
         $this->getParam("max_moon_phase");
         $this->getParam("min_interval");

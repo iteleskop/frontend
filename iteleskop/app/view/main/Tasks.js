@@ -118,11 +118,11 @@ Ext.define('iTeleskop.view.main.Tasks', {
         { text: 'VPhot', dataIndex: 'vphot', flex: 1 },
 
         /* ograniczenia */
-        { text: 'Min. wysokosc', dataIndex: 'min_alt', flex: 1,
+        { text: 'Min. Target altitude', dataIndex: 'min_alt', flex: 1,
           hidden: true, hideable: true },
-        { text: 'Min. wysokosc', dataIndex: 'min_sun_alt', flex: 1,
+        { text: 'Max Sun altitude', dataIndex: 'max_sun_alt', flex: 1,
           hidden: true, hideable: true },
-        { text: 'Min. old od Księżyca', dataIndex: 'moon_distance', flex: 1,
+        { text: 'Min. Moon Distance', dataIndex: 'moon_distance', flex: 1,
           hidden: true, hideable: true },
         { text: 'Max Moon phase', dataIndex: 'max_moon_phase', flex: 1,
           hidden: true, hideable: true },
