@@ -33,7 +33,7 @@
 
         $_result = $_db->query(
             "SELECT task_id, scope_id, object, ra, decl, tasks.user_id, users.login, ".
-            "exposure, filter, binning, guiding, dither, defocus, calibrate, ".
+            "exposure, filter, binning, guiding, dither, auto_center, defocus, calibrate, ".
             "solve, vphot, other_cmd,".
             "min_alt, max_sun_alt, moon_distance, max_moon_phase, ".
             "min_interval, skip_before, skip_after, ".

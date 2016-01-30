@@ -50,8 +50,8 @@ class AddTask {
 
     function insert($data) {
         $q = 'INSERT INTO tasks(user_id, state, scope_id, object, ra, decl, exposure, descr, '.
-             'filter, binning, guiding, dither, defocus, calibrate, solve, vphot, other_cmd, '.
-             'min_alt, max_sun_alt, moon_distance, max_moon_phase, min_interval, '.
+             'filter, binning, guiding, auto_center, dither, defocus, calibrate, solve, vphot, '.
+             'other_cmd, min_alt, max_sun_alt, moon_distance, max_moon_phase, min_interval, '.
              'skip_before, skip_after, comment, created) '.
             'VALUES('.
             $this->quoted($data, 'user_id', true).
@@ -65,6 +65,7 @@ class AddTask {
             $this->quoted($data, 'filter', true).
             $this->quoted($data, 'binning', true).
             $this->quoted($data, 'guiding', true).
+            $this->quoted($data, 'auto_center', true).
             $this->quoted($data, 'dither', true).
             $this->quoted($data, 'defocus', true).
             $this->quoted($data, 'calibrate', true).
@@ -152,6 +153,7 @@ class AddTask {
         $this->getParam("filter");
         $this->getParam("binning");
         $this->getBoolParam("guiding");
+        $this->getBoolParam("auto_center");
         $this->getBoolParam("dither");
         $this->getBoolParam("defocus");
         $this->getBoolParam("calibrate");

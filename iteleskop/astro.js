@@ -1,6 +1,6 @@
 // Funkcja konwertuje rektascencje z formatu H:M:S do zapisu zmiennoprzecinkowego.
 function RAhmsToFloat(h, m, s) {
-    var ra = parseFloat(h)*15 + parseFloat(m)/4 + parseFloat(s)/240;
+    var ra = parseFloat(h) + parseFloat(m)/60 + parseFloat(s)/3600;
     return (ra.toFixed(6));
 }
 
@@ -11,11 +11,11 @@ function RAfloatToHMS(ra) {
         return ("-");
     }
 
-    var h = Math.floor(ra/15); // hours
-    var tmp = ra - (15*h);
-    var m = Math.floor(tmp*4);
-    tmp = tmp - (m/4);
-    var s = Math.floor(tmp * 2400)/10;
+    var h = Math.floor(ra); // hours
+    var tmp = ra - (h);
+    var m = Math.floor(tmp*60);
+    tmp = tmp - (m/60); // remove minutes
+    var s = Math.floor(tmp * 3600);
 
     return (h + "h" + m + "m" + s + "s");
 }

@@ -66,7 +66,7 @@ Ext.define('iTeleskop.view.main.Tasks', {
     },
 
     columns: [
-        { text: 'Task ID',  dataIndex: 'task_id', width: 70,
+        { text: 'Task ID',  dataIndex: 'task_id', width: 60,
           renderer: function(value, metaData, record) { return this.tooltip(value, metaData, record); }
         },
         { text: 'State', dataIndex: 'state',
@@ -105,17 +105,18 @@ Ext.define('iTeleskop.view.main.Tasks', {
               return DeclinationFloatToDMS(value);
           }
         },
-        { text: 'Exposure [s]', dataIndex: 'exposure', flex: 1 },
+        { text: 'Exposure [s]', dataIndex: 'exposure', width: 60 },
         { text: 'Description', dataIndex: 'descr', flex: 1 },
         { text: 'Comment', dataIndex: 'comment', flex: 1 },
         { text: 'Filter', dataIndex: 'filter', flex: 1 },
-        { text: 'Binning', dataIndex: 'binning', flex: 1 },
-        { text: 'Guiding', dataIndex: 'guiding', flex: 1 },
-        { text: 'Dither', dataIndex: 'dither', flex: 1 },
-        { text: 'Defocus', dataIndex: 'defocus', flex: 1 },
-        { text: 'Calibrate', dataIndex: 'calibrate', flex: 1 },
-        { text: 'Pinpoint', dataIndex: 'solve', flex: 1 },
-        { text: 'VPhot', dataIndex: 'vphot', flex: 1 },
+        { text: 'Binning', dataIndex: 'binning' },
+        { text: 'Guiding', dataIndex: 'guiding' },
+        { text: 'Auto Center', dataIndex: 'auto_center' },
+        { text: 'Dither', dataIndex: 'dither', width: 60 },
+        { text: 'Defocus', dataIndex: 'defocus', width: 70 },
+        { text: 'Calibrate', dataIndex: 'calibrate', width: 70 },
+        { text: 'Pinpoint', dataIndex: 'solve', width: 80 },
+        { text: 'Upload', dataIndex: 'vphot', width: 70 },
 
         /* ograniczenia */
         { text: 'Min. Target altitude', dataIndex: 'min_alt', flex: 1,

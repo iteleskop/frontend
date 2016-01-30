@@ -40,8 +40,8 @@ Ext.define('iTeleskop.view.login.Login', {
             xtype: 'displayfield',
             hideEmptyLabel: false,
             value: 'This system is for shareholders only.<br/>' +
-                'If you\'re one of them and forgotten <br/>' +
-                'your password, please contact admins <br/>' +
+                'If you\'re one of them and forgotten<br/>' +
+                'your password, contact admins<br/>' +
                 'at <a href="http://iteleskop.org/">iteleskop.org</a>'
         }],
         buttons: [{

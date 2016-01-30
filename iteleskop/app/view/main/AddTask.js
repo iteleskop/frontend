@@ -19,6 +19,22 @@ var AddTaskBinning = Ext.create('Ext.data.Store', {
     ]
 });
 
+var Exposures = Ext.create('Ext.data.Store', {
+    fields: [ 'time' ],
+    data: [
+        { 'time': 5 },
+        { 'time': 10 },
+        { 'time': 20 },
+        { 'time': 40 },
+        { 'time': 75 },
+        { 'time': 150 },
+        { 'time': 300 },
+        { 'time': 600 },
+        { 'time': 1200 },
+        { 'time': 1800 }
+    ]
+});
+
 /// @todo: Wyciagac te dane po stronie serwera z MySQL, z tabeli filters
 var AddTaskFilters = Ext.create('Ext.data.Store', {
     fields: ['filter' , 'text'],
@@ -80,7 +96,18 @@ Ext.define('iTeleskop.view.main.AddTask', {
             fieldLabel: 'Target Name',
             name: 'object',
             labelWidth: 300,
-            allowBlank: false
+            width: 900,
+            allowBlank: false,
+            validator: function(val) {
+                if (val === "") {
+                    return "Can't be empty";
+                }
+
+                if (val.length > 68) {
+                    return "Too long (".concat(val.length,", max allowed length is 68)");
+                }
+                return true;
+            }
         },
 
         // Right ascension starts here
@@ -97,11 +124,27 @@ Ext.define('iTeleskop.view.main.AddTask', {
                 {
                     // Right ascension in floating point format.
                     xtype: 'textfield',
-                    fieldLabel: 'Right ascension',
+                    fieldLabel: 'Right ascension (0... 23.99999)',
                     name: 'ra',
                     value: '0.0',
                     labelWidth: 300,
-                    allowBlank: false
+                    allowBlank: false,
+                    validator: function(val) {
+                        if (val === "") {
+                            return "Can't be empty";
+                        }
+                        if (isNaN(val)) {
+                            return "Must be a number.";
+                        }
+                        if (val < 0) {
+                            return "Must be equal or greater than 0";
+                        }
+
+                        if (val >= 24) {
+                            return "Must be lesser than 24.";
+                        }
+                        return true;
+                    }
                 },
                 {
                     xtype: 'button',
@@ -114,11 +157,11 @@ Ext.define('iTeleskop.view.main.AddTask', {
                         var s_field = x.up().up().getForm().findField('ra_s');
 
                         var ra = ra_field.getValue();
-                        var h = Math.floor(ra/15); // hours
-                        var tmp = ra - (15*h);
-                        var m = Math.floor(tmp*4);
-                        tmp = tmp - (m/4);
-                        var s = Math.floor(tmp * 2400)/10;
+                        var h = Math.floor(ra); // hours
+                        var tmp = ra - (h);
+                        var m = Math.floor(tmp*60);
+                        tmp = tmp - (m/60);
+                        var s = Math.floor(tmp * 3600);
                         h_field.setValue(h);
                         m_field.setValue(m);
                         s_field.setValue(s);
@@ -139,7 +182,7 @@ Ext.define('iTeleskop.view.main.AddTask', {
                     }
                 },
                 {
-                    // Right ascension (hour value: 0...23)
+                    // Right ascension (hour value: 0...23.999999)
                     xtype: 'textfield',
                     fieldLabel: 'h',
                     labelAlign: 'right',
@@ -194,7 +237,23 @@ Ext.define('iTeleskop.view.main.AddTask', {
                     name: 'decl',
                     value: '0.0',
                     labelWidth: 300,
-                    allowBlank: false
+                    allowBlank: false,
+                    validator: function(val) {
+                        if (val === "") {
+                            return "Can't be empty";
+                        }
+                        if (isNaN(val)) {
+                            return "Must be a number.";
+                        }
+                        if (val < -17) {
+                            return "Must be equal or greater than -17";
+                        }
+
+                        if (val > 90) {
+                            return "Must be lesser than or equal 90.";
+                        }
+                        return true;
+                    }
                 },
                 {
                     xtype: 'button',
@@ -281,24 +340,30 @@ Ext.define('iTeleskop.view.main.AddTask', {
         // Declination ends here
 
         {
-            fieldLabel: 'Espozycja [s]',
+            fieldLabel: 'Exposure [s]',
             name: 'exposure',
             value: '10',
             labelWidth: 300,
             allowNegative: false,
             allowBlank: false,
+            xtype: 'combobox',
+            queryMode: 'local',
+            displayField: 'time',
+            valueField: 'time',
+            store: Exposures,
+            editable: true,
 
             // Ta walidacja jakos nie chce dzialac
             validator: function(val) {
                 if (val === "") {
-                    return "Nie moze byc pusta";
+                    return "Can't be empty.";
                 }
                 if (isNaN(val)) {
-                    return "Wartość nie jest liczbą";
+                    return "Is not a number.";
                 }
 
                 if (val < 0) {
-                    return "Wartość nie może być ujemna";
+                    return "Can't be negative.";
                 }
 
                 return true;
@@ -331,13 +396,27 @@ Ext.define('iTeleskop.view.main.AddTask', {
         {
             fieldLabel: 'Description',
             labelWidth: 300,
-            name: 'descr'
+            name: 'descr',
+            width: 900,
+            validator: function(val) {
+                if (val.length > 68) {
+                    return "Too long (".concat(val.length,", max allowed length is 68)");
+                }
+                return true;
+            }
         },
         {
             fieldLabel: 'Comment',
             name: 'comment',
             labelWidth: 300,
-            value: 'n/a'
+            value: 'n/a',
+            width: 900,
+            validator: function(val) {
+                if (val.length > 68) {
+                    return "Too long (".concat(val.length,", max allowed length is 68)");
+                }
+                return true;
+            }
         },
         {
             fieldLabel: 'Filter',
@@ -368,6 +447,13 @@ Ext.define('iTeleskop.view.main.AddTask', {
             name: 'guiding',
             labelWidth: 300,
             checked: true
+        },
+        {
+            fieldLabel: 'Auto Center',
+            xtype: 'checkbox',
+            name: 'auto_center',
+            labelWidth: 300,
+            checked: false
         },
         {
             fieldLabel: 'Dither',
@@ -516,6 +602,8 @@ Ext.define('iTeleskop.view.main.AddTask', {
         this.getForm().findField('skip_before').setValue(d);
         d.setDate(d.getDate() + 14); // Move it by 14 days
         this.getForm().findField('skip_after').setValue(d);
+
+        this.getForm().isValid();
     },
 
     listeners: {

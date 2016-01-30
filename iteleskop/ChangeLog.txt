@@ -3,9 +3,17 @@
 
 0.2.6 (2016-01-30)
 - Added Reset button to add task form
-- skip_before and skip_after now have default values (now, now + 14
-days)
+- skip_before and skip_after now have default values (now, now + 14 days)
 - added Refresh button in the tasks view
+- Exposure is now selected from a list of values. It's still possible
+  to specify custom exposure values, though.
+- Right ascension is now expressed in hours (0 ... 23.9999999)
+- Right ascension values are now verified
+- Declination values (-17 ... 90) are now verified
+- Target, description and comments are now larger. Their values are
+  verified to be no larger than 68 bytes.
+- Auto center column added.
+- Awkward word wrap in the login window fixed.
 
 0.2.5 (2016-01-25)
 - Renamed min_sun_alt to max_sun_alt
