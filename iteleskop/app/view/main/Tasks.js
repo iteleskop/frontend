@@ -233,8 +233,15 @@ Ext.define('iTeleskop.view.main.Tasks', {
                     }
                     //select: function(ele, rec, index) { alert("select" + ele); }
                 }
-            }
+            },
 
+            {
+                xtype: 'button',
+                text: 'Refresh',
+                handler: function() {
+                    Ext.getStore('tasks').load();
+                }
+            }
         ]
     }
 

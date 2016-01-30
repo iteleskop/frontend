@@ -3,7 +3,9 @@
 
 0.2.6 (2016-01-30)
 - Added Reset button to add task form
-- skip_before and skip_after now have default values (now, now + 14 days)
+- skip_before and skip_after now have default values (now, now + 14
+days)
+- added Refresh button in the tasks view
 
 0.2.5 (2016-01-25)
 - Renamed min_sun_alt to max_sun_alt
