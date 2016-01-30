@@ -360,7 +360,7 @@ Ext.define('iTeleskop.view.main.AddTask', {
             valueField: 'binning',
             displayField: 'text',
             labelWidth: 300,
-            value: '2'
+            value: '1'
         },
         {
             fieldLabel: 'Guiding',
@@ -453,7 +453,8 @@ Ext.define('iTeleskop.view.main.AddTask', {
             //format: 'Y-m-d H:i',
             xtype: 'datefield',
             format: 'Y-m-d',
-            name: 'skip_before'
+            name: 'skip_before',
+            value: new Date()
         },
         {
             fieldLabel: 'Do not observe after (y-m-d h:m)',
@@ -494,8 +495,28 @@ Ext.define('iTeleskop.view.main.AddTask', {
                     Ext.Msg.alert('Failure', 'Fix the fields marked with red rectangles.');
                 }
             }
+        },
+        {
+            text: "Reset to defaults",
+            handler: function() {
+                this.up('form').reset();
+                this.up().up().setDefaultFields();
+            }
         }
     ],
+
+    // This function sets the default values.
+    setDefaultFields: function() {
+
+        var user_id = Ext.getStore('user').getAt(0).data.user_id;
+        this.getForm().findField('user_id').setValue(user_id);
+
+        // Get the current date
+        var d = new Date();
+        this.getForm().findField('skip_before').setValue(d);
+        d.setDate(d.getDate() + 14); // Move it by 14 days
+        this.getForm().findField('skip_after').setValue(d);
+    },
 
     listeners: {
 
@@ -503,8 +524,7 @@ Ext.define('iTeleskop.view.main.AddTask', {
         // Wyciagamy dane z magazynu 'user' i ustawiamy pole formularza
         // user_id.
         beforerender: function(component, eOpts) {
-            var user_id = Ext.getStore('user').getAt(0).data.user_id;
-            component.getForm().findField('user_id').setValue(user_id);
+            component.setDefaultFields();
         }
     }
 });
