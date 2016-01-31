@@ -66,7 +66,7 @@ Ext.define('iTeleskop.view.main.Tasks', {
     },
 
     columns: [
-        { text: 'Task ID',  dataIndex: 'task_id', width: 60,
+        { text: 'Task ID',  dataIndex: 'task_id', width: 70,
           renderer: function(value, metaData, record) { return this.tooltip(value, metaData, record); }
         },
         { text: 'State', dataIndex: 'state',
@@ -95,28 +95,28 @@ Ext.define('iTeleskop.view.main.Tasks', {
         },
         { text: 'Login', dataIndex: 'login' },
         { text: 'Target', dataIndex: 'object', flex: 1 },
-        { text: 'RA', dataIndex: 'ra', flex: 1,
+        { text: 'RA', dataIndex: 'ra',
           renderer: function(value) {
               return RAfloatToHMS(value);
           }
         },
-        { text: 'Dec', dataIndex: 'decl', flex: 1,
+        { text: 'Dec', dataIndex: 'decl',
           renderer: function(value) {
               return DeclinationFloatToDMS(value);
           }
         },
         { text: 'Exposure [s]', dataIndex: 'exposure', width: 60 },
         { text: 'Description', dataIndex: 'descr', flex: 1 },
-        { text: 'Comment', dataIndex: 'comment', flex: 1 },
-        { text: 'Filter', dataIndex: 'filter', flex: 1 },
-        { text: 'Binning', dataIndex: 'binning' },
-        { text: 'Guiding', dataIndex: 'guiding' },
+        { text: 'Comment', dataIndex: 'comment', width: 100 },
+        { text: 'Filter', dataIndex: 'filter', width: 50 },
+        { text: 'Binning', dataIndex: 'binning', width: 60 },
+        { text: 'Guiding', dataIndex: 'guiding', width: 60 },
         { text: 'Auto Center', dataIndex: 'auto_center' },
         { text: 'Dither', dataIndex: 'dither', width: 60 },
         { text: 'Defocus', dataIndex: 'defocus', width: 70 },
         { text: 'Calibrate', dataIndex: 'calibrate', width: 70 },
-        { text: 'Pinpoint', dataIndex: 'solve', width: 80 },
-        { text: 'Upload', dataIndex: 'vphot', width: 70 },
+        { text: 'Pinpoint', dataIndex: 'solve', width: 70 },
+        { text: 'Upload', dataIndex: 'vphot', width: 50 },
 
         /* ograniczenia */
         { text: 'Min. Target altitude', dataIndex: 'min_alt', flex: 1,

@@ -1,6 +1,10 @@
  iTeleskop ChangeLog
 ---------------------
 
+0.2.7 (2016-01-31)
+- Description column is now displayed
+- Added minimum target altitude verification
+
 0.2.6 (2016-01-30)
 - Added Reset button to add task form
 - skip_before and skip_after now have default values (now, now + 14 days)
