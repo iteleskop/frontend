@@ -502,25 +502,42 @@ Ext.define('iTeleskop.view.main.AddTask', {
 
         },
         {
-            fieldLabel: '... target altitude is lesser than [] degrees above horizon',
+            fieldLabel: '... target altitude is lesser than [] degrees above horizon (0...90)',
             name: 'min_alt',
             value: '5',
-            labelWidth: 300
+            labelWidth: 300,
+            value: 0,
+            validator: function(val) {
+                if (val === "") {
+                    return "Can't be empty";
+                }
+                if (isNaN(val)) {
+                    return "Must be a number.";
+                }
+                if (val < 0) {
+                    return "Must be equal or greater than 0";
+                }
+
+                if (val > 90) {
+                    return "Must be lesser than or equal 90.";
+                }
+                return true;
+            }
         },
         {
-            fieldLabel: '... Sun altitude is greater than [] degrees below horizon',
+            fieldLabel: '... Sun altitude is greater than [ ] degrees below horizon',
             labelWidth: 300,
             name: 'max_sun_alt',
             value: '-18'
         },
         {
-            fieldLabel: '... target to Moon distance is lesser than [] degrees',
+            fieldLabel: '... target to Moon distance is lesser than [ ] degrees',
             labelWidth: 300,
             name: 'moon_distance',
             value: '0'
         },
         {
-            fieldLabel: '... Moon phase is greater than [] per cent',
+            fieldLabel: '... Moon phase is greater than [ ] per cent',
             labelWidth: 300,
             name: 'max_moon_phase',
             value: '100'
@@ -533,7 +550,7 @@ Ext.define('iTeleskop.view.main.AddTask', {
         },
 
         {
-            fieldLabel: 'Do not observe before (y-m-d h:m):',
+            fieldLabel: 'Do not observe before (y-m-d):',
             labelWidth: 300,
             //xtype: 'datetimefield',
             //format: 'Y-m-d H:i',
@@ -543,7 +560,7 @@ Ext.define('iTeleskop.view.main.AddTask', {
             value: new Date()
         },
         {
-            fieldLabel: 'Do not observe after (y-m-d h:m)',
+            fieldLabel: 'Do not observe after (y-m-d)',
             labelWidth: 300,
             xtype: 'datefield',
             format: 'Y-m-d',
