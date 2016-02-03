@@ -44,7 +44,6 @@ function DeclinationFloatToDMS(dec, superscript) {
     var sign = "+";
     if (negative) {
         sign = "-";
-        deg = -deg;
     }
 
     if (superscript) {
