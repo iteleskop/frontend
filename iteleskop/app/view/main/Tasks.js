@@ -137,13 +137,20 @@ Ext.define('iTeleskop.view.main.Tasks', {
         /* pozostale */
         { text: 'Other commands', dataIndex: 'other_cmd', flex: 1,
           hidden: true, hideable: true },
-        { text: 'File', dataIndex: 'imagename', flex: 1,
-          hidden: true, hideable: true }
+        { text: 'File', dataIndex: 'imagename', width: 100,
+          hidden: false, hideable: true,
+          renderer: function(value, metaData, record) {
+              if (value === null) {
+                  return "--";
+              }
+              return '<a href="ftp://anonymous:pass@v13.klub.com.pl/'.concat(value, '">download</a>');
+          }
+        }
 
     ],
 
     listeners: {
-        select: 'onTaskClick'
+        itemdblclick: 'onTaskClick'
     },
 
     // That's gonna be cool. This will allow showing records a page at a time.

@@ -1,6 +1,11 @@
  iTeleskop ChangeLog
 ---------------------
 
+0.2.8 (2016-02-03)
+- Updated file column. It's now visible and for non-empty values it
+  is clickable.
+- Tasks are now edited with double click, rather than selection.
+
 0.2.7 (2016-01-31)
 - Description column is now displayed
 - Added minimum target altitude verification
