@@ -55,7 +55,7 @@ Ext.define('iTeleskop.view.login.LoginController', {
         if (result.hasOwnProperty('success')) {
             Ext.toast("Logged in, your id is " + result.user_id + ", welcome!");
 
-            this.saveUserData(result.user_id,
+            this.saveUserData(result,
                          this.lookupReference('login_user').getValue());
 
             // Zakoncz logowanie z sukcesem.
@@ -65,9 +65,9 @@ Ext.define('iTeleskop.view.login.LoginController', {
     },
 
     // Zapisuje dane uzytkownika w magazynie 'user'
-    saveUserData: function(user_id, login) {
+    saveUserData: function(userdata) {
         var x = Ext.getStore('user');
-        x.add({ login: login, user_id: user_id });
+        x.add(userdata);
     },
 
     onLoginSuccess: function(user) {

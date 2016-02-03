@@ -25,6 +25,7 @@ Ext.define('iTeleskop.view.main.Main', {
         'iTeleskop.view.main.Tasks',
         'iTeleskop.view.main.AddTask',
         'iTeleskop.view.main.Objects',
+        'iTeleskop.view.main.UserPreferences',
 
         'Ext.ux.DateTimePicker',
         'Ext.ux.DateTimeField'
@@ -56,7 +57,7 @@ Ext.define('iTeleskop.view.main.Main', {
                 // @todo: Jak wyciagnac wersje tej aplikacji?
                 html: "<div align='center' style='font-size: 50%'>".concat(
                     "<img src='logo-small.png' title='iTeleskop logo'/><br/>",
-                    "<a href='ChangeLog.txt' target='_blank'>0.2.8</a>, ",
+                    "<a href='ChangeLog.txt' target='_blank'>0.3.0</a>, ",
                     "<a href='https://www.sencha.com/products/extjs/'>Ext JS (",
                     Ext.getVersion().version,
                     ')</a> ',
@@ -105,7 +106,7 @@ Ext.define('iTeleskop.view.main.Main', {
     items: [
     {
         title: 'Tasks',
-        iconCls: 'fa-users',
+        iconCls: 'fa-calendar',
         items: [{
             xtype: 'tasks'
         }],
@@ -132,7 +133,7 @@ Ext.define('iTeleskop.view.main.Main', {
     },
     {
         title: 'Objects',
-        iconCls: 'fa-users',
+        iconCls: 'fa-binoculars',
         items: [{
             xtype: 'objects'
         }]
@@ -157,5 +158,12 @@ Ext.define('iTeleskop.view.main.Main', {
         bind: {
             html: '{loremIpsum}'
         }
+    },
+    {
+        title: 'Preferences',
+        iconCls: 'fa-sliders',
+        items: [{
+            xtype: 'userpref'
+        }]
     }]
 });

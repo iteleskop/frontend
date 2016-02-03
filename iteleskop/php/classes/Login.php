@@ -40,7 +40,8 @@ class Login {
         $md5pass = $params->md5pass;
 
         // Przygotuje kwerke
-        $q = "SELECT user_id, pass FROM users WHERE login='".$user."'";
+        $q = "SELECT user_id, pass, login, firstname, lastname, share, phone, email, ".
+            "permissions, aavso_id, ftp_login, ftp_pass FROM users WHERE login='".$user."'";
 
         // A tu biedziemy wrzucac odpowiedz.
         $answer = array();
@@ -58,7 +59,7 @@ class Login {
             // Kwerka zwrocila zero wierszy, czyli uzytkownik podal zly
             // login.
             $answer['failure'] = true;
-            $answer['msg'] = 'Brak użytkownika o loginie: ' . $user;
+            $answer['msg'] = 'No user with such a login: ' . $user;
             return $answer;
         }
 
@@ -70,10 +71,20 @@ class Login {
             // Poprawne haslo, podajmy mu user_id
             $answer['success'] = true;
             $answer['user_id'] = $row['user_id'];
+            $answer['login'] = $row['login'];
+            $answer['firstname'] = $row['firstname'];
+            $answer['lastname'] = $row['lastname'];
+            $answer['share'] = $row['share'];
+            $answer['phone'] = $row['phone'];
+            $answer['email'] = $row['email'];
+            $answer['permissions'] = $row['permissions'];
+            $answer['aavso_id'] = $row['aavso_id'];
+            $answer['ftp_login'] = $row['ftp_login'];
+            $answer['ftp_pass'] = $row['ftp_pass'];
         } else {
             // Niepoprawne haslo, niech spada na drzewo.
             $answer['failure'] = true;
-            $answer['msg'] = 'Nieprawidłowe hasło.';
+            $answer['msg'] = 'Incorrect password.';
         }
 
         $this->_db->close();

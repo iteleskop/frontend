@@ -140,10 +140,13 @@ Ext.define('iTeleskop.view.main.Tasks', {
         { text: 'File', dataIndex: 'imagename', width: 100,
           hidden: false, hideable: true,
           renderer: function(value, metaData, record) {
+
+              var u = Ext.getStore('user').getAt(0);
               if (value === null) {
                   return "--";
               }
-              return '<a href="ftp://anonymous:pass@v13.klub.com.pl/'.concat(value, '">download</a>');
+              return '<a href="ftp://'.concat(u.data.ftp_login, ":", u.data.ftp_pass,
+                                              '@v13.klub.com.pl/', value, '">download</a>');
           }
         }
 
