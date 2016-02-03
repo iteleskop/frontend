@@ -422,7 +422,7 @@ Ext.define('iTeleskop.view.main.AddTask', {
             fieldLabel: 'Filter',
             name: 'filter',
             editable: false,
-            value: 'none',
+            value: 'CV',
             xtype: 'combobox',
             valueField: 'filter',
             displayField: 'text',
