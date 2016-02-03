@@ -1,6 +1,9 @@
  iTeleskop ChangeLog
 ---------------------
 
+0.3.1 (3016-02-03)
+- Corrected display of small negative declination (between 0 and -1 degree)
+
 0.3.0 (2016-02-03)
 - Updated file column. It's now visible and for non-empty values it
   is clickable.

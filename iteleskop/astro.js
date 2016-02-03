@@ -41,14 +41,16 @@ function DeclinationFloatToDMS(dec, superscript) {
     tmp = (tmp - m)*600;
     var s = Math.round(tmp)/10;
 
+    var sign = "+";
     if (negative) {
+        sign = "-";
         deg = -deg;
     }
 
     if (superscript) {
-        return (deg + "<sup>o</sup> " + m + "\'" + s + "\"");
+        return (sign + deg + "<sup>o</sup> " + m + "\'" + s + "\"");
     } else {
-        return (deg + "deg. " + m + "m " + s + "s ");
+        return (sign + deg + "deg. " + m + "m " + s + "s ");
     }
 }
 
