@@ -145,8 +145,9 @@ Ext.define('iTeleskop.view.main.Tasks', {
               if (value === null) {
                   return "--";
               }
-              return '<a href="ftp://'.concat(u.data.ftp_login, ":", u.data.ftp_pass,
-                                              '@v13.klub.com.pl/', value, '">download</a>');
+              var url = '://'.concat(u.data.ftp_login, ":", u.data.ftp_pass,
+                                     '@iteleskop.ddns.net/', value, '"');
+              return '<a href="ftp'.concat(url, ' target="_blank">ftp</a> <a href="ftps', url, ' target="_blank">ftps</a>');
           }
         }
 
