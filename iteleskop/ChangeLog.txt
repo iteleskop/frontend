@@ -7,6 +7,8 @@
   - epoch (J2000.0 in most cases)
   - magnitude (value taken from official catalogs)
   - width, height (expressed in minutes, as defined in catalogs)
+- Object in the Object list can be double clicked. It will use its
+  name, ra, dec in New task
 - Targets can be now be selected from objects list
 - Minor tweaks in New task panel
 

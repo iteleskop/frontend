@@ -64,6 +64,8 @@ Ext.define('iTeleskop.view.main.AddTask', {
     title: 'Add new task',
     xtype: 'addtask',
 
+    id: 'addtask',
+
     // Eskperyment z przewijaniem (autoScroll + height w pixelach wlacza scroll
     // pionowy)
     autoScroll: true,
@@ -98,6 +100,7 @@ Ext.define('iTeleskop.view.main.AddTask', {
             // Object selection. It is now currently selected from the Objects store.
             // It can be specified by hand as well.
             fieldLabel: 'Target Name',
+            id: 'target_name',
             xtype: 'combo',
             store: 'objects',
             valueField: 'name',
@@ -151,7 +154,7 @@ Ext.define('iTeleskop.view.main.AddTask', {
                     xtype: 'textfield',
                     fieldLabel: 'Right ascension (0... 23.99999)',
                     name: 'ra',
-                    id: 'ra_field',
+                    id: 'target_ra',
                     value: '0.0',
                     labelWidth: 300,
                     allowBlank: false,
@@ -261,7 +264,7 @@ Ext.define('iTeleskop.view.main.AddTask', {
                     xtype: 'textfield',
                     fieldLabel: 'Declination (-17.0 to 90.0)',
                     name: 'decl',
-                    id: 'decl_field',
+                    id: 'target_dec',
                     value: '0.0',
                     labelWidth: 300,
                     allowBlank: false,
@@ -665,13 +668,13 @@ Ext.define('iTeleskop.view.main.AddTask', {
     // This method sets the new task to observe the target.
     // @param record - a record from Objects store.
     setTarget: function(record) {
-        var ra = record.data.ra;
-        var decl = record.data.decl;
 
-        var x1 = Ext.getCmp('ra_field');
-        var x2 = Ext.getCmp('decl_field');
+        var x1 = Ext.getCmp('target_ra');
+        var x2 = Ext.getCmp('target_dec');
+        var x3 = Ext.getCmp('target_name');
 
-        x1.setValue(ra);
-        x2.setValue(decl);
+        x1.setValue(record.data.ra);
+        x2.setValue(record.data.decl);
+        x3.setValue(record.data.name);
     }
 });

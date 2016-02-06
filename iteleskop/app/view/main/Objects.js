@@ -43,6 +43,13 @@ Ext.define('iTeleskop.view.main.Objects', {
     listeners: {
         beforerender: function(component, eOpts) {
             Ext.getStore('objects').load();
+        },
+
+        itemdblclick: function(sender, record) {
+            var addtask = Ext.getCmp('addtask');
+            addtask.setTarget(record);
+
+            // @todo: Switch to new task panel
         }
     }
 });
