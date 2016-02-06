@@ -154,7 +154,11 @@ Ext.define('iTeleskop.view.main.Tasks', {
     ],
 
     listeners: {
-        itemdblclick: 'onTaskClick'
+        itemdblclick: 'onTaskClick',
+
+        beforerender: function(component, eOpts) {
+            Ext.getStore('tasks').load();
+        }
     },
 
     // That's gonna be cool. This will allow showing records a page at a time.

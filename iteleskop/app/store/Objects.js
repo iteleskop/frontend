@@ -17,7 +17,5 @@ Ext.define('iTeleskop.store.Objects', {
     proxy: {
         type: 'direct',
         directFn: 'QueryObjects.getResults'
-    },
-
-    autoLoad: true
+    }
 });

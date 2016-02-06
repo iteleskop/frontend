@@ -34,7 +34,5 @@ Ext.define('iTeleskop.store.Tasks', {
     proxy: {
         type: 'direct',
         directFn: 'Tasks.getResults'
-    },
-
-    autoLoad: true
+    }
 });

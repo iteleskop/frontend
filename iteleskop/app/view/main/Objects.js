@@ -6,18 +6,43 @@ Ext.define('iTeleskop.view.main.Objects', {
         'iTeleskop.store.Objects'
     ],
 
-    title: 'Obiekty',
+    title: 'Objects',
 
     store: {
         type: 'objects'
     },
 
     columns: [
-        { text: 'Object ID',  dataIndex: 'object_id' },
-        { text: 'Target name', dataIndex: 'name', flex: 1 },
-        { text: 'RA', dataIndex: 'ra' },
-        { text: 'Dec', dataIndex: 'decl' },
-        { text: 'Description', dataIndex: 'descr', flex: 1 },
-        { text: 'Comment', dataIndex: 'comment', flex: 1 }
-    ]
+        { text: 'Target name', dataIndex: 'name' },
+        { text: 'RA', dataIndex: 'ra', renderer: function(value) { return RAfloatToHMS(value); } },
+        { text: 'Dec', dataIndex: 'decl', renderer: function(value) { return DeclinationFloatToDMS(value); } },
+        { text: 'Description', dataIndex: 'descr' },
+        { text: 'Comment', dataIndex: 'comment' },
+        { text: 'Const.', dataIndex: 'const' },
+        { text: 'Mangnitude', dataIndex: 'magn' },
+        { text: 'Dimensions', dataIndex: 'none',
+          renderer: function(value, metaData, record) {
+              var x = record.get('x');
+              var y = record.get('y');
+              if (x === null)
+                  return '-';
+              if (y === null)
+                  return x;
+              return x + "x" + y;
+          }
+        },
+        { text: 'Type', dataIndex: 'type',
+          renderer: function (value) {
+              if (value == "nul") {
+                  return "";
+              }
+              return value;
+          }},
+    ],
+
+    listeners: {
+        beforerender: function(component, eOpts) {
+            Ext.getStore('objects').load();
+        }
+    }
 });
