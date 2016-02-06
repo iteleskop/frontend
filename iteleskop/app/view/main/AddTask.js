@@ -71,6 +71,10 @@ Ext.define('iTeleskop.view.main.AddTask', {
 
     url: 'php/classes/AddTask.php',
 
+    requires: [
+        'iTeleskop.store.Objects'
+    ],
+
     layout: {
         type: 'vbox',
         align: 'left',
@@ -83,19 +87,26 @@ Ext.define('iTeleskop.view.main.AddTask', {
     defaultType: 'textfield',
     items: [
         {
-            // To pole jest ustawianie w metodzie beforerender
+            // This fields is set in the beforerender method
             name: 'user_id',
-            xtype: 'textfield',
+            xtype: 'hidden',
             fieldLabel:'User ID',
             readOnly: true,
             labelWidth: 300
         },
         {
-            // Wybor obiektu, jedno wielkie @todo trzeba te dane wyciagac z jakiejs bazy
-            // danych, moze z simbada? Na razie wpisywane z reki
+            // Object selection. It is now currently selected from the Objects store.
+            // It can be specified by hand as well.
             fieldLabel: 'Target Name',
+            xtype: 'combo',
+            store: 'objects',
+            valueField: 'name',
+            displayField: 'name',
+            queryMode: 'local',
             name: 'object',
             labelWidth: 300,
+            typeAhead: true,
+            minChars: 3,
             width: 900,
             allowBlank: false,
             validator: function(val) {
@@ -107,6 +118,19 @@ Ext.define('iTeleskop.view.main.AddTask', {
                     return "Too long (".concat(val.length,", max allowed length is 68)");
                 }
                 return true;
+            },
+            listeners: {
+                select: function(checkbox, records) {
+                    var objects = Ext.getStore('objects');
+                    var object = objects.findRecord('name', checkbox.getValue());
+
+                    if (!object) {
+                        return;
+                    }
+
+                    var addtask = checkbox.up('addtask');
+                    addtask.setTarget(object);
+                }
             }
         },
 
@@ -119,6 +143,7 @@ Ext.define('iTeleskop.view.main.AddTask', {
                 align: 'stretch',
                 pack: 'start'
             },
+            id: 'ra_container',
             padding: "0 0 10 0", // top right bottom left
             items: [
                 {
@@ -126,6 +151,7 @@ Ext.define('iTeleskop.view.main.AddTask', {
                     xtype: 'textfield',
                     fieldLabel: 'Right ascension (0... 23.99999)',
                     name: 'ra',
+                    id: 'ra_field',
                     value: '0.0',
                     labelWidth: 300,
                     allowBlank: false,
@@ -235,6 +261,7 @@ Ext.define('iTeleskop.view.main.AddTask', {
                     xtype: 'textfield',
                     fieldLabel: 'Declination (-17.0 to 90.0)',
                     name: 'decl',
+                    id: 'decl_field',
                     value: '0.0',
                     labelWidth: 300,
                     allowBlank: false,
@@ -620,6 +647,8 @@ Ext.define('iTeleskop.view.main.AddTask', {
         d.setDate(d.getDate() + 14); // Move it by 14 days
         this.getForm().findField('skip_after').setValue(d);
 
+        this.getForm().findField('object').bindStore(Ext.StoreMgr.lookup('objects'));
+
         this.getForm().isValid();
     },
 
@@ -631,5 +660,18 @@ Ext.define('iTeleskop.view.main.AddTask', {
         beforerender: function(component, eOpts) {
             component.setDefaultFields();
         }
+    },
+
+    // This method sets the new task to observe the target.
+    // @param record - a record from Objects store.
+    setTarget: function(record) {
+        var ra = record.data.ra;
+        var decl = record.data.decl;
+
+        var x1 = Ext.getCmp('ra_field');
+        var x2 = Ext.getCmp('decl_field');
+
+        x1.setValue(ra);
+        x2.setValue(decl);
     }
 });

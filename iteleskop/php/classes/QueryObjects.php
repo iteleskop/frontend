@@ -31,7 +31,8 @@
     public function getResults($params) {
         $_db = $this->_db;
 
-        $_result = $_db->query("SELECT object_id, name, ra, decl, descr, comment " .
+        $_result = $_db->query("SELECT object_id, name, ra, decl, descr, comment, ".
+                               "const, magn, x, y, type ".
                                " FROM objects ORDER BY name DESC") or
             die('Connection Error: ' . $_db->error);
 

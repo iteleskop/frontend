@@ -19,7 +19,7 @@ Ext.define('iTeleskop.view.main.Objects', {
         { text: 'Description', dataIndex: 'descr' },
         { text: 'Comment', dataIndex: 'comment' },
         { text: 'Const.', dataIndex: 'const' },
-        { text: 'Mangnitude', dataIndex: 'magn' },
+        { text: 'Magnitude', dataIndex: 'magn' },
         { text: 'Dimensions', dataIndex: 'none',
           renderer: function(value, metaData, record) {
               var x = record.get('x');
