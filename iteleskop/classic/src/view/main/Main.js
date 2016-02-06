@@ -7,14 +7,14 @@
  */
 Ext.define('iTeleskop.view.main.Main', {
 
-    // Ten widok to zestaw paneli (czyli takich przelaczanych zakladek)
+    // This view is a set of panels
     extend: 'Ext.tab.Panel',
 
-    // Ten widok definituje typ app-main. Zamiast iTeleskop.view.main.Main
-    // mozna poslugiwac sie nazwa app-main.
+    // This object is can be referenced to as app-main, which can be used instead
+    // of iTeleskop.view.main.Main
     xtype: 'app-main',
 
-    /* tu jest lista klas, ktore trzeba zaladowac przed startem aplikacji */
+    // This is a list of classes, which have to be loaded before this object
     requires: [
         'Ext.plugin.Viewport',
         'Ext.window.MessageBox',
