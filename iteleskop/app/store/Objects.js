@@ -5,6 +5,11 @@ Ext.define('iTeleskop.store.Objects', {
 
     alias: 'store.objects',
 
+    sorters: [{
+        property: 'object_id',
+        direction: 'ASC'
+    }],
+
     fields: [
         'object_id',
         'name',

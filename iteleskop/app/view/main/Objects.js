@@ -13,7 +13,8 @@ Ext.define('iTeleskop.view.main.Objects', {
     },
 
     columns: [
-        { text: 'Target name', dataIndex: 'name' },
+        { text: 'ID', dataIndex: 'object_id', hidden: true, hideable: true },
+        { text: 'Target name', dataIndex: 'name', flex: 1 },
         { text: 'RA', dataIndex: 'ra', renderer: function(value) { return RAfloatToHMS(value); } },
         { text: 'Dec', dataIndex: 'decl', renderer: function(value) { return DeclinationFloatToDMS(value); } },
         { text: 'Description', dataIndex: 'descr' },
