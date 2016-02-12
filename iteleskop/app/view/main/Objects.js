@@ -21,7 +21,7 @@ Ext.define('iTeleskop.view.main.Objects', {
         { text: 'Comment', dataIndex: 'comment' },
         { text: 'Const.', dataIndex: 'const' },
         { text: 'Magnitude', dataIndex: 'magn' },
-        { text: 'Dimensions', dataIndex: 'none',
+        { text: 'Dimensions[\']', dataIndex: 'none',
           renderer: function(value, metaData, record) {
               var x = record.get('x');
               var y = record.get('y');
@@ -38,7 +38,8 @@ Ext.define('iTeleskop.view.main.Objects', {
                   return "";
               }
               return value;
-          }},
+          }
+        }
     ],
 
     listeners: {

@@ -37,7 +37,7 @@
             "solve, vphot, other_cmd, descr, ".
             "min_alt, max_sun_alt, moon_distance, max_moon_phase, ".
             "min_interval, skip_before, skip_after, ".
-            "comment, state, imagename ".
+            "comment, state, created, activated, performed, imagename ".
             "FROM tasks, users WHERE tasks.user_id = users.user_id ORDER BY task_id DESC");
         if (!$_result) {
             return $this->failure("MySQL error:". $_db->error);
@@ -85,7 +85,7 @@
         return $this->success("Task ".$task_id." updated to state ".$new_state);
     }
 
-    public function delete($params) {
+    public function deleteTask($params) {
         $user_id = $params->user_id;
         $task_id = $params->task_id;
 

@@ -25,10 +25,10 @@ Ext.define('iTeleskop.view.main.Main', {
         'iTeleskop.view.main.Tasks',
         'iTeleskop.view.main.AddTask',
         'iTeleskop.view.main.Objects',
-        'iTeleskop.view.main.UserPreferences',
+        'iTeleskop.view.main.UserPreferences'
 
-        'Ext.ux.DateTimePicker',
-        'Ext.ux.DateTimeField'
+        // 'Ext.ux.DateTimePicker',
+        // 'Ext.ux.DateTimeField'
     ],
 
     // Dodany plugin viewport, ktory odpowiada za samodzielne wyswietlanie

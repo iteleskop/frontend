@@ -28,7 +28,7 @@ $photon_catcher_db   = 'iteleskop';
                         'new_state'
                         )
                     ),
-                'delete' => array(
+                'deleteTask' => array(
                     'params' => array(
                         'user_id',
                         'task_id'

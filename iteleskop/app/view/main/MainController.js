@@ -79,7 +79,7 @@ Ext.define('iTeleskop.view.main.MainController', {
                         var s = record.store;
                         s.remove(record);
 
-                        Tasks.delete(data, callbackDelete, this);
+                        Tasks.deleteTask(data, callbackDelete, this);
                     } else if (btn == "cancel") {
                         // do nothing
                     }

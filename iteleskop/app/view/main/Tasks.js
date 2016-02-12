@@ -13,7 +13,7 @@ var FilterStates = Ext.create('Ext.data.Store', {
         { 'filter': '3',   'text': '3(in queue)' },
         { 'filter': '4',   'text': '4(executed)' },
         { 'filter': '5',   'text': '5(done,for users)' },
-        { 'filter': '6',   'text': '5(done,public)' },
+        { 'filter': '6',   'text': '6(done,public)' },
         { 'filter': 'all', 'text': 'show all states' }
     ]
 });
@@ -137,6 +137,9 @@ Ext.define('iTeleskop.view.main.Tasks', {
         /* pozostale */
         { text: 'Other commands', dataIndex: 'other_cmd', flex: 1,
           hidden: true, hideable: true },
+        { text: 'Created', dataIndex: 'created', hidden: true, hideable: true },
+        { text: 'Activated', dataIndex: 'activated', hidden: true, hideable: true },
+        { text: 'Performed', dataIndex: 'performed', hidden: true, hideable: true },
         { text: 'File', dataIndex: 'imagename', width: 100,
           hidden: false, hideable: true,
           renderer: function(value, metaData, record) {
