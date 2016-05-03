@@ -28,7 +28,7 @@ Ext.define('iTeleskop.view.login.LoginController', {
 
         var data = {
             "user": user,
-            "md5pass": pwd
+            "md5pass": md5(pwd)
         };
 
         // Zawolaj zdalna metode (server-side) przez Ext.Direct. To wywolanie

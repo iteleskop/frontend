@@ -49,13 +49,13 @@ class Login {
             return $answer;
         }
 
-        // Pobierz dane przeslane przez strone klienta.
-        /// @todo: To NAPRAWDE powinien byc hash, a nie samo haslo!
+        // Get the data from the client. Note that the md5pass is
+        // now actually an MD5 password.
         $user = $params->user;
-        $md5pass = $params->md5pass;
+        $md5pass = strtoupper($params->md5pass);
 
         // Here's the actual query
-        $q = "SELECT user_id, pass, login, firstname, lastname, share, phone, email, ".
+        $q = "SELECT user_id, pass_d, login, firstname, lastname, share, phone, email, ".
             "permissions, aavso_id, ftp_login, ftp_pass FROM users WHERE login='".$user."'";
 
         $_result = $_db->query($q);
@@ -78,7 +78,7 @@ class Login {
         // Get it and check if the pass matches.
         $row = $_result->fetch_assoc();
 
-        $db_pass = $row['pass'];
+        $db_pass = strtoupper($row['pass_d']);
         if ($md5pass == $db_pass) {
             // Password is good, let's provide all the details.
             $answer['success'] = true;
@@ -96,7 +96,7 @@ class Login {
         } else {
             // Nope, incorrect password. Buzz off!
             $answer['failure'] = true;
-            $answer['msg'] = 'Incorrect password.';
+            $answer['msg'] = 'Incorrect password: provided ['.$md5pass.'] vs db ['.$db_pass.']';
         }
 
         $this->_db->close();

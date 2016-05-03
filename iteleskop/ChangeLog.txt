@@ -13,6 +13,7 @@
   - Removed extra commands field
   - Removed auto center field
   - Do not observe after is now set to (today) + 30 days (was 14)
+- Password are now MD5 hashed
 
 0.4.0 (2016-02-06)
 - Objects panel updated, added several columns:
