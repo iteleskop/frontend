@@ -31,8 +31,8 @@ Ext.define('iTeleskop.view.main.MainController', {
         }
 
         var state = record.get('state');
-        if ( (state == 0) || (state == 1)) {
-            if (state == 0) {
+        if ( (state == 0) || (state == 1) || (state == 2)) {
+            if (state == 0 || state == 2) {
                 var button = "Move to New(1) state";
                 var new_state ="1";
             }
@@ -49,8 +49,8 @@ Ext.define('iTeleskop.view.main.MainController', {
 
             Ext.MessageBox.show({
                 title:'What to do with this task?',
-                msg: 'Are you sure want to delete?',
-                buttonText: {yes: button, no: "Delete", cancel: "Keep current"},
+                msg: 'What do you want to do with this task?',
+                buttonText: {yes: button, no: "Delete", cancel: "Do nothing"},
                 fn: function(btn) {
                     if (btn == "yes") {
                         // Moving to wait state

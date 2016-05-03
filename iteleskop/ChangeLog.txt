@@ -14,6 +14,13 @@
   - Removed auto center field
   - Do not observe after is now set to (today) + 30 days (was 14)
 - Password are now MD5 hashed
+- View tasks panel:
+  - state 5 is now no longer used
+  - states -1 (deleted) and -2 (deleted template) are now displayed
+    properly
+  - tasks in state 2 (activated) can now be deleted or moved back to
+    state 1
+  - added filtering for states -1 (deleted) and -2 (deleted template)
 
 0.4.0 (2016-02-06)
 - Objects panel updated, added several columns:

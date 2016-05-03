@@ -12,8 +12,9 @@ var FilterStates = Ext.create('Ext.data.Store', {
         { 'filter': '2',   'text': '2(activated)' },
         { 'filter': '3',   'text': '3(in queue)' },
         { 'filter': '4',   'text': '4(executed)' },
-        { 'filter': '5',   'text': '5(done,for users)' },
-        { 'filter': '6',   'text': '6(done,public)' },
+        { 'filter': '6',   'text': '6(done)' },
+        { 'filter': '-1',  'text': '-1 (deleted)'},
+        { 'filter': '-2',  'text': '-2 (deleted templates)'},
         { 'filter': 'all', 'text': 'show all states' }
     ]
 });
@@ -46,6 +47,10 @@ Ext.define('iTeleskop.view.main.Tasks', {
     // Converts numeric value to more descriptive representation of the status
     stateToText: function(value) {
         switch (value) {
+        case "-1":
+            return "-1 (deleted)";
+        case "-2":
+            return "-2 (deleted tmpl)";
         case "0":
             return "0 (template)";
         case "1":
@@ -56,10 +61,8 @@ Ext.define('iTeleskop.view.main.Tasks', {
             return "3 (in Nerpio queue)";
         case "4":
             return "4 (executed)";
-        case "5":
-            return "5 (done,for users)";
         case "6":
-            return "6 (done,public)";
+            return "6 (done)";
         default:
             return "unknown(" + value + ")";
         };
