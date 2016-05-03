@@ -39,15 +39,11 @@ var Exposures = Ext.create('Ext.data.Store', {
 var AddTaskFilters = Ext.create('Ext.data.Store', {
     fields: ['filter' , 'text'],
     data: [
-        { 'filter': 'CV',     'text': 'L (luminance)' },
-        { 'filter': 'TR',   'text': 'R (red)' },
-        { 'filter': 'TG', 'text': 'G (green)' },
-        { 'filter': 'TB',  'text': 'B (blue)' },
-        { 'filter': 'HA',    'text': 'H-alpha' },
-        { 'filter': 'V',     'text': 'V (fotometric)' },
-        { 'filter': 'B',     'text': 'B (fotometric)' },
-        { 'filter': 'R',     'text': 'R (fotometric)' },
-        { 'filter': 'none',  'text': 'no filter' }
+        { 'filter': 'CV',     'text': 'Luminance' },
+        { 'filter': 'SG',   'text': 'Sloan g\'' },
+        { 'filter': 'SR', 'text': 'Sloan r\'' },
+        { 'filter': 'SI',  'text': 'Sloan i\'' },
+        { 'filter': 'HA',    'text': 'H-alpha' }
     ]
 });
 
@@ -412,16 +408,17 @@ Ext.define('iTeleskop.view.main.AddTask', {
             labelWidth: 300
         },
         {
-            // Wybor teleskopu: @todo: wyciagac te dane z tabeli telescopes
-            fieldLabel: 'Teleskop',
+            // Scope selection: @todo: Get that data from telescopes table
+            //fieldLabel: 'Teleskop',
             name: 'scope_id',
-            value: "1",
-            xtype: 'combobox',
-            valueField: 'scope_id',
-            displayField: 'text',
-            queryMode: 'local',
-            store: AddTaskScopes,
-            labelWidth: 300
+            value: '1',
+            xtype: 'hidden'
+            // xtype: 'combobox',
+            // valueField: 'scope_id',
+            // displayField: 'text',
+            // queryMode: 'local',
+            // store: AddTaskScopes,
+            // labelWidth: 300
         },
         {
             fieldLabel: 'Description',
@@ -473,14 +470,16 @@ Ext.define('iTeleskop.view.main.AddTask', {
         },
         {
             fieldLabel: 'Guiding',
-            xtype: 'checkbox',
+            // xtype: 'checkbox',
+            xtype: 'hidden',
             name: 'guiding',
             labelWidth: 300,
-            checked: true
+            checked: false
         },
         {
             fieldLabel: 'Auto Center',
-            xtype: 'checkbox',
+            //xtype: 'checkbox',
+            xtype: 'hidden',
             name: 'auto_center',
             labelWidth: 300,
             checked: false
@@ -522,6 +521,7 @@ Ext.define('iTeleskop.view.main.AddTask', {
         },
         {
             fieldLabel: 'Extra commands',
+            xtype: 'hidden',
             labelWidth: 300,
             name: 'other_cmd'
         },
@@ -647,7 +647,7 @@ Ext.define('iTeleskop.view.main.AddTask', {
         // Get the current date
         var d = new Date();
         this.getForm().findField('skip_before').setValue(d);
-        d.setDate(d.getDate() + 14); // Move it by 14 days
+        d.setDate(d.getDate() + 30); // Move it by 30 days
         this.getForm().findField('skip_after').setValue(d);
 
         this.getForm().findField('object').bindStore(Ext.StoreMgr.lookup('objects'));

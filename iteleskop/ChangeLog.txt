@@ -1,6 +1,19 @@
  iTeleskop ChangeLog
 ---------------------
 
+0.5.0 (2016-05-03)
+- Database connection errors are now displayed (this solves a problem,
+  when DB was offline and user tried to log in. Previously there was
+  no visible reaction, although the software tried to connect to the
+  database).
+- Changes in adding new task panel:
+  - Changed available filters to Luminance, Sloan g', Sloan r',
+    Sloan i', H alpha
+  - Removed guiding field
+  - Removed extra commands field
+  - Removed auto center field
+  - Do not observe after is now set to (today) + 30 days (was 14)
+
 0.4.0 (2016-02-06)
 - Objects panel updated, added several columns:
   - type (object type, as defined in NGC calatog)
@@ -14,7 +27,7 @@
 
 0.3.1 (3016-02-03)
 - Corrected display of small negative declination (between 0 and -1
-degree)
+  degree)
 - The default filter is now CV
 
 0.3.0 (2016-02-03)
