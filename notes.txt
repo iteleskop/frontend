@@ -50,5 +50,3 @@ event: login
 
 Ctrl.onLoginSuccess w iTeleskop.controller.Ctrl
 Ctrl.showUI
-
-
