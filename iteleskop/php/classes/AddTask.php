@@ -1,7 +1,5 @@
 <?php
 
-require_once("../config.php");
-
 class AddTask {
 
     private $_db;
@@ -91,8 +89,8 @@ class AddTask {
 
         $last_id = $_db->insert_id;
 
-        $txt = "Dodano zadanie obserwacji <b>".$data['object'].
-            "</b>, id zadania <b>".$last_id."</b>";
+        $txt = "Observation task added for object <b>".$data['object'].
+            "</b>, task id is <b>".$last_id."</b>";
 
         $this->success($txt);
     }
@@ -112,7 +110,7 @@ class AddTask {
             return;
         }
         if (!isset($_GET[$name])) {
-            $this->failure("Brak obowiazkowego parametru ".$name);
+            $this->failure("Mandatory parameter missing: ".$name);
         }
         $this->data[$name] = $_GET[$name];
         return;
@@ -138,7 +136,7 @@ class AddTask {
         $this->data[$name] = 0;
     }
 
-    // Czas odebrac wszystkie dane
+    // It's time to retrieve all data from POST or GET.
     function getData() {
         $this->data = array();
 
@@ -172,7 +170,7 @@ class AddTask {
         return ($this->data);
     }
 
-    // Konwertuje otrzymane dane do jednego stringa
+    // Converts data to a single script. Useful mostly for debugging.
     // Uzyteczne glownie w celach debugowych.
     function dataToText($x) {
         $str = "";
@@ -181,20 +179,15 @@ class AddTask {
         }
         return $str;
     }
+
+    function cloneTask($x) {
+        $answer = array();
+        $answer['success'] = true;
+        $answer['msg'] = var_export($x, true);
+        return $answer;
+
+        /// @todo: Implement this for real.
+    }
 };
-
-// Stworz instancje klasy AddTask
-$x = new AddTask();
-
-// Pobierz dane przekazane przez POST lub GET. Jezeli brakuje jakiejs
-// danej, zostanie zawolane failure() z odpowiednimi parametrami i
-// skrypt przerwie dzialanie.
-$data = $x->getData();
-
-// Sprawdz, czy dane sa poprawne.
-$x->validate($data);
-
-// Wstaw dane do bazy.
-$x->insert($data);
 
 ?>

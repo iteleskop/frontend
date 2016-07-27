@@ -67,7 +67,7 @@ Ext.define('iTeleskop.view.main.AddTask', {
     autoScroll: true,
     height: 900,
 
-    url: 'php/classes/AddTask.php',
+    url: 'php/forms/add_task.php',
 
     requires: [
         'iTeleskop.store.Objects'
