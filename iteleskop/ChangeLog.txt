@@ -1,5 +1,10 @@
  iTeleskop ChangeLog
 ---------------------
+0.5.1 (not-released-yet)
+- Created/Activated/Performed columns are now shown by default in
+  the Tasks view.
+- Autocenter/Dither/Defocus/Calibrate/Pinpoint/Upload columns are now
+  hidden by default in the Tasks view.
 
 0.5.0 (2016-05-03)
 - Database connection errors are now displayed (this solves a problem,

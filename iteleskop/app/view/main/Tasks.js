@@ -114,12 +114,12 @@ Ext.define('iTeleskop.view.main.Tasks', {
         { text: 'Filter', dataIndex: 'filter', width: 50 },
         { text: 'Binning', dataIndex: 'binning', width: 60 },
         { text: 'Guiding', dataIndex: 'guiding', width: 60 },
-        { text: 'Auto Center', dataIndex: 'auto_center' },
-        { text: 'Dither', dataIndex: 'dither', width: 60 },
-        { text: 'Defocus', dataIndex: 'defocus', width: 70 },
-        { text: 'Calibrate', dataIndex: 'calibrate', width: 70 },
-        { text: 'Pinpoint', dataIndex: 'solve', width: 70 },
-        { text: 'Upload', dataIndex: 'vphot', width: 50 },
+        { text: 'Auto Center', dataIndex: 'auto_center', hidden: true, hideable: true },
+        { text: 'Dither', dataIndex: 'dither', width: 60, hidden: true, hideable: true },
+        { text: 'Defocus', dataIndex: 'defocus', width: 70, hidden: true, hideable: true },
+        { text: 'Calibrate', dataIndex: 'calibrate', width: 70, hidden: true, hideable: true },
+        { text: 'Pinpoint', dataIndex: 'solve', width: 70, hidden: true, hideable: true },
+        { text: 'Upload', dataIndex: 'vphot', width: 50, hidden: true, hideable: true },
 
         /* ograniczenia */
         { text: 'Min. Target altitude', dataIndex: 'min_alt', flex: 1,
@@ -140,9 +140,9 @@ Ext.define('iTeleskop.view.main.Tasks', {
         /* pozostale */
         { text: 'Other commands', dataIndex: 'other_cmd', flex: 1,
           hidden: true, hideable: true },
-        { text: 'Created', dataIndex: 'created', hidden: true, hideable: true },
-        { text: 'Activated', dataIndex: 'activated', hidden: true, hideable: true },
-        { text: 'Performed', dataIndex: 'performed', hidden: true, hideable: true },
+        { text: 'Created', dataIndex: 'created', hidden: false, hideable: true },
+        { text: 'Activated', dataIndex: 'activated', hidden: false, hideable: true },
+        { text: 'Performed', dataIndex: 'performed', hidden: false, hideable: true },
         { text: 'File', dataIndex: 'imagename', width: 100,
           hidden: false, hideable: true,
           renderer: function(value, metaData, record) {
