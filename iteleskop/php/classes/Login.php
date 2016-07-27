@@ -38,6 +38,8 @@ class Login {
     }
 
     public function verify($params) {
+        global $photon_catcher_debug;
+
         $_db = $this->_db;
 
         // We will put the response here.
@@ -96,7 +98,10 @@ class Login {
         } else {
             // Nope, incorrect password. Buzz off!
             $answer['failure'] = true;
-            $answer['msg'] = 'Incorrect password: provided ['.$md5pass.'] vs db ['.$db_pass.']';
+            $answer['msg'] = 'Incorrect password';
+            if ($photon_catcher_debug) {
+                $answer['msg'] .= ': provided ['.$md5pass.'] vs db ['.$db_pass.']';
+            }
         }
 
         $this->_db->close();

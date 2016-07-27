@@ -1,10 +1,12 @@
 <?php
 
-// Zmienne globalne, ktore sa dostepne we wszystkich plikach PHP
+// Global variables used in all PHP files.
 $photon_catcher_host = 'localhost';
 $photon_catcher_user = 'iteleskop';
 $photon_catcher_pass = 'Vox0OhMa';
 $photon_catcher_db   = 'iteleskop';
+
+$photon_catcher_debug = false;
 
  function get_extdirect_api() {
 

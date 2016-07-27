@@ -5,6 +5,7 @@
   the Tasks view.
 - Autocenter/Dither/Defocus/Calibrate/Pinpoint/Upload columns are now
   hidden by default in the Tasks view.
+- Debug information for failed login is now omitted.
 
 0.5.0 (2016-05-03)
 - Database connection errors are now displayed (this solves a problem,
