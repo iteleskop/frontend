@@ -1,13 +1,13 @@
  iTeleskop ChangeLog
 ---------------------
-0.5.1 (not-released-yet)
+0.5.1 (2016-08-28)
 - Created/Activated/Performed columns are now shown by default in
   the Tasks view.
 - Autocenter/Dither/Defocus/Calibrate/Pinpoint/Upload columns are now
   hidden by default in the Tasks view.
 - Debug information for failed login is now omitted.
-- Task cloning implemented. You can click clone task to clone existing
-  task. Just click + icon in Tasks view for any task.
+- Task cloning implemented. You can make a copy of existing task with
+  a single click. Just click + icon in Tasks view for any task.
 
 0.5.0 (2016-05-03)
 - Database connection errors are now displayed (this solves a problem,

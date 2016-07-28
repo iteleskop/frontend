@@ -62,10 +62,10 @@ Ext.define('iTeleskop.view.main.AddTask', {
 
     id: 'addtask',
 
-    // Eskperyment z przewijaniem (autoScroll + height w pixelach wlacza scroll
-    // pionowy)
+    // Eksperiment with scrolling (autoScroll + height in pixels enables
+    // vertical scroll)
     autoScroll: true,
-    height: 900,
+    // height: 900,
 
     url: 'php/forms/add_task.php',
 
@@ -603,6 +603,7 @@ Ext.define('iTeleskop.view.main.AddTask', {
             handler: function() {
                 var form = this.up('form'); // get the form panel
                 if (form.isValid()) { // make sure the form contains valid data before submitting
+
                     form.submit({
                         success: function(form, action) {
                             Ext.Msg.alert('Success', action.result.msg);

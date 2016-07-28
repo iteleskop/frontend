@@ -80,7 +80,7 @@ Ext.define('iTeleskop.view.main.Tasks', {
                 icon: 'images/add.png',
                 tooltip: 'Clone this task',
                 handler: 'onCloneClick'
-            }, {
+            } /*, {
                 icon: 'images/cog_edit.png',
                 tooltip: 'Edit this task',
                 handler: 'onEditClick'
@@ -88,11 +88,11 @@ Ext.define('iTeleskop.view.main.Tasks', {
                 icon: 'images/delete.png',
                 tooltip: 'Delete this task',
                 handler: 'onDeleteClick'
-                /*handler: function(grid, rowIndex, colIndex) {
-                    var rec = grid.getStore().getAt(rowIndex);
-                    alert("Delete " + rec.get('task_id'));
-                }*/
-            }]
+                //handler: function(grid, rowIndex, colIndex) {
+                //   var rec = grid.getStore().getAt(rowIndex);
+                //  alert("Delete " + rec.get('task_id'));
+                }
+            }*/]
         },
 
         { text: 'State', dataIndex: 'state',
