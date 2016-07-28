@@ -29,16 +29,32 @@ class AddTask {
         return $_db;
     }
 
+    /// @todo: Depending on how it is called, we need to either:
+    /// 1) printf('{ "success": true, "msg": "%s" }', $txt) (if it's called from add_task.php)
+    /// 2) do:
+    ///    $answer = array();
+    ///    $answer['failure'] = true;
+    ///    $answer['msg'] = 'MySQL connection error: '.$this->error;
+    ///    return $answer; (if it's called from the connector using AddTask.cloneTask()
+
+    /// @return a string explaining what is wrong (or "" if everything is ok)
     function validate($data) {
         if (!isset($data) || !is_array($data)) {
-            $this->failure("Validation failed: passed data is not an array");
+            return $this->failure("Validation failed: passed data is not an array");
         }
 
         // @todo: implement real validation here
+
+        return "";
     }
 
     function quoted($data, $name, $comma) {
-        $txt = '"'.$data[$name].'"';
+        if (is_array($data)) {
+            $txt = '"'.$data[$name].'"';
+        }
+        if (is_object($data)) {
+            $txt = '"'.$data->$name.'"';
+        }
         if ($comma) {
             return $txt.", ";
         } else {
@@ -82,26 +98,35 @@ class AddTask {
 
         $_db = $this->_db;
 
-        $_result = $_db->query($q) or
-            $this->failure("<b>Błąd podłączenia do bazy</b><br/>".
-                           "Informacje debugowe: DB error=". $_db->error."<br/>".
-                           "DB connection error=". $_db->connect_error);
+        $_result = $_db->query($q);
+        if (!$_result) {
+            return $this->failure("<b>Database connection failure.</b><br/>".
+                                  "Debug info: DB error=". $_db->error."<br/>".
+                                  "DB connection error=". $_db->connect_error);
+        }
 
         $last_id = $_db->insert_id;
 
-        $txt = "Observation task added for object <b>".$data['object'].
+        $txt = "Observation task added for object <b>".$this->quoted($data, "object", false).
             "</b>, task id is <b>".$last_id."</b>";
 
-        $this->success($txt);
+        return $this->success($txt);
     }
 
     function success($txt) {
-        printf('{ "success": true, "msg": "%s" }', $txt);
+        //printf('{ "success": true, "msg": "%s" }', $txt);
+        $x = array();
+        $x['success'] = true;
+        $x['msg'] = $txt;
+        return $x;
     }
 
     function failure($txt) {
-        printf('{ "failure": true, "msg": "%s" }', $txt);
-        die();
+        // printf('{ "failure": true, "msg": "%s" }', $txt);
+        $x = array();
+        $x['failure'] = true;
+        $x['msg'] = $txt;
+        return $x;
     }
 
     function getParam($name) {
@@ -110,10 +135,10 @@ class AddTask {
             return;
         }
         if (!isset($_GET[$name])) {
-            $this->failure("Mandatory parameter missing: ".$name);
+            return $this->failure("Mandatory parameter missing: ".$name);
         }
         $this->data[$name] = $_GET[$name];
-        return;
+        return "";
     }
 
     function getBoolParam($name) {
@@ -171,7 +196,6 @@ class AddTask {
     }
 
     // Converts data to a single script. Useful mostly for debugging.
-    // Uzyteczne glownie w celach debugowych.
     function dataToText($x) {
         $str = "";
         foreach ($x as $key => $value) {
@@ -180,13 +204,25 @@ class AddTask {
         return $str;
     }
 
-    function cloneTask($x) {
-        $answer = array();
-        $answer['success'] = true;
-        $answer['msg'] = var_export($x, true);
-        return $answer;
+    function cloneTask($params) {
+        global $photon_catcher_debug;
 
-        /// @todo: Implement this for real.
+        $result = $this->validate($params);
+        if (strlen($result)) {
+            // Uh oh, something went wrong.
+            $answer = array();
+            $answer['failure'] = true;
+            $answer['msg'] = $error;
+            if ($photon_catcher_debug) {
+                $answer['msg'] .= ", params= ".var_export($params, true);
+            }
+            return $answer;
+        }
+
+        // return $this->success($this->dataToText($params));
+        // Insert returns the structure that represents the outcome
+        // The result is an array with either success or failure fields set.
+        return $this->insert($params);
     }
 };
 

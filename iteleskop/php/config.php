@@ -45,6 +45,38 @@ $photon_catcher_debug = false;
                     )
                 )
             ),
+        'AddTask' => array(
+            'methods' => array(
+                'cloneTask' => array(
+                    'params' => array (
+                        'user_id',
+                        'state',
+                        'object',
+                        'ra',
+                        'decl',
+                        'exposure',
+                        'descr',
+                        'filter',
+                        'binning',
+                        'guiding',
+                        'dither',
+                        'defocus',
+                        'calibrate',
+                        'solve',
+                        'min_alt',
+                        'max_sun_alt',
+                        'moon_distance',
+                        'max_moon_phase',
+                        'min_interval',
+                        'skip_before',
+                        'skip_after',
+                        'scope_id',
+                        'auto_center',
+                        'vphot'
+                        )
+                    )
+                )
+            ),
         'Login' => array(
             'methods' => array(
                 'verify' => array(

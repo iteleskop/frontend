@@ -96,7 +96,7 @@ class Login {
             $answer['ftp_login'] = $row['ftp_login'];
             $answer['ftp_pass'] = $row['ftp_pass'];
         } else {
-            // Nope, incorrect password. Buzz off!
+            // Nope, incorrect password. Sod off!
             $answer['failure'] = true;
             $answer['msg'] = 'Incorrect password';
             if ($photon_catcher_debug) {

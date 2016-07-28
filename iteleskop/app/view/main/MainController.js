@@ -96,6 +96,74 @@ Ext.define('iTeleskop.view.main.MainController', {
         }
     },
 
+    /// This method is called, when Clone icon in Tasks view is clicked.
+    onCloneClick: function(grid, rowIndex, colIndex) {
+
+        var rec = grid.getStore().getAt(rowIndex);
+
+        // Get the current date
+        var before = new Date();
+        var after = new Date();
+
+        after.setDate(before.getDate() + 30);
+
+        // Prepare all data for the new task
+        var data = {
+            "user_id": Ext.getStore('user').getAt(0).data.user_id,
+            "state": 1,
+            "object": rec.get('object'),
+            "scope_id": rec.get('scope_id'),
+            "ra": rec.get('ra'),
+            "decl": rec.get('decl'),
+            "exposure": rec.get('exposure'),
+            "descr": rec.get('descr'),
+            "filter": rec.get('filter'),
+            "binning": rec.get('binning'),
+            "guiding": rec.get('guiding'),
+            "dither": rec.get('dither'),
+            "defocus": rec.get('defocus'),
+            "calibrate": rec.get('calibrate'),
+            "solve": rec.get('solve'),
+            "min_alt": rec.get('min_alt'),
+            "max_sun_alt": rec.get('max_sun_alt'),
+            "moon_distance": rec.get('moon_distance'),
+            "max_moon_phase": rec.get('max_moon_phase'),
+            "min_interval": rec.get('min_interval'),
+            "skip_before": before,
+            "skip_after": after,
+            "comment": rec.get('comment'),
+            "auto_center": rec.get('auto_center'),
+            "vphot": rec.get('vphot')
+            // no task_id - will be set up automatically
+        };
+
+        AddTask.cloneTask(data, this.onCloneResult, this);
+    },
+
+    /// @brief A callback function after onCloneClick is executed
+    onCloneResult: function(result, event, success) {
+        if (result.hasOwnProperty('failure')) {
+            Ext.toast("Clone failed: " + result.msg);
+            return;
+        }
+
+        if (result.hasOwnProperty('success')) {
+            Ext.toast("Clone successful: " + result.msg);
+        }
+    },
+
+    // This method is called when Edit icon in Tasks view is clicked.
+    onEditClick: function(grid, rowIndex, colIndex) {
+        var rec = grid.getStore().getAt(rowIndex);
+        alert("onEditClick " + rec.get('task_id'));
+    },
+
+    // This method is called when Delete icon in Tasks view is clicked.
+    onDeleteClick: function (grid, rowIndex, colIndex) {
+        var rec = grid.getStore().getAt(rowIndex);
+        alert("onDeleteClick " + rec.get('task_id'));
+    },
+
     updateResult: function(result, event, success) {
         if (result.hasOwnProperty('failure')) {
             Ext.toast("Update failed: " + result.msg);

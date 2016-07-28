@@ -72,6 +72,29 @@ Ext.define('iTeleskop.view.main.Tasks', {
         { text: 'Task ID',  dataIndex: 'task_id', width: 70,
           renderer: function(value, metaData, record) { return this.tooltip(value, metaData, record); }
         },
+        {
+            text: 'Actions',
+            xtype:'actioncolumn',
+            width:80,
+            items: [{
+                icon: 'images/add.png',
+                tooltip: 'Clone this task',
+                handler: 'onCloneClick'
+            }, {
+                icon: 'images/cog_edit.png',
+                tooltip: 'Edit this task',
+                handler: 'onEditClick'
+            }, {
+                icon: 'images/delete.png',
+                tooltip: 'Delete this task',
+                handler: 'onDeleteClick'
+                /*handler: function(grid, rowIndex, colIndex) {
+                    var rec = grid.getStore().getAt(rowIndex);
+                    alert("Delete " + rec.get('task_id'));
+                }*/
+            }]
+        },
+
         { text: 'State', dataIndex: 'state',
           renderer: function(value, metaData) {
               var tip = "Available states:<br/>" +
@@ -155,8 +178,8 @@ Ext.define('iTeleskop.view.main.Tasks', {
                                      '@iteleskop.ddns.net/', value, '"');
               return '<a href="ftp'.concat(url, ' target="_blank">ftp</a> <a href="ftps', url, ' target="_blank">ftps</a>');
           }
-        }
-
+        },
+        { text: 'Scope ID', dataIndex: 'scope_id', hidden: true, hideable: true }
     ],
 
     listeners: {

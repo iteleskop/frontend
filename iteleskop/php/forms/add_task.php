@@ -14,9 +14,15 @@ $x = new AddTask();
 $data = $x->getData();
 
 // Check if the data is correct.
-$x->validate($data);
+$result = $x->validate($data);
+
+if (strlen($result)) {
+    printf(json_encode($result));
+}
 
 // Insert the data into DB.
-$x->insert($data);
+$result = $x->insert($data);
+
+printf(json_encode($result));
 
 ?>

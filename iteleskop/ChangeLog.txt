@@ -6,6 +6,8 @@
 - Autocenter/Dither/Defocus/Calibrate/Pinpoint/Upload columns are now
   hidden by default in the Tasks view.
 - Debug information for failed login is now omitted.
+- Task cloning implemented. You can click clone task to clone existing
+  task. Just click + icon in Tasks view for any task.
 
 0.5.0 (2016-05-03)
 - Database connection errors are now displayed (this solves a problem,
