@@ -37,15 +37,21 @@ class AddTask {
     ///    $answer['msg'] = 'MySQL connection error: '.$this->error;
     ///    return $answer; (if it's called from the connector using AddTask.cloneTask()
 
-    /// @return a string explaining what is wrong (or "" if everything is ok)
+    /// @return an array with parameters explaining what is wrong (or empty array if everything is ok)
     function validate($data) {
-        if (!isset($data) || !is_array($data)) {
+        if (!isset($data)) {
             return $this->failure("Validation failed: passed data is not an array");
         }
 
+        if (!isset($data->user_id)) {
+            return $this->failure("user_id not set");
+        }
+        if (!isset($data->object)) {
+            return $this->failure("object not set");
+        }
         // @todo: implement real validation here
 
-        return "";
+        return array();
     }
 
     function quoted($data, $name, $comma) {
@@ -208,15 +214,12 @@ class AddTask {
         global $photon_catcher_debug;
 
         $result = $this->validate($params);
-        if (strlen($result)) {
-            // Uh oh, something went wrong.
-            $answer = array();
-            $answer['failure'] = true;
-            $answer['msg'] = $error;
+        if (count($result)) {
+            $result['failure'] = true;
             if ($photon_catcher_debug) {
-                $answer['msg'] .= ", params= ".var_export($params, true);
+                $result['msg'] .= ", params= ".var_export($params, true);
             }
-            return $answer;
+            return $result;
         }
 
         // return $this->success($this->dataToText($params));
