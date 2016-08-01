@@ -186,7 +186,16 @@ Ext.define('iTeleskop.view.main.Tasks', {
         itemdblclick: 'onTaskClick',
 
         beforerender: function(component, eOpts) {
+
+            // Load the tasks information from DB
             Ext.getStore('tasks').load();
+
+            // Set the default filter (show user's tasks only)
+            var user_login = Ext.getStore('user').getAt(0).data.login;
+            var filter = [
+                { property: 'login', value: user_login }
+            ];
+            Ext.getStore('tasks').filter(filter);
         }
     },
 
@@ -218,15 +227,6 @@ Ext.define('iTeleskop.view.main.Tasks', {
         }
 
         Ext.getStore('tasks').filter(filter);
-
-        /*
-                    if (this.pressed) {
-                        Ext.getStore('tasks').filter('login', user_login);
-                        this.setText('Your tasks only (yes)');
-                    } else {
-                        Ext.getStore('tasks').clearFilter();
-                        this.setText('Your tasks only (no)');
-                } */
     },
 
     header: {
@@ -235,16 +235,17 @@ Ext.define('iTeleskop.view.main.Tasks', {
             {
                 xtype: 'button',
                 id: 'my_tasks_filter',
-                text: 'Your tasks only (no)',
+                text: 'My tasks',
                 margins: '10 10 10 10',
                 padding: '10 10 10 10',
                 enableToggle: true,
                 stateful: true,
+                pressed: true,
                 handler: function() {
                     if (this.pressed) {
-                        this.setText('Your tasks only (yes)');
+                        this.setText('My tasks');
                     } else {
-                        this.setText('Your tasks only (no)');
+                        this.setText('All users\' tasks');
                     }
                     this.up().up().filterChanged();
                 },
