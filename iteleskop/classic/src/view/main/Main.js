@@ -2,8 +2,6 @@
  * This class is the main view for the application. It is specified in app.js as the
  * "mainView" property. That setting automatically applies the "viewport"
  * plugin causing this view to become the body element (i.e., the viewport).
- *
- * TODO - Replace this content of this view to suite the needs of your application.
  */
 Ext.define('iTeleskop.view.main.Main', {
 
@@ -24,6 +22,7 @@ Ext.define('iTeleskop.view.main.Main', {
         'iTeleskop.view.main.Users',
         'iTeleskop.view.main.Tasks',
         'iTeleskop.view.main.AddTask',
+        'iTeleskop.view.main.EditTask',
         'iTeleskop.view.main.Objects',
         'iTeleskop.view.main.UserPreferences'
 
@@ -106,12 +105,13 @@ Ext.define('iTeleskop.view.main.Main', {
     items: [
     {
         title: 'Tasks',
-        iconCls: 'fa-calendar',
+        iconCls: 'fa-camera',
         items: [{
             xtype: 'tasks'
         }],
         layout: 'fit',
-        autoScroll: true
+        autoScroll: true,
+        itemId: 'tasks-tab'
     },
     {
         // to jest panel z dodawaniem nowych zadan. Definicja samego panelu znajduje
@@ -123,6 +123,17 @@ Ext.define('iTeleskop.view.main.Main', {
         }],
         layout: 'fit',
         autoScroll: true
+    },
+    {
+        title: 'Edit task',
+        iconCls: 'fa-edit',
+        items: [{
+            xtype: 'edittask'
+        }],
+        layout: 'fit',
+        autoScroll: true,
+        hidden: true,
+        itemId: 'edittask-tab'
     },
     {
         title: 'Users',
@@ -152,13 +163,6 @@ Ext.define('iTeleskop.view.main.Main', {
                 'Queuing management: <b>in development</b><br/>',
                 'Telescope management: <b>in development</b><br/>',
                 'Data server: <b>Offline (not set up yet)</b>')
-        }
-    },
-    {
-        title: 'Results',
-        iconCls: 'fa-camera',
-        bind: {
-            html: '{loremIpsum}'
         }
     },
     {

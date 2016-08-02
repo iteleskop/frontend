@@ -10,11 +10,11 @@ Ext.define('iTeleskop.view.main.Main', {
     xtype: 'app-main',
 
     requires: [
-        'Ext.MessageBox',
+        'Ext.MessageBox'
 
-        'iTeleskop.view.main.MainController',
-        'iTeleskop.view.main.MainModel',
-        'iTeleskop.view.main.Users'
+        //'iTeleskop.view.main.MainController',
+        //'iTeleskop.view.main.MainModel',
+        //'iTeleskop.view.main.Users'
     ],
 
     controller: 'main',

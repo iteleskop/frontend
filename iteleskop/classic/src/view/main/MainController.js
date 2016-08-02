@@ -155,7 +155,11 @@ Ext.define('iTeleskop.view.main.MainController', {
     // This method is called when Edit icon in Tasks view is clicked.
     onEditClick: function(grid, rowIndex, colIndex) {
         var rec = grid.getStore().getAt(rowIndex);
-        alert("onEditClick " + rec.get('task_id'));
+
+        var edit = grid.up('app-main').child('#edittask-tab');
+        edit.tab.show();
+        grid.up('app-main').setActiveTab(edit);
+        edit.down("edittask").loadRecord(rec);
     },
 
     // This method is called when Delete icon in Tasks view is clicked.
