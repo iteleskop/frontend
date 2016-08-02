@@ -160,6 +160,7 @@ Ext.define('iTeleskop.view.main.MainController', {
         edit.tab.show();
         grid.up('app-main').setActiveTab(edit);
         edit.down("edittask").loadRecord(rec);
+        edit.down("edittask").setTitle("Editing task ".concat(rec.data.task_id));
     },
 
     // This method is called when Delete icon in Tasks view is clicked.
