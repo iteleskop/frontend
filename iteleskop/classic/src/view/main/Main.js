@@ -136,13 +136,6 @@ Ext.define('iTeleskop.view.main.Main', {
         itemId: 'edittask-tab'
     },
     {
-        title: 'Users',
-        iconCls: 'fa-users',
-        items: [{
-            xtype: 'users'
-        }]
-    },
-    {
         title: 'Objects',
         iconCls: 'fa-binoculars',
         items: [{
@@ -150,6 +143,13 @@ Ext.define('iTeleskop.view.main.Main', {
         }],
         layout: 'fit',
         autoScroll: true
+    },
+    {
+        title: 'Users',
+        iconCls: 'fa-users',
+        items: [{
+            xtype: 'users'
+        }]
     },
     {
         title: 'Status',
