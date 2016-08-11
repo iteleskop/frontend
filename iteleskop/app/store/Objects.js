@@ -6,8 +6,11 @@ Ext.define('iTeleskop.store.Objects', {
     alias: 'store.objects',
 
     sorters: [{
-        property: 'object_id',
-        direction: 'ASC'
+        sorterFn: function (o1, o2) {
+            rank1 = parseInt(o1.get('object_id'));
+            rank2 = parseInt(o2.get('object_id'));
+            return rank1 < rank2 ? -1 : 1;
+        }
     }],
 
     fields: [
