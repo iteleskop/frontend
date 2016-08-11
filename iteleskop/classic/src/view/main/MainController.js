@@ -156,6 +156,20 @@ Ext.define('iTeleskop.view.main.MainController', {
     onEditClick: function(grid, rowIndex, colIndex) {
         var rec = grid.getStore().getAt(rowIndex);
 
+        var user_data = Ext.getStore('user').getAt(0).data;
+
+        if (rec.data.user_id != user_data.user_id) {
+            // Nope, you can't edit someone elses task.
+            Ext.toast("This is not your task! You can't edit it");
+            return;
+        }
+
+        if (rec.data.state > 3) {
+            Ext.toast("You can't edit task in state ".concat(rec.data.state));
+            return;
+        }
+
+        // All is good, user is editing its own task.
         var edit = grid.up('app-main').child('#edittask-tab');
         edit.tab.show();
         grid.up('app-main').setActiveTab(edit);

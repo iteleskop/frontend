@@ -1,8 +1,11 @@
  iTeleskop ChangeLog
 ---------------------
-0.5.2 (not-released-yet)
+0.6.0 (2016-08-11)
 - Only user's tasks (not everyone's) are displayed by default
   in Tasks view.
+- Obsolete Results tab removed
+- Edit task panel implemented (still a bit experimental, use with
+  caution)
 
 0.5.1 (2016-07-28)
 - Created/Activated/Performed columns are now shown by default in

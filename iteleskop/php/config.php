@@ -45,10 +45,10 @@ $photon_catcher_debug = false;
                     )
                 )
             ),
-        'AddTask' => array(
+        'Task' => array(
             'methods' => array(
                 'cloneTask' => array(
-                    'params' => array (
+                    'params' => array(
                         'user_id',
                         'state',
                         'object',
@@ -73,6 +73,40 @@ $photon_catcher_debug = false;
                         'scope_id',
                         'auto_center',
                         'vphot'
+                        )
+                    ),
+                'edit' => array(
+                    'params' => array (
+                        'user',
+                        'user_id',
+                        'md5pass',
+                        'task_id',
+                        'object',
+                        'ra',
+                        'decl',
+                        'exposure',
+                        'state',
+                        'descr',
+                        'comment',
+                        'filter',
+                        'binning',
+                        'guiding',
+                        'dither',
+                        'defocus',
+                        'calibrate',
+                        'solve',
+                        'vphot',
+                        
+                        'min_alt',
+                        'max_sun_alt',
+                        'moon_distance',
+                        'max_moon_phase',
+                        'min_interval',
+                        'skip_before',
+                        'skip_after',
+
+                        'scope_id',
+                        'auto_center'
                         )
                     )
                 )

@@ -18,11 +18,8 @@ Ext.define('iTeleskop.view.login.LoginController', {
         this.doLogin();
     },
 
-    // Ta metoda jest wolana, kiedy user wcisnal ENTER albo kliknal login
+    // This method is called when the user pressed ENTER or clicked 'login' button
     doLogin: function() {
-        // This would be the ideal location to verify the user's credentials via
-        // a server-side lookup. We'll just move forward for the sake of this example.
-
         var user = this.lookupReference('login_user').getValue();
         var pwd = this.lookupReference('login_pass').getValue();
 
@@ -56,17 +53,25 @@ Ext.define('iTeleskop.view.login.LoginController', {
             Ext.toast("Logged in, your id is " + result.user_id + ", welcome!");
 
             this.saveUserData(result,
-                         this.lookupReference('login_user').getValue());
+                              this.lookupReference('login_user').getValue());
+            /// @todo: why do we pass 2 parameters here, if saveUserData takes
+            /// only one?
 
-            // Zakoncz logowanie z sukcesem.
+            // Login successful.
             this.onLoginSuccess();
         }
 
     },
 
-    // Zapisuje dane uzytkownika w magazynie 'user'
+    // Saves user's data in 'user' store.
+    // Userdata is a structure returned by Login.verify() in src/classes/Login.php
     saveUserData: function(userdata) {
         var x = Ext.getStore('user');
+
+        // userdata does not contain user's password, so we need to store it.
+        var pwd = this.lookupReference('login_pass').getValue();
+        userdata.pass = pwd;
+
         x.add(userdata);
     },
 

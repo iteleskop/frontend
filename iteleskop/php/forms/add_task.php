@@ -2,10 +2,10 @@
 
 require_once("../config.php");
 
-require_once("../classes/AddTask.php");
+require_once("../classes/Task.php");
 
-// Create new instance of the AddTask class.
-$x = new AddTask();
+// Create new instance of the Task class.
+$x = new Task();
 
 // Get the data from POST or GET. If there are any mandatory fields missing,
 // failure() will be called with specified parameters and the script will
@@ -14,7 +14,7 @@ $x = new AddTask();
 $data = $x->getData();
 
 // Check if the data is correct.
-$result = $x->validate($data);
+$result = $x->validateNewTask($data);
 
 if (strlen($result)) {
     printf(json_encode($result));

@@ -80,11 +80,11 @@ Ext.define('iTeleskop.view.main.Tasks', {
                 icon: 'images/add.png',
                 tooltip: 'Clone this task',
                 handler: 'onCloneClick'
-            } /*, {
+            },  {
                 icon: 'images/cog_edit.png',
                 tooltip: 'Edit this task',
                 handler: 'onEditClick'
-            }, {
+            } /*, {
                 icon: 'images/delete.png',
                 tooltip: 'Delete this task',
                 handler: 'onDeleteClick'

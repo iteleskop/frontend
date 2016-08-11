@@ -9,34 +9,11 @@ Sencha zainstalowana w ~/devel/sencha-cmd/sencha
 Dobry opis katalogow, co gdzie jest:
 https://docs.sencha.com/cmd/5.x/extjs/cmd_app.html
 
-
 Lista stron:
 classic/src/view/main/Main.js
 
-
 Fajne extension do wskazywania naraz daty i godziny DateTimePicker:
 https://www.sencha.com/forum/showthread.php?288858-DateTime-Field-Extension/
-
-Problemy do rozwiazania:
-
-1. Jak wstawic panel z logowaniem?
-Znalazłem tutorial pokazujący, jak zrobić proste logowanie:
-https://docs.sencha.com/extjs/5.1/getting_started/login_app.html
-
-
-  Po zmianie w app.js z:
-
-    mainView: 'iTeleskop.view.main.Main'
-
-  na:
-
-  launch: function() {
-      Ext.widget('app-main'); // app-main to alias do iTeleskop.view.main.Main
-  },
-
-Zaczyna wywalać taki oto błąd:
-[E] Ext.data.proxy.Direct.resolveMethods(): Cannot resolve directFn QueryTasks.getResults
-
 
 Kolejnosc uruchamiania metod:
 Application.js/launch
@@ -50,3 +27,7 @@ event: login
 
 Ctrl.onLoginSuccess w iTeleskop.controller.Ctrl
 Ctrl.showUI
+
+TODO:
+ - przeniesc objects przed users
+ - w katalogu objects na dexterze mam 3x NGC5463 (czemu?)

@@ -85,6 +85,14 @@ Ext.define('iTeleskop.view.main.Task', {
             labelWidth: 300
         },
         {
+            // This fields is set only for EditTask form. It is set in
+            // MainController::onEditClick.
+            name: 'task_id',
+            xtype: 'hidden',
+            fieldLabel:'Task ID',
+            readOnly: true
+        },
+        {
             // Object selection. It is now currently selected from the Objects store.
             // It can be specified by hand as well.
             fieldLabel: 'Target Name',
