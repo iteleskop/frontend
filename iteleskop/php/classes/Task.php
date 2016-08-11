@@ -42,10 +42,10 @@ class Task {
             return $this->failure("Validation failed: passed data is not an array");
         }
 
-        if (!isset($data->user_id)) {
-            return $this->failure("user_id not set");
+        if (!$this->exists($data, "user_id")) {
+            return $this->failure("user_id not set.");
         }
-        if (!isset($data->object)) {
+        if (!$this->exists($data, "object")) {
             return $this->failure("object not set");
         }
         // @todo: implement real validation here
@@ -265,7 +265,23 @@ class Task {
     }
 
     function get($params, $name) {
-        return $params->$name;
+        if (is_array($data)) {
+            return $params[$name];
+        }
+        if (is_object($data)) {
+            return $params->$name;
+        }
+        return "";
+    }
+
+    function exists($params, $name) {
+        if (is_array($params)) {
+            return array_key_exists($name, $params);
+        }
+        if (is_object($params)) {
+            return isset($params->$name);
+        }
+        return false;
     }
 
     function edit($params) {

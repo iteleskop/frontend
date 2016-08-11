@@ -16,8 +16,9 @@ $data = $x->getData();
 // Check if the data is correct.
 $result = $x->validateNewTask($data);
 
-if (strlen($result)) {
+if (count($result)) {
     printf(json_encode($result));
+    return;
 }
 
 // Insert the data into DB.

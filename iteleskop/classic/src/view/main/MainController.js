@@ -137,7 +137,7 @@ Ext.define('iTeleskop.view.main.MainController', {
             // no task_id - will be set up automatically
         };
 
-        AddTask.cloneTask(data, this.onCloneResult, this);
+        Task.cloneTask(data, this.onCloneResult, this);
     },
 
     /// @brief A callback function after onCloneClick is executed
