@@ -122,6 +122,7 @@ Ext.define('iTeleskop.view.main.Main', {
             xtype: 'addtask'
         }],
         layout: 'fit',
+        itemId: 'addtask-tab',
         autoScroll: true
     },
     {

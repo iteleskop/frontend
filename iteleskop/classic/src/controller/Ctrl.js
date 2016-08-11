@@ -28,7 +28,6 @@ Ext.define('iTeleskop.controller.Ctrl', {
     },
 
     onLoginSuccess: function (loginController, loginManager) {
-        // alert('Ctrl.onLoginSuccess');
         this.login.hide();
         this.loginManager = loginManager;
         this.showUI();

@@ -52,6 +52,8 @@ Ext.define('iTeleskop.view.main.Objects', {
             addtask.setTarget(record);
 
             // @todo: Switch to new task panel
+            var panel = this.up('app-main').child('#addtask-tab');
+            this.up('app-main').setActiveTab(panel);
         }
     }
 });

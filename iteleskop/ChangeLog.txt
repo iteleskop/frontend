@@ -1,5 +1,8 @@
  iTeleskop ChangeLog
 ---------------------
+0.6.1 (not-released-yet)
+- Clicking on an object in Objects list now moves to the new task tab.
+
 0.6.0 (2016-08-11)
 - Only user's tasks (not everyone's) are displayed by default
   in Tasks view.

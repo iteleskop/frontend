@@ -50,7 +50,7 @@ Ext.define('iTeleskop.view.main.EditTask', {
                         "skip_after": form.getForm().findField('skip_after').getValue(),
 
                         "scope_id": form.getForm().findField('scope_id').getValue(),
-                        "auto_center": form.getForm().findField('auto_center').getValue(),
+                        "auto_center": form.getForm().findField('auto_center').getValue()
                     };
 
                     Task.edit(params, this.editCallback, this);

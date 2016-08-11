@@ -30,7 +30,7 @@ Ext.define('iTeleskop.Application', {
         'iTeleskop.view.main.Main'
     ],
 
-    // Lista uzywanych magazynow informacji
+    // List of currently used data stores
     stores: [
         'Tasks',
         'Users',
@@ -41,10 +41,6 @@ Ext.define('iTeleskop.Application', {
     launch: function() {
         // Interfejs do pobierania danych server-side
         Ext.direct.Manager.addProvider(Ext.REMOTING_API);
-
-        // Mozna to odkomentowac w celu otrzymania potwierdzenia, ze launch() zostal
-        // wywolany.
-        // alert('Application.js/launch');
     },
 
     onAppUpdate: function () {
