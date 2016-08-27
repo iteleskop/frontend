@@ -1,8 +1,6 @@
 /**
  * This class is the controller for the main view for the application. It is specified as
  * the "controller" of the Main view class.
- *
- * TODO - Replace this content of this view to suite the needs of your application.
  */
 Ext.define('iTeleskop.view.main.MainController', {
     extend: 'Ext.app.ViewController',
@@ -119,7 +117,7 @@ Ext.define('iTeleskop.view.main.MainController', {
             "descr": rec.get('descr'),
             "filter": rec.get('filter'),
             "binning": rec.get('binning'),
-            "guiding": rec.get('guiding'),
+            "guiding": 0, // rec.get('guiding'),
             "dither": rec.get('dither'),
             "defocus": rec.get('defocus'),
             "calibrate": rec.get('calibrate'),
