@@ -1,5 +1,8 @@
  iTeleskop ChangeLog
 ---------------------
+0.6.3 (2016-10-07)
+- Users list is no longer preloaded.
+
 0.6.2 (2016-10-04)
 - It is possible to filter tasks by target name.
 - Number of tasks displayed has been decreased to 10000.

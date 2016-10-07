@@ -12,7 +12,5 @@ Ext.define('iTeleskop.store.Users', {
     proxy: {
         type: 'direct',
         directFn: 'QueryUsers.getResults'
-    },
-
-    autoLoad: true
+    }
 });

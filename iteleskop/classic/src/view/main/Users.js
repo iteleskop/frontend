@@ -51,5 +51,12 @@ Ext.define('iTeleskop.view.main.Users', {
           }
         },
         { text: 'AAVSO ID', dataIndex: 'aavso_id' }
-    ]
+    ],
+
+    listeners: {
+        beforerender: function(component, eOpts) {
+            Ext.getStore('users').load();
+        }
+    }
+
 });
