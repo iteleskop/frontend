@@ -209,32 +209,77 @@ Ext.define('iTeleskop.view.main.Tasks', {
         }],  */
 
     filterChanged: function() {
-        var btn1 = Ext.getCmp('my_tasks_filter');
-        var btn2 = Ext.getCmp('task_state_filter');
+        var btn1 = Ext.getCmp('tasks_my_filter');
+        var btn2 = Ext.getCmp('tasks_state_filter');
+        var btn3 = Ext.getCmp('tasks_name_filter');
+        var btn4 = Ext.getCmp('tasks_stats');
+
         var user_login = Ext.getStore('user').getAt(0).data.login;
 
-        var filter = [
-        ];
+        var myFilter = new Ext.util.Filter({
+            filterFn: function(item) {
+                if (this.hasOwnProperty('login') && (this.login != item.data.login)) {
+                    return false;
+                }
+
+                if (this.hasOwnProperty('state') && (this.state != item.data.state)) {
+                    return false;
+                }
+
+                if (this.hasOwnProperty('target') && (this.target.length > 0) ) {
+                    if (item.data.object.indexOf(this.target) == -1)
+                        return false;
+                }
+
+                return true;
+            }
+        });
 
         Ext.getStore('tasks').clearFilter();
 
         if (btn1.pressed) {
-            filter.push({ property: 'login', value: user_login });
+            myFilter.login = user_login;
         }
 
         if (btn2.getValue() != 'all') {
-            filter.push({ property: 'state', value: btn2.getValue() });
+            myFilter.state = btn2.getValue();
         }
 
-        Ext.getStore('tasks').filter(filter);
+        myFilter.target = btn3.getValue();
+
+        Ext.getStore('tasks').filter(myFilter);
+
+        btn4.setValue(Ext.getStore('tasks').getCount() + " of "
+                      + Ext.getStore('tasks').getTotalCount());
     },
 
     header: {
         titlePosition: 0,
         items: [
             {
+                xtype: 'textfield',
+                fieldLabel: 'Number of tasks',
+                disabled: true,
+                id: 'tasks_stats'
+            },
+            {
+                xtype: 'textfield',
+                id: 'tasks_name_filter',
+                fieldLabel: 'Target:',
+                labelWidth: 50,
+                margins: '10 10 10 10',
+                padding: '10 10 10 10',
+                listeners: {
+                    specialkey: function(f,e){
+                        if (e.getKey() == e.ENTER) {
+                            this.up().up().filterChanged();
+                        }
+                    }
+                }
+            },
+            {
                 xtype: 'button',
-                id: 'my_tasks_filter',
+                id: 'tasks_my_filter',
                 text: 'My tasks',
                 margins: '10 10 10 10',
                 padding: '10 10 10 10',
@@ -250,6 +295,7 @@ Ext.define('iTeleskop.view.main.Tasks', {
                     this.up().up().filterChanged();
                 },
 
+                // @todo: WTF is this shit? Why do I need this?
                 getState: function() {
                     if (this.enableToggle == true) {
                         var config = {};
@@ -266,7 +312,7 @@ Ext.define('iTeleskop.view.main.Tasks', {
             {
                 xtype: 'combobox',
                 valueField: 'filter',
-                id: 'task_state_filter',
+                id: 'tasks_state_filter',
                 displayField: 'text',
                 queryMode: 'local',
                 value: 'all',

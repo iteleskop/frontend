@@ -38,7 +38,7 @@
             "min_alt, max_sun_alt, moon_distance, max_moon_phase, ".
             "min_interval, skip_before, skip_after, ".
             "comment, state, created, activated, performed, imagename ".
-            "FROM tasks, users WHERE tasks.user_id = users.user_id ORDER BY task_id DESC");
+            "FROM tasks, users WHERE tasks.user_id = users.user_id ORDER BY task_id DESC LIMIT 10000");
         if (!$_result) {
             return $this->failure("MySQL error:". $_db->error);
         }

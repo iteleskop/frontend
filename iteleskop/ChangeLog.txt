@@ -1,5 +1,9 @@
  iTeleskop ChangeLog
 ---------------------
+0.6.2 (2016-10-04)
+- It is possible to filter tasks by target name.
+- Number of tasks displayed has been decreased to 10000.
+
 0.6.1 (2016-08-26)
 - Clicking on an object in Objects list now moves to the new task tab.
 - When editing or cloning existing tasks, the Guiding field is set to 0.
