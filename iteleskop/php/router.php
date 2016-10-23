@@ -59,8 +59,7 @@
 
         if (isset($mdef['len'])) {
             $params = isset($cdata->data) && is_array($cdata->data) ? $cdata->data : array();
-        }
- else {
+        } else {
             $params = array($cdata->data);
         }
 
@@ -85,8 +84,7 @@
     foreach($data as $d){
         $response[] = doRpc($d);
     }
- }
- else{
+ } else {
     $response = doRpc($data);
  }
 
@@ -94,8 +92,7 @@
     echo '<html><body><textarea>';
     echo json_encode($response);
     echo '</textarea></body></html>';
- }
- else{
+ } else {
     echo json_encode($response);
  }
 
