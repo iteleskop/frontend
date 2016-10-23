@@ -62,7 +62,8 @@ Ext.define('iTeleskop.view.main.Task', {
     // height: 900,
 
     requires: [
-        'iTeleskop.store.Objects'
+        'iTeleskop.store.Objects',
+        'Ext.ux.DateTimeField'
     ],
 
     layout: {
@@ -579,21 +580,36 @@ Ext.define('iTeleskop.view.main.Task', {
         },
 
         {
-            fieldLabel: 'Do not observe before (y-m-d):',
-            labelWidth: 300,
-            //xtype: 'datetimefield',
-            //format: 'Y-m-d H:i',
-            xtype: 'datefield',
-            format: 'Y-m-d',
+            xtype: 'datetimefield',
             name: 'skip_before',
-            value: new Date()
+            labelWidth: 300,
+
+            fieldLabel : 'Do not observe before',
+            format : 'Y-m-d H:i',
+            // Don't need to set the date here.
+            // value : new Date(),
+
+            // minValue: '01/12/2015 04:00 AM',
+            // maxValue: '31/12/2016 05:30 PM',
+            todayText: 'Select Current Time',
+            hourText: 'H',
+            minuteText: 'M',
+            width: 475
         },
         {
-            fieldLabel: 'Do not observe after (y-m-d)',
+            fieldLabel: 'Do not observe after',
             labelWidth: 300,
-            xtype: 'datefield',
-            format: 'Y-m-d',
-            name: 'skip_after'
+            xtype: 'datetimefield',
+            name: 'skip_after',
+            format : 'Y-m-d H:i',
+            value : new Date(),
+            // minValue: '01/12/2015 04:00 AM',
+            // maxValue: '31/12/2016 05:30 PM',
+            todayText: 'Select Current Time',
+            hourText: 'H',
+            minuteText: 'M',
+            width: 475
+
         }
     ], // koniec items, czyli obiektow znadujacych sie w tej formie
 

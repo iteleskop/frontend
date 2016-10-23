@@ -318,10 +318,8 @@ class Task {
             ." max_moon_phase=".$this->quoted($params, "max_moon_phase", true)
             ." min_interval=".$this->quoted($params, "min_interval", true)
 
-            /// @todo: skip_before and skip_after dates are not set up in the form
-            /// properly. Don't know why.
-            //." skip_before=".$this->quoted($params, "skip_before", true)
-            //." skip_after=".$this->quoted($params, "skip_after", true)
+            ." skip_before=".$this->quoted($params, "skip_before", true)
+            ." skip_after=".$this->quoted($params, "skip_after", true)
 
             ." scope_id=".$this->quoted($params, "scope_id", true)
             ." auto_center=".$this->quoted($params, "auto_center", false)
