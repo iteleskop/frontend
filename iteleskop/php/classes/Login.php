@@ -16,6 +16,8 @@ class Login {
 
     public $error;
 
+    public $log_file;
+
     public function __construct() {
         global $photon_catcher_host;
         global $photon_catcher_user;
@@ -37,6 +39,12 @@ class Login {
         return $_db;
     }
 
+    public function log($txt) {
+        $filename = "/domains/iteleskop.org/public_html/webpanel/php/login-attempts.txt";
+        $prefix = date('[Y-m-d H:i:s]');
+        file_put_contents($filename, $prefix . " " . $txt."\n", FILE_APPEND);
+    }
+
     public function verify($params) {
         global $photon_catcher_debug;
 
@@ -48,6 +56,9 @@ class Login {
         if (strlen($this->error)) {
             $answer['failure'] = true;
             $answer['msg'] = 'MySQL connection error: '.$this->error;
+            if ($photon_catcher_debug) {
+                $this->log($answer['msg']);
+            }
             return $answer;
         }
 
@@ -66,6 +77,9 @@ class Login {
             // give the user some clue.
             $answer['failure'] = true;
             $answer['msg'] = 'MySQL error: '.$_db->error;
+            if ($photon_catcher_debug) {
+                $this->log($answer['msg']);
+            }
             return $answer;
         }
 
@@ -73,6 +87,9 @@ class Login {
             // Query returned 0 rows, so the user specified wrong login.
             $answer['failure'] = true;
             $answer['msg'] = 'No user with such a login: ' . $user;
+            if ($photon_catcher_debug) {
+                $this->log($answer['msg']);
+            }
             return $answer;
         }
 
@@ -95,6 +112,10 @@ class Login {
             $answer['aavso_id'] = $row['aavso_id'];
             $answer['ftp_login'] = $row['ftp_login'];
             $answer['ftp_pass'] = $row['ftp_pass'];
+            if ($photon_catcher_debug) {
+                $this->log("success, logging in user: login=" . $answer['login']
+                           . ", user_id=" . $answer['user_id']);
+            }
         } else {
             // Nope, incorrect password. Sod off!
             $answer['failure'] = true;

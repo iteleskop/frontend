@@ -1,5 +1,8 @@
  iTeleskop ChangeLog
 ---------------------
+0.6.5 (2016-12-16)
+- Additional debugging messages added around login.
+
 0.6.4 (2016-10-23)
 - Time constraints are now defined with minute precision
   (skip before and skip after are now using Y-m-D H:i format rather

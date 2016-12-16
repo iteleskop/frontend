@@ -23,6 +23,9 @@ Ext.define('iTeleskop.view.login.LoginController', {
         var user = this.lookupReference('login_user').getValue();
         var pwd = this.lookupReference('login_pass').getValue();
 
+        Ext.toast("1. Sending login " + user + ", password is " + pwd.length
+                  + " bytes long");
+
         var data = {
             "user": user,
             "md5pass": md5(pwd)
@@ -41,16 +44,18 @@ Ext.define('iTeleskop.view.login.LoginController', {
     // { 'failure': true, msg: '...' }
     verifyResult: function(result, event, success) {
 
+        Ext.toast("2. Received login response: result=" + result);
+
         // Jezeli w odpowiedzi jest pole failure, to logowanie sie
         // nie udalo. Wyswietl zalaczony komunikat i na tym koniec
         // przetwarzania.
         if (result.hasOwnProperty('failure')) {
-            Ext.toast("Login error: " + result.msg);
+            Ext.toast("3. Login error: " + result.msg);
             return;
         }
 
         if (result.hasOwnProperty('success')) {
-            Ext.toast("Logged in, your id is " + result.user_id + ", welcome!");
+            Ext.toast("3. Logged in, your id is " + result.user_id + ", welcome!");
 
             this.saveUserData(result,
                               this.lookupReference('login_user').getValue());

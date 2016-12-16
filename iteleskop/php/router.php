@@ -63,7 +63,9 @@
             $params = array($cdata->data);
         }
 
-        array_push($params, $cdata->metadata);
+        if (property_exists($cdata, "metadata")) {
+                array_push($params, $cdata->metadata);
+        }
 
         $r['result'] = call_user_func_array(array($o, $method), $params);
     }
