@@ -1,5 +1,8 @@
  iTeleskop ChangeLog
 ---------------------
+0.6.6 (2016-12-23)
+- An attempt to work around the web login issue.
+
 0.6.5 (2016-12-16)
 - Additional debugging messages added around login.
 

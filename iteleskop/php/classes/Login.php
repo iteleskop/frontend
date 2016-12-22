@@ -103,8 +103,8 @@ class Login {
             $answer['success'] = true;
             $answer['user_id'] = $row['user_id'];
             $answer['login'] = $row['login'];
-            $answer['firstname'] = $row['firstname'];
-            $answer['lastname'] = $row['lastname'];
+            $answer['firstname'] = 'disabled'; // $row['firstname'];
+            $answer['lastname'] = 'disabled for testng'; // $row['lastname'];
             $answer['share'] = $row['share'];
             $answer['phone'] = $row['phone'];
             $answer['email'] = $row['email'];

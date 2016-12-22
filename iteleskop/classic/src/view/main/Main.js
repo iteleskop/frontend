@@ -55,7 +55,7 @@ Ext.define('iTeleskop.view.main.Main', {
             bind: {
                 html: "<div align='center' style='font-size: 50%'>".concat(
                     "<img src='logo-small.png' title='iTeleskop logo'/><br/>",
-                    "<a href='ChangeLog.txt' target='_blank'>0.6.5</a>, ",
+                    "<a href='ChangeLog.txt' target='_blank'>0.6.6</a>, ",
                     "<a href='https://www.sencha.com/products/extjs/'>Ext JS (",
                     Ext.getVersion().version,
                     ')</a> ',
