@@ -34,7 +34,7 @@ Ext.define('iTeleskop.view.main.EditTask', {
                         "comment": form.getForm().findField('comment').getValue(),
                         "filter": form.getForm().findField('filter').getValue(),
                         "binning": form.getForm().findField('binning').getValue(),
-                        "guiding": false, // form.getForm().findField('guiding').getValue(),
+                        "guiding": form.getForm().findField('guiding').getValue(),
                         "dither": form.getForm().findField('dither').getValue(),
                         "defocus": form.getForm().findField('defocus').getValue(),
                         "calibrate": form.getForm().findField('calibrate').getValue(),

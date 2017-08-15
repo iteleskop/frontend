@@ -470,8 +470,8 @@ Ext.define('iTeleskop.view.main.Task', {
         },
         {
             fieldLabel: 'Guiding',
-            // xtype: 'checkbox',
-            xtype: 'hidden',
+            xtype: 'checkbox',
+            //xtype: 'hidden',
             name: 'guiding',
             labelWidth: 300,
             checked: false

@@ -1,5 +1,10 @@
- iTeleskop ChangeLog
----------------------
+ iTeleskop Web Interface ChangeLog
+-----------------------------------
+
+0.6.7 (2017-08-15)
+- Added guiding parameter.
+- Debug login info removed.
+
 0.6.6 (2016-12-23)
 - An attempt to work around the web login issue.
 
