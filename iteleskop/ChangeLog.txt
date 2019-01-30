@@ -1,6 +1,9 @@
  iTeleskop Web Interface ChangeLog
 -----------------------------------
 
+0.6.8 (2019-01-30)
+- Cloned tasks now retain guiding flag.
+
 0.6.7 (2017-08-15)
 - Added guiding parameter.
 - Debug login info removed.

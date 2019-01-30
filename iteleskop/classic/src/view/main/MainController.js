@@ -117,7 +117,7 @@ Ext.define('iTeleskop.view.main.MainController', {
             "descr": rec.get('descr'),
             "filter": rec.get('filter'),
             "binning": rec.get('binning'),
-            "guiding": 0, // rec.get('guiding'),
+            "guiding": rec.get('guiding'),
             "dither": rec.get('dither'),
             "defocus": rec.get('defocus'),
             "calibrate": rec.get('calibrate'),
