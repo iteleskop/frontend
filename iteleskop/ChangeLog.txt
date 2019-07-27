@@ -1,6 +1,9 @@
  iTeleskop Web Interface ChangeLog
 -----------------------------------
 
+0.6.9 (2019-07-28)
+- Changed FTP links to use port 2100.
+
 0.6.8 (2019-01-30)
 - Cloned tasks now retain guiding flag.
 

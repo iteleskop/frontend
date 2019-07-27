@@ -175,7 +175,7 @@ Ext.define('iTeleskop.view.main.Tasks', {
                   return "--";
               }
               var url = '://'.concat(u.data.ftp_login, ":", u.data.ftp_pass,
-                                     '@iteleskop.ddns.net/', value, '"');
+                                     '@iteleskop.ddns.net:2100/', value, '"');
               return '<a href="ftp'.concat(url, ' target="_blank">ftp</a> <a href="ftps', url, ' target="_blank">ftps</a>');
           }
         },
